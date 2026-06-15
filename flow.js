@@ -87,8 +87,18 @@
       lastAuthor = m.author;
       lastState = m.state;
     }
-    // smooth scroll to bottom
-    requestAnimationFrame(() => { host.scrollTop = host.scrollHeight; });
+    // Smooth-scroll to the newest message after layout settles.
+    // Double RAF + scrollIntoView is the most reliable cross-browser approach.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        const last = host.lastElementChild;
+        if (last && typeof last.scrollIntoView === 'function') {
+          last.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+        } else {
+          host.scrollTop = host.scrollHeight;
+        }
+      });
+    });
   }
 
   function renderMessage(m, prevAuthor) {
