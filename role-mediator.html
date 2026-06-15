@@ -5,10 +5,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · Optro ECM as Mediator</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615f" />
-<link rel="stylesheet" href="optro-card.css?v=20260615f" />
-<link rel="stylesheet" href="flow.css?v=20260615f" />
-<link rel="stylesheet" href="tour.css?v=20260615f" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
+<link rel="stylesheet" href="optro-card.css?v=20260615g" />
+<link rel="stylesheet" href="flow.css?v=20260615g" />
+<link rel="stylesheet" href="tour.css?v=20260615g" />
 </head>
 <body>
 
@@ -71,8 +71,8 @@
 <script>
 window.THREAD = [
   { state: 1, author: 'weston', ts: 'Friday · 2:48 PM',
-    body: 'Q3 AR attached. Same query as last quarter.',
-    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' },
+    body: 'Q3 UAR attached. Same query as last quarter.',
+    attachment: { name: 'UAR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' },
     reactions: ['👀 1'] },
 
   { state: 2, author: 'marie', ts: '2:51 PM',
@@ -87,14 +87,14 @@ window.THREAD = [
     card: {
       header: 'Three options · no recommendation',
       actions: [
-        { label: 'Lay out the diff' },
-        { label: 'Find the change source' },
+        { label: 'Show schema comparison' },
+        { label: 'Trace change request' },
         { label: 'Stay out of it' },
       ],
     } },
 
   { state: 5, author: 'optro', ts: '2:53 PM',
-    body: 'Marie picked <em>Lay out the diff</em>:',
+    body: 'Marie picked <em>Show schema comparison</em>:',
     kind: 'diff',
     diff: {
       left:  { title: 'Q2 schema (11 cols)', items: [
@@ -113,7 +113,7 @@ window.THREAD = [
     }},
 
   { state: 6, author: 'optro', ts: '2:54 PM',
-    body: 'And <em>Find the change source</em>:',
+    body: 'And <em>Trace change request</em>:',
     kind: 'card',
     card: {
       header: 'Change source · located',
@@ -133,7 +133,7 @@ window.THREAD = [
     body: 'Summarized the exchange for the audit trail:',
     kind: 'card',
     card: {
-      header: 'Judgment trail · Q3 FY26',
+      header: 'Audit trail · Q3 FY26',
       meta: 'Optional — Marie can record this into the control history',
       fields: [
         ["Marie's concern", 'Provenance of new column <span class="ai-citation">termination_date_normalized</span>'],
@@ -159,12 +159,12 @@ window.THREAD = [
       fields: [
         ['Outcome', '<strong>Approved with notes</strong>'],
         ['Reviewer note', '"Verified — new column documented via <span class="ai-citation">DBA-CR-2401</span>, see thread for full context."'],
-        ['Exchange link', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+        ['Workpaper reference', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
       ],
     }},
 
   { state: 11, author: 'optro', ts: '3:01 PM', kind: 'receipt',
-    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 93% · routed=Marie · resolved 1 reviewer Q · 11 messages · chain=block #4,180,318' },
+    receipt: 'filed: <strong>UAR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · AI confidence 93% · routed=Marie · resolved 1 reviewer Q · 11 messages · chain=block #4,180,318' },
 ];
 
 window.TOUR = {

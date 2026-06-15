@@ -5,10 +5,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · One thread per evidence ask</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615f" />
-<link rel="stylesheet" href="optro-card.css?v=20260615f" />
-<link rel="stylesheet" href="flow.css?v=20260615f" />
-<link rel="stylesheet" href="tour.css?v=20260615f" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
+<link rel="stylesheet" href="optro-card.css?v=20260615g" />
+<link rel="stylesheet" href="flow.css?v=20260615g" />
+<link rel="stylesheet" href="tour.css?v=20260615g" />
 </head>
 <body>
 
@@ -44,10 +44,10 @@
       <span class="workspace-name">Watts Water Technologies</span>
     </div>
     <div class="slack-section">Open asks</div>
-    <div class="slack-channel"><span class="hash">▸</span> t1 · Q3 AR prod-db</div>
+    <div class="slack-channel"><span class="hash">▸</span> t1 · Q3 UAR prod-db</div>
     <div class="slack-channel is-active"><span class="hash">▸</span> t2 · SOC2 firewall export</div>
     <div class="slack-channel"><span class="hash">▸</span> t3 · Priv-account list Q3</div>
-    <div class="slack-section">Filed asks (47)</div>
+    <div class="slack-section">Closed asks (47)</div>
     <div class="slack-channel" style="color:rgba(255,255,255,0.4);">▾ See archive</div>
     <div class="slack-section">Direct messages</div>
     <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
@@ -56,7 +56,7 @@
     <header class="slack-header" id="ask-header">
       <span style="color:var(--text-meta);">▸</span>
       <span id="ask-title">t2 · SOC2 firewall rule export</span>
-      <span class="topic" id="ask-topic">Stalled 3 days · due Wed</span>
+      <span class="topic" id="ask-topic">Past due 3 days · due Wed</span>
     </header>
     <div class="slack-messages" id="slack-messages"></div>
     <div class="slack-composer">
@@ -71,15 +71,15 @@
 <script>
 window.addEventListener('load', () => {
   const headerMap = {
-    1: { title: 't2 · SOC2 firewall rule export', topic: 'Stalled 3 days · due Wed' },
+    1: { title: 't2 · SOC2 firewall rule export', topic: 'Past due 3 days · due Wed' },
     2: { title: 't2 · SOC2 firewall rule export', topic: 'Day 1 — no reply' },
     3: { title: 't2 · SOC2 firewall rule export', topic: 'Day 3 — bot nudge' },
     4: { title: 't2 · SOC2 firewall rule export', topic: 'Day 3 — artifact dropped' },
-    5: { title: 't2 · SOC2 firewall rule export', topic: 'Sealed · 4 messages' },
-    6: { title: 't1 · Q3 AR prod-db', topic: 'Mid-review · Marie just approved' },
-    7: { title: 't1 · Q3 AR prod-db', topic: 'Sealed · 6 messages' },
+    5: { title: 't2 · SOC2 firewall rule export', topic: 'Closed · 4 messages' },
+    6: { title: 't1 · Q3 UAR prod-db', topic: 'Mid-review · Marie just approved' },
+    7: { title: 't1 · Q3 UAR prod-db', topic: 'Closed · 6 messages' },
     8: { title: 't3 · Priv-account list Q3', topic: 'Just opened · awaiting Weston' },
-    9: { title: 'Filed asks · this quarter', topic: '47 sealed threads' },
+    9: { title: 'Closed asks · this quarter', topic: '47 sealed threads' },
     10: { title: 't-q4-1 · Q4 backup retention attestation', topic: 'Just opened by Sarah Kim · references Q2 sealed thread' },
   };
   const updateHeader = (n) => {
@@ -132,18 +132,18 @@ window.THREAD = [
     attachment: { name: 'snow-fw-export-q3.csv', meta: '8 cols · 412 rows · 38 KB' } },
 
   { state: 5, author: 'optro', ts: 'Thu · 9:12 AM', kind: 'receipt',
-    receipt: 'filed: <strong>snow-fw-export-q3.csv</strong> → SOC2-CC6.1 · classifier 96% · routed=Marie · 1 bot nudge + 1 reply · thread sealed' },
+    receipt: 'filed: <strong>snow-fw-export-q3.csv</strong> → SOC2-CC6.1 · AI confidence 96% · routed=Marie · 1 bot nudge + 1 reply · evidence request closed' },
 
   { state: 6, author: 'weston', ts: 'Fri · 2:48 PM',
-    body: 'Q3 AR attached.',
-    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
+    body: 'Q3 UAR attached.',
+    attachment: { name: 'UAR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
 
   { state: 6, author: 'marie', ts: 'Fri · 3:00 PM',
     body: 'Approved — clean Q3, consistent with Q2.',
     reactions: ['✅ 1'] },
 
   { state: 7, author: 'optro', ts: 'Fri · 3:00 PM', kind: 'receipt',
-    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 94% · routed=Marie · 6 messages · thread sealed · chain=block #4,180,318' },
+    receipt: 'filed: <strong>UAR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · AI confidence 94% · routed=Marie · 6 messages · evidence request closed · chain=block #4,180,318' },
 
   { state: 8, author: 'optro', ts: 'Fri · 4:10 PM',
     body: 'Q3 priv-account list ask for IT Lead.',
@@ -168,12 +168,12 @@ window.THREAD = [
     kind: 'card',
     card: {
       header: '47 sealed threads · Q3 FY26',
-      subtitle: 'Filed asks archive',
+      subtitle: 'Closed asks archive',
       facts: [
-        '<span class="ai-citation">t1 · Q3 AR prod-db</span> — sealed Fri 3:00 PM · chain #4,180,318',
-        '<span class="ai-citation">t2 · SOC2 firewall export</span> — sealed Thu 9:12 AM',
-        '<span class="ai-citation">t-43 · Q3 backup retention</span> — sealed Apr 8',
-        '<span class="ai-citation">t-42 · IAM role review</span> — sealed Apr 7',
+        '<span class="ai-citation">t1 · Q3 UAR prod-db</span> — closed Fri 3:00 PM · chain #4,180,318',
+        '<span class="ai-citation">t2 · SOC2 firewall export</span> — closed Thu 9:12 AM',
+        '<span class="ai-citation">t-43 · Q3 backup retention</span> — closed Apr 8',
+        '<span class="ai-citation">t-42 · IAM role review</span> — closed Apr 7',
         '… 43 more',
       ],
     } },
@@ -185,7 +185,7 @@ window.THREAD = [
       header: 'New ask · Q4 backup retention attestation',
       subtitle: 'Sarah Kim · External Auditor',
       fields: [
-        ['References', '<span class="ai-citation">t-22 · Q2 backup retention · sealed Jan 3, 2026</span>'],
+        ['References', '<span class="ai-citation">t-22 · Q2 backup retention · closed Jan 3, 2026</span>'],
         ['Control',    '7.3.4'],
         ['Due',        'May 30'],
       ],

@@ -5,10 +5,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · Optro ECM as Drafter</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615f" />
-<link rel="stylesheet" href="optro-card.css?v=20260615f" />
-<link rel="stylesheet" href="flow.css?v=20260615f" />
-<link rel="stylesheet" href="tour.css?v=20260615f" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
+<link rel="stylesheet" href="optro-card.css?v=20260615g" />
+<link rel="stylesheet" href="flow.css?v=20260615g" />
+<link rel="stylesheet" href="tour.css?v=20260615g" />
 </head>
 <body>
 
@@ -71,17 +71,17 @@
 <script>
 window.THREAD = [
   { state: 1, author: 'optro', ts: 'Friday · 9:00 AM',
-    body: 'Q3 AR for <span class="ai-citation">control 4.2.1</span> — drafted for you both.',
+    body: 'Q3 UAR for <span class="ai-citation">control 4.2.1</span> — drafted for you both.',
     kind: 'card',
     card: {
-      header: 'Evidence draft · AR-Q3FY26-prod-db',
+      header: 'Evidence draft · UAR-Q3FY26-prod-db',
       meta: 'Drafted from your last 5 quarters · ready for one-click approve',
-      confidence: { label: 'Match to your usual pattern', pct: 94 },
+      confidence: { label: 'Match to prior periods', pct: 94 },
       fields: [
         ['Control',             '4.2.1'],
         ['Cadence',             'Quarterly'],
         ['Reviewer',            'Marie Curie'],
-        ['Suggested artifact',  '<span class="ai-citation">snow-query-AR-prod-db.csv</span>'],
+        ['Suggested artifact',  '<span class="ai-citation">snow-query-UAR-prod-db.csv</span>'],
         ['Proposed reviewer note', '"Checked — consistent with Q2."'],
       ],
       actions: [
@@ -129,12 +129,12 @@ window.THREAD = [
     reactions: ['✅ 1'] },
 
   { state: 9, author: 'optro', ts: '10:36 AM', kind: 'receipt',
-    receipt: 'filed: <strong>snow-query-AR-prod-db.csv</strong> → control 4.2.1 · classifier 94% · routed=Marie · 1m32s end-to-end · 2 clicks · chain=block #4,180,221' },
+    receipt: 'filed: <strong>snow-query-UAR-prod-db.csv</strong> → control 4.2.1 · AI confidence 94% · routed=Marie · 1m32s end-to-end · 2 clicks · chain=block #4,180,221' },
 
   { state: 10, author: 'optro', ts: '10:36 AM', kind: 'expander',
     expander: {
       summary: 'Why I played drafter here',
-      reveal: '5 prior identical-shape attestations · same reviewer · same artifact source · drift score 0.02 · pattern confidence 0.94. <br><br>The bot earns the right to draft only when prior pattern depth ≥ 4 quarters AND drift &lt; 0.05 AND reviewer-style match &gt; 0.85. This control hit all three. Any one missing → the bot stays in mediator mode instead.',
+      reveal: '5 prior identical-shape attestations · same reviewer · same artifact source · variance score 0.02 · match confidence 0.94. <br><br>The bot earns the right to draft only when prior pattern depth ≥ 4 quarters AND variance &lt; 0.05 AND reviewer-style match &gt; 0.85. This control hit all three. Any one missing → the bot stays in mediator mode instead.',
     } },
 ];
 
@@ -169,7 +169,7 @@ window.TOUR = {
       body: 'The artifact, the drafted note, the edit, the sign-off — all bundled into a single chain-anchored receipt.',
       before: function () { window.Flow && window.Flow.go(9); } },
     { title: 'Why the bot earned the right to draft',
-      body: 'This is the moat. The bot did not "decide" to draft — it qualified. 4-quarter pattern depth, drift &lt; 0.05, reviewer-style match &gt; 0.85. Without the underlying attestation graph, drafting is reckless. With it, drafting is just operator labor.',
+      body: 'This is the moat. The bot did not "decide" to draft — it qualified. 4-quarter pattern depth, variance &lt; 0.05, reviewer-style match &gt; 0.85. Without the underlying attestation graph, drafting is reckless. With it, drafting is just operator labor.',
       before: function () { window.Flow && window.Flow.go(10); } },
   ],
 };

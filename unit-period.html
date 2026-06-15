@@ -5,10 +5,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · One thread per close period</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615f" />
-<link rel="stylesheet" href="optro-card.css?v=20260615f" />
-<link rel="stylesheet" href="flow.css?v=20260615f" />
-<link rel="stylesheet" href="tour.css?v=20260615f" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
+<link rel="stylesheet" href="optro-card.css?v=20260615g" />
+<link rel="stylesheet" href="flow.css?v=20260615g" />
+<link rel="stylesheet" href="tour.css?v=20260615g" />
 </head>
 <body>
 
@@ -45,8 +45,8 @@
     </div>
     <div class="slack-section">Close periods</div>
     <div class="slack-channel is-active"><span class="hash">#</span> q3-fy26-close</div>
-    <div class="slack-channel"><span class="hash">#</span> q2-fy26-close · sealed</div>
-    <div class="slack-channel"><span class="hash">#</span> q1-fy26-close · sealed</div>
+    <div class="slack-channel"><span class="hash">#</span> q2-fy26-close · closed</div>
+    <div class="slack-channel"><span class="hash">#</span> q1-fy26-close · closed</div>
     <div class="slack-section">SOX controls</div>
     <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-1</div>
     <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-2</div>
@@ -91,7 +91,7 @@ window.THREAD = [
     body: "Let's go. Flag anything stuck within 48hr." },
 
   { state: 3, author: 'optro', ts: 'Mar 4 · 5:00 PM', kind: 'context',
-    body: 'Day 4 · 3/47 cleared · 0 stalled · 0 disputes' },
+    body: 'Day 4 · 3/47 cleared · 0 stalled · 0 exceptions' },
 
   { state: 4, author: 'optro', ts: 'Mar 12 · 5:00 PM',
     body: 'Day 12 digest.',
@@ -100,15 +100,15 @@ window.THREAD = [
       header: 'Day 12 · digest',
       fields: [
         ['Cleared',    '23/47'],
-        ['Disputes',   '2 open'],
+        ['Exceptions',   '2 open'],
         ['Missing',    '1 attestation'],
-        ['Top of pile','4.2.1, 5.1.2'],
+        ['Priority controls','4.2.1, 5.1.2'],
       ],
     } },
 
   { state: 5, author: 'weston', ts: 'Mar 12 · 5:14 PM',
-    body: 'Filing 4.2.1 — Q3 AR for prod-db.',
-    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
+    body: 'Filing 4.2.1 — Q3 UAR for prod-db.',
+    attachment: { name: 'UAR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
 
   { state: 6, author: 'marie', ts: 'Mar 14 · 10:02 AM',
     body: '4.2.1 approved — clean.',
@@ -154,7 +154,7 @@ window.THREAD = [
       facts: [
         '44/47 controls cleared',
         '3 in final review · projected to clear by Day 30',
-        '2 disputes resolved · 1 reviewer Q resolved',
+        '2 exceptions resolved · 1 reviewer Q resolved',
         'Click any control to drill into its thread',
       ],
     } },
@@ -166,7 +166,7 @@ window.THREAD = [
       header: 'Q3 FY26 close · summary',
       fields: [
         ['Controls cleared', '47/47'],
-        ['Total disputes',   '2 (both resolved)'],
+        ['Total exceptions',   '2 (both resolved)'],
         ['Reviewer Qs',      '4 (all resolved)'],
         ['Avg turnaround',   '1.4 days'],
         ['Chain anchor',     '<span class="ai-citation">block #4,180,872</span>'],
@@ -174,7 +174,7 @@ window.THREAD = [
     } },
 
   { state: 13, author: 'optro', ts: 'Mar 31 · 4:46 PM', kind: 'receipt',
-    receipt: 'sealed: <strong>q3-fy26-close</strong> · 47/47 · audit-evidence bundle: <strong>q3-fy26-close-package.zip</strong> · 1.4 GB · the thread <strong>is</strong> the close' },
+    receipt: 'closed: <strong>q3-fy26-close</strong> · 47/47 · workpaper bundle: <strong>q3-fy26-close-package.zip</strong> · 1.4 GB · the thread <strong>is</strong> the close' },
 ];
 
 window.TOUR = {
@@ -190,7 +190,7 @@ window.TOUR = {
       body: '3 of 47 cleared. Bot reports a fact, no editorial.',
       before: function () { window.Flow && window.Flow.go(3); } },
     { title: 'Day 12 — mid-quarter digest',
-      body: '23 of 47 cleared. 2 disputes open, 1 missing attestation. The digest is the cadence.',
+      body: '23 of 47 cleared. 2 exceptions open, 1 missing attestation. The digest is the cadence.',
       before: function () { window.Flow && window.Flow.go(4); } },
     { title: 'Weston files inline',
       body: 'A specific control fills inside the period thread — not in its own channel. The period thread captures everything.',
@@ -214,10 +214,10 @@ window.TOUR = {
       body: 'Bot assembles a preview. Every control link drills into its own thread. The graph is dense.',
       before: function () { window.Flow && window.Flow.go(11); } },
     { title: 'Day 30 — final summary',
-      body: '47 of 47. Total disputes, reviewer questions, turnaround. The summary is the close.',
+      body: '47 of 47. Total exceptions, reviewer questions, turnaround. The summary is the close.',
       before: function () { window.Flow && window.Flow.go(12); } },
     { title: 'The thread IS the close',
-      body: 'Chain-anchored audit-evidence bundle. The thread itself is the close package — searchable, attestable, signed.',
+      body: 'Chain-anchored workpaper bundle. The thread itself is the close package — searchable, attestable, signed.',
       before: function () { window.Flow && window.Flow.go(13); } },
   ],
 };
