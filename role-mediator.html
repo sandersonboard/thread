@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread · Optro ECM as Mediator</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+</head>
+<body>
+<div id="flow-root" class="page">
+  <div class="page-caption">
+    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Bot's role</span>
+    <span class="take-title">Optro ECM as Mediator</span>
+    <span class="axis-tag">Role · Mediator</span>
+  </div>
+
+  <div class="state-pills" id="state-pills"></div>
+  <span class="state-pills-controls" id="state-controls"></span>
+
+  <div class="page-layout">
+    <div class="slack-window">
+      <aside class="slack-sidebar">
+        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+        <div class="slack-section">Channels</div>
+        <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
+        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+        <div class="slack-channel"><span class="hash">#</span> dba-team</div>
+        <div class="slack-channel"><span class="hash">#</span> it-security</div>
+        <div class="slack-section">Direct messages</div>
+        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+        <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
+        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+      </aside>
+      <main class="slack-main">
+        <header class="slack-header">
+          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span>
+          ctrl-4-2-1
+          <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
+        </header>
+        <div class="slack-messages" id="slack-messages"></div>
+        <div class="slack-composer">
+          <div class="input-shell">
+            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
+            <div class="input-line is-ghost" id="ghost-composer">Message #ctrl-4-2-1</div>
+            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="page-side">
+      <div class="state-caption" id="state-caption"></div>
+      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Thread · Optro ECM as Mediator</span>
+    <span><a href="index.html">← All takes</a></span>
+  </div>
+</div>
+
+<script src="scenario.js"></script>
+<script>
+const STATE_CAPTIONS = {
+  1:  "Weston drops the Q3 export. No bot intervention yet.",
+  2:  "Marie spots a new column. Pushes back.",
+  3:  "Bot surfaces the schema diff as a fact — no conclusion offered.",
+  4:  "Bot offers three options, doesn't pick.",
+  5:  "Marie picks 'lay out the diff'. Bot posts side-by-side.",
+  6:  "Marie picks 'find the change source'. Bot finds the CR ticket.",
+  7:  "Weston explains the GDPR field.",
+  8:  "Bot summarizes into a judgment trail.",
+  9:  "Marie agrees to record the exchange.",
+  10: "Marie signs off with the exchange embedded in her reviewer note.",
+  11: "Filing receipt. Chain anchored.",
+};
+
+const THREAD = [
+  { state: 1, author: 'weston', ts: '2:48 PM',
+    body: 'Q3 AR attached. Same query as last quarter.',
+    attachment: 'AR-Q3FY26-prod-db.csv',
+    reactions: ['👀 1'] },
+
+  { state: 2, author: 'marie', ts: '2:51 PM',
+    body: "Quick question — there's a new column. Where'd it come from?" },
+
+  { state: 3, author: 'optro', ts: '2:51 PM', kind: 'context',
+    body: 'noticed the schema diff: +1 field vs Q2 (<span class="cite">termination_date_normalized</span>).' },
+
+  { state: 4, author: 'optro', ts: '2:52 PM', kind: 'buttons-only',
+    buttons: [
+      { label: 'Lay out the diff' },
+      { label: 'Find the change source' },
+      { label: 'Stay out of it' },
+    ] },
+
+  { state: 5, author: 'optro', ts: '2:53 PM', kind: 'diff',
+    diff: {
+      left:  { title: 'Q2 schema (11 cols)', items: [
+        { text: 'user_id' }, { text: 'role' }, { text: 'role_assigned_at' },
+        { text: 'last_login' }, { text: 'last_review_date' }, { text: 'reviewer' },
+        { text: 'review_outcome' }, { text: 'is_active' }, { text: 'created_at' },
+        { text: 'updated_at' }, { text: 'export_ts' },
+      ]},
+      right: { title: 'Q3 schema (12 cols)', items: [
+        { text: 'user_id' }, { text: 'role' }, { text: 'role_assigned_at' },
+        { text: 'last_login' }, { text: 'last_review_date' }, { text: 'reviewer' },
+        { text: 'review_outcome' }, { text: 'is_active' }, { text: 'created_at' },
+        { text: 'updated_at' }, { text: 'export_ts' },
+        { text: 'termination_date_normalized', isNew: true },
+      ]},
+    }},
+
+  { state: 6, author: 'optro', ts: '2:54 PM', kind: 'card',
+    card: {
+      header: 'Change source located',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Field added', 'termination_date_normalized'],
+        ['Source patch', '<span class="cite">Oracle patch log · Apr 14, 2026</span>'],
+        ['Linked CR', '<span class="cite">DBA-CR-2401 · "Add GDPR-normalized termination date column"</span>'],
+        ['Approved by', 'Legal Review · Apr 12, 2026'],
+      ],
+    }},
+
+  { state: 7, author: 'weston', ts: '2:56 PM',
+    body: "Oh, that's the GDPR field — DBA team added it after legal review. Sorry, should have flagged that." },
+
+  { state: 8, author: 'optro', ts: '2:56 PM', kind: 'card',
+    card: {
+      header: 'Judgment trail',
+      subtitle: 'Optro ECM',
+      fields: [
+        ["Marie's concern", 'New field provenance — where did <span class="cite">termination_date_normalized</span> come from?'],
+        ["Weston's answer",  'GDPR compliance field added via <span class="cite">DBA-CR-2401</span>'],
+        ['Linked artifacts', '<span class="cite">DBA-CR-2401</span> · <span class="cite">legal-review-apr12.pdf</span>'],
+      ],
+      actions: [
+        { label: "Record exchange in 4.2.1's history", primary: true },
+        { label: 'Edit summary' },
+      ],
+    }},
+
+  { state: 9, author: 'marie', ts: '2:58 PM',
+    body: 'Yes — record it. Good catch on the patch log.',
+    reactions: ['👍 1'] },
+
+  { state: 10, author: 'marie', ts: '3:01 PM', kind: 'card',
+    card: {
+      header: 'Reviewer sign-off · Q3 FY26',
+      subtitle: 'Marie Curie',
+      fields: [
+        ['Outcome', '<strong>Approved with notes</strong>'],
+        ['Reviewer note', '"Verified — new column documented via <span class="cite">DBA-CR-2401</span>, see thread for full context."'],
+        ['Exchange link', '<span class="cite">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+      ],
+    }},
+
+  { state: 11, author: 'optro', ts: '3:01 PM', kind: 'receipt',
+    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 93% · routed=Marie · resolved 1 reviewer Q · 11 messages · chain=block #4,180,318' },
+];
+</script>
+<script src="flow.js"></script>
+</body>
+</html>
