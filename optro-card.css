@@ -1,0 +1,246 @@
+/* Block Kit-flavored card the Optro ECM bot posts inside a Slack message.
+   Neutral gray accents — does not import Luna tokens. */
+
+:root {
+  --card-rule: #3D3D3D;
+  --card-bg: #FFFFFF;
+  --card-border: #DDDDDD;
+  --card-text: #1D1C1D;
+  --card-text-muted: #616061;
+  --card-divider: #EEEEEE;
+  --card-btn-border: #BBBBBB;
+  --card-btn-text: #1D1C1D;
+  --card-btn-bg: #FFFFFF;
+  --card-btn-bg-hover: #F4F4F4;
+  --card-btn-primary-bg: #007A5A;
+  --card-btn-primary-bg-hover: #148567;
+  --card-btn-primary-text: #FFFFFF;
+  --card-btn-danger-border: #C0392B;
+  --card-btn-danger-text: #C0392B;
+  --card-cite: #1264A3;
+}
+
+.optro-card {
+  margin-top: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--card-rule);
+  border-radius: 4px;
+  max-width: 540px;
+  overflow: hidden;
+  font-size: 14px;
+  color: var(--card-text);
+}
+
+.optro-card .card-section {
+  padding: 12px 14px;
+}
+.optro-card .card-divider {
+  height: 1px;
+  background: var(--card-divider);
+  margin: 0;
+}
+
+.optro-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.optro-card .card-header .mark {
+  width: 18px; height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #e5e5e5, #c8c8c8);
+  display: grid; place-items: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+.optro-card .card-header .subtitle {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--card-text-muted);
+}
+
+.optro-card .card-fields {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 6px 14px;
+  font-size: 13px;
+}
+.optro-card .card-fields .label {
+  color: var(--card-text-muted);
+  font-weight: 600;
+}
+.optro-card .card-fields .value {
+  color: var(--card-text);
+}
+
+.optro-card .card-fact {
+  font-size: 13px;
+  color: var(--card-text);
+  line-height: 1.5;
+}
+.optro-card .card-fact .cite {
+  color: var(--card-cite);
+  text-decoration: none;
+  cursor: pointer;
+}
+.optro-card .card-fact .cite:hover { text-decoration: underline; }
+.optro-card .card-fact .cite::before {
+  content: '🔗 ';
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.optro-card .card-actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  flex-wrap: wrap;
+}
+.optro-card .card-actions button {
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 4px;
+  border: 1px solid var(--card-btn-border);
+  background: var(--card-btn-bg);
+  color: var(--card-btn-text);
+  cursor: pointer;
+  font-family: inherit;
+}
+.optro-card .card-actions button:hover { background: var(--card-btn-bg-hover); }
+.optro-card .card-actions button.primary {
+  background: var(--card-btn-primary-bg);
+  color: var(--card-btn-primary-text);
+  border-color: var(--card-btn-primary-bg);
+}
+.optro-card .card-actions button.primary:hover { background: var(--card-btn-primary-bg-hover); border-color: var(--card-btn-primary-bg-hover); }
+.optro-card .card-actions button.danger {
+  border-color: var(--card-btn-danger-border);
+  color: var(--card-btn-danger-text);
+}
+
+/* Compact context block — used for the bot's "noticed X" lines */
+.optro-context {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--card-text-muted);
+}
+.optro-context .mark {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #e5e5e5, #c8c8c8);
+  flex-shrink: 0;
+}
+.optro-context .body { line-height: 1.4; }
+.optro-context .body .cite {
+  color: var(--card-cite);
+  cursor: pointer;
+}
+.optro-context .body .cite:hover { text-decoration: underline; }
+
+/* Side-by-side diff card (used in role-mediator Take 2 state 5) */
+.optro-diff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--card-divider);
+}
+.optro-diff .col {
+  padding: 10px 14px;
+  font-size: 12px;
+}
+.optro-diff .col + .col {
+  border-left: 1px solid var(--card-divider);
+}
+.optro-diff .col .col-title {
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--card-text-muted);
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+}
+.optro-diff .col ul {
+  margin: 0; padding-left: 14px;
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-size: 12px;
+}
+.optro-diff .col ul li.is-new {
+  background: #FFF7DA;
+  font-weight: 700;
+}
+
+/* Filing receipt — terminal/monospace looking, but Slack-themed */
+.optro-receipt {
+  margin-top: 4px;
+  padding: 8px 12px;
+  background: #F7F8FA;
+  border: 1px solid var(--card-border);
+  border-left: 3px solid var(--card-rule);
+  border-radius: 4px;
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-size: 12px;
+  color: var(--card-text);
+  line-height: 1.5;
+}
+.optro-receipt strong { color: var(--card-text); }
+
+/* "Why I played X here" expander */
+.optro-expander {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--card-text-muted);
+  cursor: pointer;
+}
+.optro-expander summary {
+  list-style: none;
+  user-select: none;
+}
+.optro-expander summary::before {
+  content: '▸ ';
+  font-size: 10px;
+  display: inline-block;
+  transition: transform 0.12s;
+}
+.optro-expander[open] summary::before {
+  content: '▾ ';
+}
+.optro-expander .reveal {
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #F7F8FA;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  color: var(--card-text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Ephemeral interjection (Take 3 / role-silent) */
+.optro-ephemeral {
+  margin-top: 4px;
+  padding: 8px 12px;
+  background: #FFF8E1;
+  border: 1px solid #FFE0A6;
+  border-left: 3px solid #C8911D;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #6E5414;
+}
+.optro-ephemeral .label {
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+  color: #8A6612;
+}
