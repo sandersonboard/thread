@@ -5,92 +5,69 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · Optro ECM as Drafter</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
-<link rel="stylesheet" href="optro-card.css?v=20260615" />
-<link rel="stylesheet" href="flow.css?v=20260615" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
+<link rel="stylesheet" href="optro-card.css?v=20260615c" />
+<link rel="stylesheet" href="flow.css?v=20260615c" />
+<link rel="stylesheet" href="tour.css?v=20260615c" />
 </head>
 <body>
-<div id="flow-root" class="page">
-  <div class="page-caption">
-    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Bot's role</span>
-    <span class="take-title">Optro ECM as Drafter</span>
-    <span class="axis-tag">Role · Drafter</span>
+
+<div class="take-topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">TH</span>
+    Thread
+  </a>
+  <span class="brand-sep"></span>
+  <span class="crumbs">Bot's role</span>
+  <span class="take-title">Optro ECM as Drafter</span>
+  <span class="axis-tag">Role · Drafter</span>
+  <div class="right-actions">
+    <a href="index.html" class="back-link">← All takes</a>
   </div>
+</div>
 
-  <div class="state-pills" id="state-pills"></div>
-  <span class="state-pills-controls" id="state-controls"></span>
-
-  <div class="page-layout">
-    <div class="slack-window">
-      <aside class="slack-sidebar">
-        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
-        <div class="slack-section">Channels</div>
-        <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
-        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
-        <div class="slack-channel"><span class="hash">#</span> dba-team</div>
-        <div class="slack-section">Direct messages</div>
-        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
-        <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
-        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
-      </aside>
-      <main class="slack-main">
-        <header class="slack-header">
-          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span>
-          ctrl-4-2-1
-          <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
-        </header>
-        <div class="slack-messages" id="slack-messages"></div>
-        <div class="slack-composer">
-          <div class="input-shell">
-            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
-            <div class="input-line is-ghost">Message #ctrl-4-2-1</div>
-            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
-          </div>
-        </div>
-      </main>
+<div class="slack-window">
+  <aside class="slack-sidebar">
+    <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+    <div class="slack-section">Channels</div>
+    <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
+    <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+    <div class="slack-channel"><span class="hash">#</span> dba-team</div>
+    <div class="slack-section">Direct messages</div>
+    <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+    <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
+    <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+  </aside>
+  <main class="slack-main">
+    <header class="slack-header">
+      <span style="color:var(--text-meta);font-family:var(--font-mono);font-weight:500;">#</span>
+      ctrl-4-2-1
+      <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
+    </header>
+    <div class="slack-messages" id="slack-messages"></div>
+    <div class="slack-composer">
+      <div class="input-shell">Message #ctrl-4-2-1</div>
     </div>
-    <div class="page-side">
-      <div class="state-caption" id="state-caption"></div>
-      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
-    </div>
-  </div>
-
-  <div class="page-footer">
-    <span>Thread · Optro ECM as Drafter</span>
-    <span><a href="index.html">← All takes</a></span>
-  </div>
+  </main>
 </div>
 
 <script src="scenario.js"></script>
 <script>
-const STATE_CAPTIONS = {
-  1:  "Bot opens the thread with a full Block Kit draft.",
-  2:  "Weston joins, reads the draft.",
-  3:  "Weston one-clicks Approve & file. Upload acknowledged.",
-  4:  "Marie joins. Bot pings her with the pre-drafted reviewer note.",
-  5:  "Marie reads the drafted note.",
-  6:  "Marie clicks Edit. Inflates inline.",
-  7:  "Marie changes 'checked' → 'verified'. Bot logs the edit.",
-  8:  "Marie signs off.",
-  9:  "Bot posts the filing receipt.",
-  10: "Footer expander reveals why the bot earned the right to draft.",
-};
-
 const THREAD = [
   { state: 1, author: 'optro', ts: 'Friday · 9:00 AM',
-    body: 'Q3 AR for <span class="cite">control 4.2.1</span> — drafted for you both.',
+    body: 'Q3 AR for <span class="ai-citation">control 4.2.1</span> — drafted for you both.',
     kind: 'card',
     card: {
       header: 'Evidence draft · AR-Q3FY26-prod-db',
-      subtitle: 'Optro ECM',
+      meta: 'Drafted from your last 5 quarters · ready for one-click approve',
+      confidence: { label: 'Match to your usual pattern', pct: 94 },
       fields: [
         ['Control',             '4.2.1'],
         ['Cadence',             'Quarterly'],
         ['Reviewer',            'Marie Curie'],
-        ['Suggested artifact',  '<span class="cite">snow-query-AR-prod-db.csv</span>'],
+        ['Suggested artifact',  '<span class="ai-citation">snow-query-AR-prod-db.csv</span>'],
         ['Proposed reviewer note', '"Checked — consistent with Q2."'],
       ],
-      facts: ['5 prior identical-shape attestations · drift score 0.02 · pattern confidence 0.94'],
       actions: [
         { label: '✓ Approve & file', primary: true },
         { label: 'Edit query' },
@@ -102,18 +79,18 @@ const THREAD = [
     body: 'Reviewing the draft now.' },
 
   { state: 3, author: 'optro', ts: '9:14 AM', kind: 'context',
-    body: 'uploaded by Weston · 1 click · awaiting reviewer sign-off' },
+    body: 'Uploaded by Weston · 1 click · awaiting reviewer sign-off' },
 
   { state: 4, author: 'optro', ts: '10:32 AM',
     body: 'Marie — I drafted what you usually sign for this control. Edit or approve below.',
     kind: 'card',
     card: {
       header: 'Drafted reviewer note · Q3 FY26',
-      subtitle: 'Optro ECM',
+      meta: "In Marie's voice, learned from her Q2 / Q1 / Q4 sign-offs",
+      confidence: { label: 'Style match to your prior sign-offs', pct: 91 },
       fields: [
         ['Drafted text',   '"Checked — consistent with Q2. No outliers flagged. Routine approval."'],
-        ['Style match',    'Marie\'s prior Q2 / Q1 / Q4 sign-offs'],
-        ['Style score',    '0.91'],
+        ['Source pattern', "Marie's Q2 / Q1 / Q4 sign-offs"],
       ],
       actions: [
         { label: '✓ Approve', primary: true },
@@ -129,7 +106,7 @@ const THREAD = [
     body: 'Editing — one word change.' },
 
   { state: 7, author: 'optro', ts: '10:35 AM', kind: 'context',
-    body: 'edit recorded · "checked" → "verified" · drafted-note pattern updated for future Q4 sign-offs' },
+    body: 'Edit recorded · "checked" → "verified" · drafted-note pattern updated for future Q4 sign-offs' },
 
   { state: 8, author: 'marie', ts: '10:36 AM',
     body: 'Done — verified and signed.',
@@ -141,10 +118,47 @@ const THREAD = [
   { state: 10, author: 'optro', ts: '10:36 AM', kind: 'expander',
     expander: {
       summary: 'Why I played drafter here',
-      reveal: '5 prior identical-shape attestations · same reviewer · same artifact source · drift score 0.02 · pattern confidence 0.94. <br><br>The bot earns the right to draft only when prior pattern depth crosses 4 quarters AND drift &lt; 0.05 AND reviewer-style match &gt; 0.85. This control hit all three. Any one of them missing → the bot would have stayed in mediator mode instead.',
+      reveal: '5 prior identical-shape attestations · same reviewer · same artifact source · drift score 0.02 · pattern confidence 0.94. <br><br>The bot earns the right to draft only when prior pattern depth ≥ 4 quarters AND drift &lt; 0.05 AND reviewer-style match &gt; 0.85. This control hit all three. Any one missing → the bot stays in mediator mode instead.',
     } },
 ];
+
+const TOUR = {
+  title: 'Optro ECM as Drafter',
+  steps: [
+    { title: 'Bot opens the thread with a full draft',
+      body: 'Fifth identical-shape quarter in a row. The bot has earned the right to write everything — the ask, the suggested artifact, even the reviewer note in Marie\'s voice.',
+      before: function () { window.Flow && window.Flow.go(1); } },
+    { title: 'Weston reviews the draft',
+      body: 'Nothing is auto-accepted. Weston still looks at what was drafted before clicking.',
+      before: function () { window.Flow && window.Flow.go(2); } },
+    { title: 'One-click approve & file',
+      body: 'The artifact uploads. Routed to Marie. So far: 1 minute, 1 click for Weston.',
+      before: function () { window.Flow && window.Flow.go(3); } },
+    { title: 'Marie sees a drafted reviewer note',
+      body: 'In her voice, based on her three prior quarters of sign-off language. She can approve, edit, or rewrite — bot does not force the language.',
+      before: function () { window.Flow && window.Flow.go(4); } },
+    { title: 'Marie opens the draft',
+      body: 'Reading. The bot waits.',
+      before: function () { window.Flow && window.Flow.go(5); } },
+    { title: 'One word change',
+      body: 'Marie tightens the language. Bot will record this edit and use it in future drafts.',
+      before: function () { window.Flow && window.Flow.go(6); } },
+    { title: 'Learning loop',
+      body: 'Edit logged. "Checked" → "verified" updates the drafted-note pattern for Q4. The bot gets a bit better at sounding like Marie every quarter.',
+      before: function () { window.Flow && window.Flow.go(7); } },
+    { title: 'Signed off',
+      body: 'Approval recorded. Total: 1 minute 32 seconds, 2 clicks, 1 edit.',
+      before: function () { window.Flow && window.Flow.go(8); } },
+    { title: 'Filing receipt, chain-anchored',
+      body: 'The artifact, the drafted note, the edit, the sign-off — all bundled into a single chain-anchored receipt.',
+      before: function () { window.Flow && window.Flow.go(9); } },
+    { title: 'Why the bot earned the right to draft',
+      body: 'This is the moat. The bot did not "decide" to draft — it qualified. 4-quarter pattern depth, drift &lt; 0.05, reviewer-style match &gt; 0.85. Without the underlying attestation graph, drafting is reckless. With it, drafting is just operator labor.',
+      before: function () { window.Flow && window.Flow.go(10); } },
+  ],
+};
 </script>
 <script src="flow.js"></script>
+<script src="tour.js"></script>
 </body>
 </html>

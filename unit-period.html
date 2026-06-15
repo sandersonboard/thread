@@ -5,115 +5,62 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · One thread per close period</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
-<link rel="stylesheet" href="optro-card.css?v=20260615" />
-<link rel="stylesheet" href="flow.css?v=20260615" />
-<style>
-.day-marker {
-  display: flex;
-  align-items: center;
-  margin: 14px 20px 4px;
-  gap: 10px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #868686;
-  text-transform: uppercase;
-}
-.day-marker::before, .day-marker::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: #DDDDDD;
-}
-</style>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
+<link rel="stylesheet" href="optro-card.css?v=20260615c" />
+<link rel="stylesheet" href="flow.css?v=20260615c" />
+<link rel="stylesheet" href="tour.css?v=20260615c" />
 </head>
 <body>
-<div id="flow-root" class="page">
-  <div class="page-caption">
-    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Granularity</span>
-    <span class="take-title">One thread per close period</span>
-    <span class="axis-tag">Unit · Period</span>
+
+<div class="take-topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">TH</span>
+    Thread
+  </a>
+  <span class="brand-sep"></span>
+  <span class="crumbs">Granularity</span>
+  <span class="take-title">One thread per close period</span>
+  <span class="axis-tag">Unit · Period</span>
+  <div class="right-actions">
+    <a href="index.html" class="back-link">← All takes</a>
   </div>
-  <div class="state-pills" id="state-pills"></div>
-  <span class="state-pills-controls" id="state-controls"></span>
-  <div class="page-layout">
-    <div class="slack-window">
-      <aside class="slack-sidebar">
-        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
-        <div class="slack-section">Close periods</div>
-        <div class="slack-channel is-active"><span class="hash">#</span> q3-fy26-close</div>
-        <div class="slack-channel"><span class="hash">#</span> q2-fy26-close · sealed</div>
-        <div class="slack-channel"><span class="hash">#</span> q1-fy26-close · sealed</div>
-        <div class="slack-section">SOX controls</div>
-        <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-1</div>
-        <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-2</div>
-        <div class="slack-section">Direct messages</div>
-        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
-        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
-      </aside>
-      <main class="slack-main">
-        <header class="slack-header">
-          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span> q3-fy26-close
-          <span class="topic">Quarterly SOX close · 47 controls · Mar 1 → Mar 31 2026</span>
-        </header>
-        <div class="slack-messages" id="slack-messages"></div>
-        <div class="slack-composer">
-          <div class="input-shell">
-            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
-            <div class="input-line is-ghost">Message #q3-fy26-close</div>
-            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
-          </div>
-        </div>
-      </main>
+</div>
+
+<div class="slack-window">
+  <aside class="slack-sidebar">
+    <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+    <div class="slack-section">Close periods</div>
+    <div class="slack-channel is-active"><span class="hash">#</span> q3-fy26-close</div>
+    <div class="slack-channel"><span class="hash">#</span> q2-fy26-close · sealed</div>
+    <div class="slack-channel"><span class="hash">#</span> q1-fy26-close · sealed</div>
+    <div class="slack-section">SOX controls</div>
+    <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-1</div>
+    <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-2</div>
+    <div class="slack-section">Direct messages</div>
+    <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+    <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+  </aside>
+  <main class="slack-main">
+    <header class="slack-header">
+      <span style="color:var(--text-meta);font-family:var(--font-mono);font-weight:500;">#</span>
+      q3-fy26-close
+      <span class="topic">Quarterly SOX close · 47 controls · Mar 1 → Mar 31 2026</span>
+    </header>
+    <div class="slack-messages" id="slack-messages"></div>
+    <div class="slack-composer">
+      <div class="input-shell">Message #q3-fy26-close</div>
     </div>
-    <div class="page-side">
-      <div class="state-caption" id="state-caption"></div>
-      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
-    </div>
-  </div>
-  <div class="page-footer">
-    <span>Thread · One thread per close period</span>
-    <span><a href="index.html">← All takes</a></span>
-  </div>
+  </main>
 </div>
 
 <script src="scenario.js"></script>
 <script>
-const STATE_CAPTIONS = {
-  1:  "Day 1 — Optro ECM opens the close thread. Pings Ada.",
-  2:  "Day 1 — Ada posts the kickoff.",
-  3:  "Day 4 — first daily digest.",
-  4:  "Day 12 — digest names top-of-pile.",
-  5:  "Day 12 — Weston files 4.2.1 inline.",
-  6:  "Day 14 — Marie approves inline.",
-  7:  "Day 22 — bot escalates a risk to Ada.",
-  8:  "Day 22 — Ada joins the risk sub-thread, pings DBA lead.",
-  9:  "Day 24 — DBA freeze partially lifted for SOX controls.",
-  10: "Day 26 — daily digest, 42/47 cleared.",
-  11: "Day 28 — close-package preview.",
-  12: "Day 30 — final 5 clear. Bot posts the close-package summary.",
-  13: "Day 30 — audit-evidence bundle generated. Thread is the close.",
-};
-
-window.addEventListener('load', () => {
-  const pills = document.getElementById('state-pills');
-  const msgs = document.getElementById('slack-messages');
-  if (!pills || !msgs) return;
-  const decorate = () => {
-    msgs.querySelectorAll('.day-marker').forEach(n => n.remove());
-  };
-  new MutationObserver(decorate).observe(msgs, { childList: true });
-  setTimeout(decorate, 0);
-});
-
 const THREAD = [
   { state: 1, author: 'optro', ts: 'Mar 1 · 9:00 AM',
     body: 'Q3 FY26 close opens. Daily digest at 5pm.',
     kind: 'card',
     card: {
       header: 'Q3 FY26 close · kickoff',
-      subtitle: 'Optro ECM',
       fields: [
         ['Controls due',  '47'],
         ['Window',        'Mar 1 → Mar 31'],
@@ -122,7 +69,7 @@ const THREAD = [
       ],
     } },
   { state: 1, author: 'optro', ts: 'Mar 1 · 9:00 AM', kind: 'context',
-    body: 'pinged @Ada · 47 controls assigned to 9 owners' },
+    body: 'Pinged @Ada · 47 controls assigned to 9 owners' },
 
   { state: 2, author: 'ada', ts: 'Mar 1 · 9:14 AM',
     body: "Let's go. Flag anything stuck within 48hr." },
@@ -135,7 +82,6 @@ const THREAD = [
     kind: 'card',
     card: {
       header: 'Day 12 · digest',
-      subtitle: 'Optro ECM',
       fields: [
         ['Cleared',    '23/47'],
         ['Disputes',   '2 open'],
@@ -146,18 +92,19 @@ const THREAD = [
 
   { state: 5, author: 'weston', ts: 'Mar 12 · 5:14 PM',
     body: 'Filing 4.2.1 — Q3 AR for prod-db.',
-    attachment: 'AR-Q3FY26-prod-db.csv' },
+    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
 
   { state: 6, author: 'marie', ts: 'Mar 14 · 10:02 AM',
     body: '4.2.1 approved — clean.',
     reactions: ['✅ 1'] },
 
-  { state: 7, author: 'optro', ts: 'Mar 22 · 11:30 AM', kind: 'card',
+  { state: 7, author: 'optro', ts: 'Mar 22 · 11:30 AM',
+    body: 'Risk flagged:',
+    kind: 'card',
     card: {
       header: '⚠ Risk escalation',
-      subtitle: 'Optro ECM',
       fields: [
-        ['Risk',     '3 controls depend on the DBA team\'s frozen change window'],
+        ['Risk',     "3 controls depend on the DBA team's frozen change window"],
         ['Affected', '6.1.4, 6.2.1, 6.2.2'],
         ['Freeze ends', 'Mar 26 (Day 26)'],
         ['Recommend', 'Escalate to @Ada · request partial unfreeze for SOX scope'],
@@ -178,7 +125,7 @@ const THREAD = [
     } },
 
   { state: 9, author: 'optro', ts: 'Mar 24 · 9:00 AM', kind: 'context',
-    body: 'DBA freeze partially lifted for SOX scope (6.1.4, 6.2.1, 6.2.2) — Ada\'s ask approved' },
+    body: "DBA freeze partially lifted for SOX scope (6.1.4, 6.2.1, 6.2.2) — Ada's ask approved" },
 
   { state: 10, author: 'optro', ts: 'Mar 26 · 5:00 PM', kind: 'context',
     body: 'Day 26 · 42/47 cleared · 3 in review · 2 pending' },
@@ -188,7 +135,6 @@ const THREAD = [
     kind: 'card',
     card: {
       header: 'Q3 FY26 close package · preview',
-      subtitle: 'Optro ECM',
       facts: [
         '44/47 controls cleared',
         '3 in final review · projected to clear by Day 30',
@@ -202,20 +148,65 @@ const THREAD = [
     kind: 'card',
     card: {
       header: 'Q3 FY26 close · summary',
-      subtitle: 'Optro ECM',
       fields: [
         ['Controls cleared', '47/47'],
         ['Total disputes',   '2 (both resolved)'],
         ['Reviewer Qs',      '4 (all resolved)'],
         ['Avg turnaround',   '1.4 days'],
-        ['Chain anchor',     '<span class="cite">block #4,180,872</span>'],
+        ['Chain anchor',     '<span class="ai-citation">block #4,180,872</span>'],
       ],
     } },
 
   { state: 13, author: 'optro', ts: 'Mar 31 · 4:46 PM', kind: 'receipt',
     receipt: 'sealed: <strong>q3-fy26-close</strong> · 47/47 · audit-evidence bundle: <strong>q3-fy26-close-package.zip</strong> · 1.4 GB · the thread <strong>is</strong> the close' },
 ];
+
+const TOUR = {
+  title: 'One thread per close period',
+  steps: [
+    { title: 'Day 1 — kickoff',
+      body: 'The bot opens the quarter close thread. Pings the PMO. Commits to a daily digest at 5pm. The whole quarter will live here.',
+      before: function () { window.Flow && window.Flow.go(1); } },
+    { title: 'Ada acknowledges',
+      body: 'The PMO sets the tone. "Flag anything stuck within 48hr."',
+      before: function () { window.Flow && window.Flow.go(2); } },
+    { title: 'Day 4 — first digest',
+      body: '3 of 47 cleared. Bot reports a fact, no editorial.',
+      before: function () { window.Flow && window.Flow.go(3); } },
+    { title: 'Day 12 — mid-quarter digest',
+      body: '23 of 47 cleared. 2 disputes open, 1 missing attestation. The digest is the cadence.',
+      before: function () { window.Flow && window.Flow.go(4); } },
+    { title: 'Weston files inline',
+      body: 'A specific control fills inside the period thread — not in its own channel. The period thread captures everything.',
+      before: function () { window.Flow && window.Flow.go(5); } },
+    { title: 'Marie approves',
+      body: 'Reviewer reply, in-thread. Part of the period\'s narrative.',
+      before: function () { window.Flow && window.Flow.go(6); } },
+    { title: 'Day 22 — risk escalation',
+      body: 'The bot surfaces a quarter-level risk: 3 controls depend on a frozen DBA change window. This is the moat — the bot sees across all 47 controls and notices the systemic dependency.',
+      before: function () { window.Flow && window.Flow.go(7); } },
+    { title: 'Ada joins, side thread',
+      body: 'PMO escalates to the DBA lead. The side thread is linked back into the close thread for traceability.',
+      before: function () { window.Flow && window.Flow.go(8); } },
+    { title: 'Day 24 — freeze lifted',
+      body: 'Risk resolved. Bot reports the outcome.',
+      before: function () { window.Flow && window.Flow.go(9); } },
+    { title: 'Day 26 — almost there',
+      body: '42 of 47 cleared. 3 in review, 2 pending. The final stretch.',
+      before: function () { window.Flow && window.Flow.go(10); } },
+    { title: 'Day 28 — close-package preview',
+      body: 'Bot assembles a preview. Every control link drills into its own thread. The graph is dense.',
+      before: function () { window.Flow && window.Flow.go(11); } },
+    { title: 'Day 30 — final summary',
+      body: '47 of 47. Total disputes, reviewer questions, turnaround. The summary is the close.',
+      before: function () { window.Flow && window.Flow.go(12); } },
+    { title: 'The thread IS the close',
+      body: 'Chain-anchored audit-evidence bundle. The thread itself is the close package — searchable, attestable, signed.',
+      before: function () { window.Flow && window.Flow.go(13); } },
+  ],
+};
 </script>
 <script src="flow.js"></script>
+<script src="tour.js"></script>
 </body>
 </html>

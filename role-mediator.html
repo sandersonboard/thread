@@ -5,99 +5,82 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · Optro ECM as Mediator</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
-<link rel="stylesheet" href="optro-card.css?v=20260615" />
-<link rel="stylesheet" href="flow.css?v=20260615" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
+<link rel="stylesheet" href="optro-card.css?v=20260615c" />
+<link rel="stylesheet" href="flow.css?v=20260615c" />
+<link rel="stylesheet" href="tour.css?v=20260615c" />
 </head>
 <body>
-<div id="flow-root" class="page">
-  <div class="page-caption">
-    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Bot's role</span>
-    <span class="take-title">Optro ECM as Mediator</span>
-    <span class="axis-tag">Role · Mediator</span>
+
+<div class="take-topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">TH</span>
+    Thread
+  </a>
+  <span class="brand-sep"></span>
+  <span class="crumbs">Bot's role</span>
+  <span class="take-title">Optro ECM as Mediator</span>
+  <span class="axis-tag">Role · Mediator</span>
+  <div class="right-actions">
+    <a href="index.html" class="back-link">← All takes</a>
   </div>
+</div>
 
-  <div class="state-pills" id="state-pills"></div>
-  <span class="state-pills-controls" id="state-controls"></span>
-
-  <div class="page-layout">
-    <div class="slack-window">
-      <aside class="slack-sidebar">
-        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
-        <div class="slack-section">Channels</div>
-        <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
-        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
-        <div class="slack-channel"><span class="hash">#</span> dba-team</div>
-        <div class="slack-channel"><span class="hash">#</span> it-security</div>
-        <div class="slack-section">Direct messages</div>
-        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
-        <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
-        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
-      </aside>
-      <main class="slack-main">
-        <header class="slack-header">
-          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span>
-          ctrl-4-2-1
-          <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
-        </header>
-        <div class="slack-messages" id="slack-messages"></div>
-        <div class="slack-composer">
-          <div class="input-shell">
-            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
-            <div class="input-line is-ghost" id="ghost-composer">Message #ctrl-4-2-1</div>
-            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
-          </div>
-        </div>
-      </main>
+<div class="slack-window">
+  <aside class="slack-sidebar">
+    <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+    <div class="slack-section">Channels</div>
+    <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
+    <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+    <div class="slack-channel"><span class="hash">#</span> dba-team</div>
+    <div class="slack-channel"><span class="hash">#</span> it-security</div>
+    <div class="slack-section">Direct messages</div>
+    <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+    <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
+    <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+  </aside>
+  <main class="slack-main">
+    <header class="slack-header">
+      <span style="color:var(--text-meta);font-family:var(--font-mono);font-weight:500;">#</span>
+      ctrl-4-2-1
+      <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
+    </header>
+    <div class="slack-messages" id="slack-messages"></div>
+    <div class="slack-composer">
+      <div class="input-shell">Message #ctrl-4-2-1</div>
     </div>
-    <div class="page-side">
-      <div class="state-caption" id="state-caption"></div>
-      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
-    </div>
-  </div>
-
-  <div class="page-footer">
-    <span>Thread · Optro ECM as Mediator</span>
-    <span><a href="index.html">← All takes</a></span>
-  </div>
+  </main>
 </div>
 
 <script src="scenario.js"></script>
 <script>
-const STATE_CAPTIONS = {
-  1:  "Weston drops the Q3 export. No bot intervention yet.",
-  2:  "Marie spots a new column. Pushes back.",
-  3:  "Bot surfaces the schema diff as a fact — no conclusion offered.",
-  4:  "Bot offers three options, doesn't pick.",
-  5:  "Marie picks 'lay out the diff'. Bot posts side-by-side.",
-  6:  "Marie picks 'find the change source'. Bot finds the CR ticket.",
-  7:  "Weston explains the GDPR field.",
-  8:  "Bot summarizes into a judgment trail.",
-  9:  "Marie agrees to record the exchange.",
-  10: "Marie signs off with the exchange embedded in her reviewer note.",
-  11: "Filing receipt. Chain anchored.",
-};
-
 const THREAD = [
-  { state: 1, author: 'weston', ts: '2:48 PM',
+  { state: 1, author: 'weston', ts: 'Friday · 2:48 PM',
     body: 'Q3 AR attached. Same query as last quarter.',
-    attachment: 'AR-Q3FY26-prod-db.csv',
+    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' },
     reactions: ['👀 1'] },
 
   { state: 2, author: 'marie', ts: '2:51 PM',
     body: "Quick question — there's a new column. Where'd it come from?" },
 
   { state: 3, author: 'optro', ts: '2:51 PM', kind: 'context',
-    body: 'noticed the schema diff: +1 field vs Q2 (<span class="cite">termination_date_normalized</span>).' },
+    body: 'Noticed the schema diff: <strong>+1 field</strong> vs Q2 — <span class="ai-citation">termination_date_normalized</span>.' },
 
-  { state: 4, author: 'optro', ts: '2:52 PM', kind: 'buttons-only',
-    buttons: [
-      { label: 'Lay out the diff' },
-      { label: 'Find the change source' },
-      { label: 'Stay out of it' },
-    ] },
+  { state: 4, author: 'optro', ts: '2:52 PM',
+    body: 'I can help in a few ways — your call:',
+    kind: 'card',
+    card: {
+      header: 'Three options · no recommendation',
+      actions: [
+        { label: 'Lay out the diff' },
+        { label: 'Find the change source' },
+        { label: 'Stay out of it' },
+      ],
+    } },
 
-  { state: 5, author: 'optro', ts: '2:53 PM', kind: 'diff',
+  { state: 5, author: 'optro', ts: '2:53 PM',
+    body: 'Marie picked <em>Lay out the diff</em>:',
+    kind: 'diff',
     diff: {
       left:  { title: 'Q2 schema (11 cols)', items: [
         { text: 'user_id' }, { text: 'role' }, { text: 'role_assigned_at' },
@@ -114,32 +97,36 @@ const THREAD = [
       ]},
     }},
 
-  { state: 6, author: 'optro', ts: '2:54 PM', kind: 'card',
+  { state: 6, author: 'optro', ts: '2:54 PM',
+    body: 'And <em>Find the change source</em>:',
+    kind: 'card',
     card: {
-      header: 'Change source located',
-      subtitle: 'Optro ECM',
+      header: 'Change source · located',
+      meta: 'Cross-linked from Oracle patch log + DBA Jira + Legal Review',
       fields: [
-        ['Field added', 'termination_date_normalized'],
-        ['Source patch', '<span class="cite">Oracle patch log · Apr 14, 2026</span>'],
-        ['Linked CR', '<span class="cite">DBA-CR-2401 · "Add GDPR-normalized termination date column"</span>'],
-        ['Approved by', 'Legal Review · Apr 12, 2026'],
+        ['Field added', '<span class="ai-citation">termination_date_normalized</span>'],
+        ['Source patch', '<span class="ai-citation">Oracle patch log · Apr 14, 2026</span>'],
+        ['Linked CR', '<span class="ai-citation">DBA-CR-2401</span> — "Add GDPR-normalized termination date"'],
+        ['Approved by', 'Legal Review · <span class="ai-citation">apr12-counsel-memo.pdf</span>'],
       ],
     }},
 
   { state: 7, author: 'weston', ts: '2:56 PM',
     body: "Oh, that's the GDPR field — DBA team added it after legal review. Sorry, should have flagged that." },
 
-  { state: 8, author: 'optro', ts: '2:56 PM', kind: 'card',
+  { state: 8, author: 'optro', ts: '2:56 PM',
+    body: 'Summarized the exchange for the audit trail:',
+    kind: 'card',
     card: {
-      header: 'Judgment trail',
-      subtitle: 'Optro ECM',
+      header: 'Judgment trail · Q3 FY26',
+      meta: 'Optional — Marie can record this into the control history',
       fields: [
-        ["Marie's concern", 'New field provenance — where did <span class="cite">termination_date_normalized</span> come from?'],
-        ["Weston's answer",  'GDPR compliance field added via <span class="cite">DBA-CR-2401</span>'],
-        ['Linked artifacts', '<span class="cite">DBA-CR-2401</span> · <span class="cite">legal-review-apr12.pdf</span>'],
+        ["Marie's concern", 'Provenance of new column <span class="ai-citation">termination_date_normalized</span>'],
+        ["Weston's answer",  'GDPR compliance field — added via <span class="ai-citation">DBA-CR-2401</span>'],
+        ['Linked artifacts', '<span class="ai-citation">DBA-CR-2401</span> · <span class="ai-citation">apr12-counsel-memo.pdf</span>'],
       ],
       actions: [
-        { label: "Record exchange in 4.2.1's history", primary: true },
+        { label: 'Record exchange in 4.2.1 history', primary: true },
         { label: 'Edit summary' },
       ],
     }},
@@ -148,21 +135,73 @@ const THREAD = [
     body: 'Yes — record it. Good catch on the patch log.',
     reactions: ['👍 1'] },
 
-  { state: 10, author: 'marie', ts: '3:01 PM', kind: 'card',
+  { state: 10, author: 'marie', ts: '3:01 PM',
+    body: 'Approving with notes:',
+    kind: 'card',
     card: {
       header: 'Reviewer sign-off · Q3 FY26',
       subtitle: 'Marie Curie',
       fields: [
         ['Outcome', '<strong>Approved with notes</strong>'],
-        ['Reviewer note', '"Verified — new column documented via <span class="cite">DBA-CR-2401</span>, see thread for full context."'],
-        ['Exchange link', '<span class="cite">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+        ['Reviewer note', '"Verified — new column documented via <span class="ai-citation">DBA-CR-2401</span>, see thread for full context."'],
+        ['Exchange link', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
       ],
     }},
 
   { state: 11, author: 'optro', ts: '3:01 PM', kind: 'receipt',
     receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 93% · routed=Marie · resolved 1 reviewer Q · 11 messages · chain=block #4,180,318' },
 ];
+
+const TOUR = {
+  title: 'Optro ECM as Mediator',
+  steps: [
+    { title: 'Weston drops the Q3 export',
+      body: 'Friday afternoon. He attaches the CSV — "same query as last quarter." Marie has not arrived yet. The bot is silent so far.',
+      before: function () { window.Flow && window.Flow.go(1); } },
+
+    { title: 'Marie spots a new column',
+      body: "She does not accuse. She just asks. There is no default escalation — and the bot has not pre-judged who is right.",
+      before: function () { window.Flow && window.Flow.go(2); } },
+
+    { title: 'Bot surfaces the fact, not a verdict',
+      body: 'One context line: "schema diff: +1 field." No interpretation. This is the mediator move — make the disagreement legible without taking a side.',
+      before: function () { window.Flow && window.Flow.go(3); } },
+
+    { title: 'Three options, no recommendation',
+      body: 'The bot offers what it could do; Marie picks. The bot is the operator, not the decider.',
+      before: function () { window.Flow && window.Flow.go(4); } },
+
+    { title: 'Side-by-side schema diff',
+      body: 'Q2 had 11 columns. Q3 has 12. The new column is highlighted. The bot still holds its opinion.',
+      before: function () { window.Flow && window.Flow.go(5); } },
+
+    { title: 'The integration graph kicks in',
+      body: 'Cross-links the Oracle patch log, finds DBA-CR-2401, surfaces the legal approval. This only works because Optro ECM knows the connected systems — patch logs, Jira, change management, legal counsel memos. The graph is the moat.',
+      before: function () { window.Flow && window.Flow.go(6); } },
+
+    { title: 'Weston explains',
+      body: 'GDPR field, added after legal review. Resolved in one message — the bot had already done the legwork.',
+      before: function () { window.Flow && window.Flow.go(7); } },
+
+    { title: 'Bot summarizes the exchange',
+      body: "Not a conclusion — a record. Marie can stamp it into the control's permanent history with one click.",
+      before: function () { window.Flow && window.Flow.go(8); } },
+
+    { title: 'Marie agrees to record',
+      body: "The exchange becomes part of the control's history — not just the artifact, but the reasoning behind the approval.",
+      before: function () { window.Flow && window.Flow.go(9); } },
+
+    { title: 'Sign-off references the thread',
+      body: "Marie's reviewer note links to the exchange itself. The next auditor sees not just \"approved\" but \"approved after this 3-message clarification.\"",
+      before: function () { window.Flow && window.Flow.go(10); } },
+
+    { title: 'Receipt, anchored',
+      body: 'File + diff + CR ticket + clarifying exchange + sign-off — all anchored together. The judgment is part of the audit record, not just the artifact.',
+      before: function () { window.Flow && window.Flow.go(11); } },
+  ],
+};
 </script>
 <script src="flow.js"></script>
+<script src="tour.js"></script>
 </body>
 </html>

@@ -5,106 +5,113 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · One thread per control</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
-<link rel="stylesheet" href="optro-card.css?v=20260615" />
-<link rel="stylesheet" href="flow.css?v=20260615" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
+<link rel="stylesheet" href="optro-card.css?v=20260615c" />
+<link rel="stylesheet" href="flow.css?v=20260615c" />
+<link rel="stylesheet" href="tour.css?v=20260615c" />
 <style>
 .collapsed-sticky {
-  margin: 4px 20px;
-  padding: 6px 12px;
-  background: #F4F5F7;
-  border-left: 3px solid #C8C8C8;
-  border-radius: 4px;
+  margin: 4px 24px;
+  padding: 8px 14px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-teal-500);
+  border-radius: var(--radius-md);
   font-size: 12px;
-  color: #4A4A4A;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-.collapsed-sticky .check { color: #007A5A; font-weight: 800; }
-
-.health-card {
-  margin: 16px 20px;
-  padding: 14px 16px;
-  background: linear-gradient(180deg, #FAFBFC, #F4F5F7);
-  border: 1px solid #D5DAE0;
-  border-radius: 6px;
+.collapsed-sticky .check {
+  color: var(--accent-green-500);
+  font-weight: 800;
   font-size: 13px;
 }
+
+.health-card {
+  margin: 16px 24px 4px;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #FAFBFC, #F4F5F7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
 .health-card .label {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.3px;
-  color: #868686;
+  letter-spacing: 0.08em;
+  color: var(--text-meta);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.health-card .label::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-green-500); box-shadow: 0 0 0 2px rgba(0, 122, 90, 0.2);
 }
 .health-card .stats {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  font-size: 12px;
+  gap: 14px;
 }
 .health-card .stats .stat .num {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 900;
   display: block;
-  color: #1D1C1D;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
 }
 .health-card .stats .stat .lbl {
-  color: #868686;
+  color: var(--text-meta);
   font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 </style>
 </head>
 <body>
-<div id="flow-root" class="page">
-  <div class="page-caption">
-    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Granularity</span>
-    <span class="take-title">One thread per control</span>
-    <span class="axis-tag">Unit · Control</span>
+
+<div class="take-topbar">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">TH</span>
+    Thread
+  </a>
+  <span class="brand-sep"></span>
+  <span class="crumbs">Granularity</span>
+  <span class="take-title">One thread per control</span>
+  <span class="axis-tag">Unit · Control</span>
+  <div class="right-actions">
+    <a href="index.html" class="back-link">← All takes</a>
   </div>
-  <div class="state-pills" id="state-pills"></div>
-  <span class="state-pills-controls" id="state-controls"></span>
-  <div class="page-layout">
-    <div class="slack-window">
-      <aside class="slack-sidebar">
-        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
-        <div class="slack-section">SOX controls</div>
-        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
-        <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-2</div>
-        <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-1</div>
-        <div class="slack-channel"><span class="hash">#</span> ctrl-6-2-1</div>
-        <div class="slack-channel" style="color:rgba(255,255,255,0.45);">+ 43 more</div>
-        <div class="slack-section">Direct messages</div>
-        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
-      </aside>
-      <main class="slack-main">
-        <header class="slack-header">
-          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span> ctrl-4-2-1
-          <span class="topic">Quarterly user-access review · prod-db-01.helios · 4 quarters of history</span>
-        </header>
-        <div id="control-stickies"></div>
-        <div class="slack-messages" id="slack-messages"></div>
-        <div id="control-pinned-bottom"></div>
-        <div class="slack-composer">
-          <div class="input-shell">
-            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
-            <div class="input-line is-ghost">Message #ctrl-4-2-1</div>
-            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
-          </div>
-        </div>
-      </main>
+</div>
+
+<div class="slack-window">
+  <aside class="slack-sidebar">
+    <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+    <div class="slack-section">SOX controls</div>
+    <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+    <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-2</div>
+    <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-1</div>
+    <div class="slack-channel"><span class="hash">#</span> ctrl-6-2-1</div>
+    <div class="slack-channel" style="color:rgba(255,255,255,0.45);">+ 43 more</div>
+    <div class="slack-section">Direct messages</div>
+    <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+  </aside>
+  <main class="slack-main">
+    <header class="slack-header">
+      <span style="color:var(--text-meta);font-family:var(--font-mono);font-weight:500;">#</span>
+      ctrl-4-2-1
+      <span class="topic">Quarterly user-access review · prod-db-01.helios · 4 quarters of history</span>
+    </header>
+    <div id="control-stickies"></div>
+    <div class="slack-messages" id="slack-messages"></div>
+    <div id="control-pinned-bottom"></div>
+    <div class="slack-composer">
+      <div class="input-shell">Message #ctrl-4-2-1</div>
     </div>
-    <div class="page-side">
-      <div class="state-caption" id="state-caption"></div>
-      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
-    </div>
-  </div>
-  <div class="page-footer">
-    <span>Thread · One thread per control</span>
-    <span><a href="index.html">← All takes</a></span>
-  </div>
+  </main>
 </div>
 
 <script src="scenario.js"></script>
@@ -118,44 +125,33 @@ window.addEventListener('load', () => {
   `;
 });
 
-const STATE_CAPTIONS = {
-  1:  "Open #ctrl-4-2-1. Q4/Q1/Q2 sign-offs collapsed at the top.",
-  2:  "Bot posts the Q3 ask with a drift-since-Q2 mini-card.",
-  3:  "Weston files the Q3 artifact.",
-  4:  "Bot auto-compares vs the 3 prior quarters.",
-  5:  "Marie joins, reads the drift card.",
-  6:  "Marie clicks 'view prior 3 sign-offs' — Q4/Q1/Q2 expand inline.",
-  7:  "Marie signs off with a history-aware boilerplate.",
-  8:  "Bot collapses Q3 into a new sticky at top.",
-  9:  "Pinned control-health card appears at the thread bottom.",
-  10: "4 quarters · 4 clean · 0 disputes · drift stable.",
-};
-
 const THREAD = [
   { state: 1, author: 'optro', ts: 'Apr 1 · 9:00 AM', kind: 'context',
-    body: 'control thread alive since Oct 14, 2025 · 4 prior quarters · 4 prior clean sign-offs' },
+    body: 'Control thread alive since Oct 14, 2025 · 4 prior quarters · 4 prior clean sign-offs' },
 
   { state: 2, author: 'optro', ts: 'Apr 7 · 9:00 AM',
-    body: 'Q3 AR ask for <span class="cite">control 4.2.1</span>.',
+    body: 'Q3 AR ask for <span class="ai-citation">control 4.2.1</span>.',
     kind: 'card',
     card: {
       header: 'Evidence ask · Q3 FY26 · 4.2.1',
-      subtitle: 'Optro ECM',
+      meta: 'Drift since Q2: row count +3% (in band) · schema unchanged · reviewer turnaround avg 1.2d',
       fields: [
         ['Reviewer',  'Marie Curie'],
         ['Due',       'Apr 14 (T+7)'],
-        ['Drift since Q2',  'row count Q4→Q1→Q2 sparkline · schema unchanged · reviewer turnaround avg 1.2d'],
+        ['History',   '<span class="ai-citation">Q4 / Q1 / Q2</span> all clean'],
       ],
     }},
 
   { state: 3, author: 'weston', ts: 'Apr 12 · 11:20 AM',
     body: 'Q3 file attached.',
-    attachment: 'AR-Q3FY26-prod-db.csv' },
+    attachment: { name: 'AR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' } },
 
-  { state: 4, author: 'optro', ts: 'Apr 12 · 11:20 AM', kind: 'card',
+  { state: 4, author: 'optro', ts: 'Apr 12 · 11:20 AM',
+    body: 'Auto-compared against the 3 prior quarters:',
+    kind: 'card',
     card: {
       header: 'Auto-compare vs 3 prior quarters',
-      subtitle: 'Optro ECM',
+      confidence: { label: 'Drift score (low = stable)', pct: 6 },
       fields: [
         ['Row count',     'Q4: 247 · Q1: 251 · Q2: 254 · Q3: 261 (+3%, in band)'],
         ['Schema',        'identical to Q2 (12 cols)'],
@@ -172,14 +168,16 @@ const THREAD = [
     kind: 'context',
     context: 'Q4 + Q1 + Q2 stickies expanded inline for Marie' },
 
-  { state: 7, author: 'marie', ts: 'Apr 14 · 9:17 AM', kind: 'card',
+  { state: 7, author: 'marie', ts: 'Apr 14 · 9:17 AM',
+    body: 'Approving with the history-aware note:',
+    kind: 'card',
     card: {
       header: 'Reviewer sign-off · Q3 FY26',
       subtitle: 'Marie Curie',
       fields: [
         ['Outcome', '<strong>Approved</strong>'],
         ['Reviewer note', '"Verified — consistent with 3 prior quarters."'],
-        ['History link', '<span class="cite">view prior 3 sign-offs</span>'],
+        ['History link', '<span class="ai-citation">view prior 3 sign-offs</span>'],
       ],
     } },
 
@@ -187,17 +185,47 @@ const THREAD = [
     body: 'Q3 sign-off collapsed to top sticky · 4 quarters of history in this thread' },
 
   { state: 9, author: 'optro', ts: 'Apr 14 · 9:18 AM', kind: 'receipt',
-    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 96% · drift 0.02 (stable) · history graph anchored · chain=block #4,180,500' },
+    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 96% · drift 0.06 (stable) · history graph anchored · chain=block #4,180,500' },
 
-  { state: 10, author: 'optro', ts: 'Apr 14 · 9:18 AM',
-    body: 'Pinned to the thread footer:',
-    kind: 'card',
-    card: {
-      header: 'Control health · 4.2.1',
-      subtitle: 'Optro ECM · live',
-      facts: ['Pinned · always visible at thread bottom'],
-    } },
+  { state: 10, author: 'optro', ts: 'Apr 14 · 9:18 AM', kind: 'context',
+    body: 'Control health · pinned to thread footer · always visible' },
 ];
+
+const TOUR = {
+  title: 'One thread per control',
+  steps: [
+    { title: 'A control with 4 quarters of history',
+      body: 'Open #ctrl-4-2-1. The collapsed stickies at the top are Q4, Q1, Q2 sign-offs. The control thread has been alive since Oct 2025.',
+      before: function () { window.Flow && window.Flow.go(1); } },
+    { title: 'Q3 ask, with drift context',
+      body: 'When the bot posts the Q3 ask, it includes drift since Q2 — row count, schema, turnaround. The history is the prompt.',
+      before: function () { window.Flow && window.Flow.go(2); } },
+    { title: 'Weston files',
+      body: 'Same as before, but in the same long-lived thread. No new channel.',
+      before: function () { window.Flow && window.Flow.go(3); } },
+    { title: 'Auto-compare across 4 quarters',
+      body: 'The bot doesn\'t just compare to Q2 — it compares against the full 4-quarter arc. Row count, schema, source query, file size. This is the longitudinal graph in action.',
+      before: function () { window.Flow && window.Flow.go(4); } },
+    { title: 'Marie reads the drift card',
+      body: 'No bot intervention here. Marie processes the comparison.',
+      before: function () { window.Flow && window.Flow.go(5); } },
+    { title: 'Expanding prior sign-offs',
+      body: 'Marie opens the collapsed Q4/Q1/Q2 stickies. The full history is one click away.',
+      before: function () { window.Flow && window.Flow.go(6); } },
+    { title: 'History-aware sign-off',
+      body: '"Consistent with 3 prior quarters." The note references the arc, not just the artifact.',
+      before: function () { window.Flow && window.Flow.go(7); } },
+    { title: 'Q3 becomes a new sticky',
+      body: 'Marie\'s sign-off collapses into a new sticky at the top. The thread now has 4 stickies — one per quarter.',
+      before: function () { window.Flow && window.Flow.go(8); } },
+    { title: 'Filing receipt',
+      body: 'Chain-anchored, with the drift score embedded. The control\'s history graph is part of the receipt.',
+      before: function () { window.Flow && window.Flow.go(9); } },
+    { title: 'Pinned control health',
+      body: 'A live dashboard pinned at the thread bottom — 4 quarters, 4 clean reviews, stable drift. The control\'s reputation lives in the thread.',
+      before: function () { window.Flow && window.Flow.go(10); } },
+  ],
+};
 
 window.addEventListener('load', () => {
   const setHealth = (showIt) => {
@@ -216,14 +244,15 @@ window.addEventListener('load', () => {
       </div>
     ` : '';
   };
-  const pills = document.getElementById('state-pills');
-  if (!pills) return;
-  new MutationObserver(() => {
-    const active = pills.querySelector('.pill.is-active');
-    if (active) setHealth(Number(active.dataset.state) >= 10);
-  }).observe(pills, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  // Hook into Flow.go to show/hide health card based on state
+  const origGo = window.Flow && window.Flow.go;
+  if (origGo) {
+    window.Flow.go = function (n) { origGo(n); setHealth(n >= 10); };
+  }
+  setTimeout(() => setHealth(false), 0);
 });
 </script>
 <script src="flow.js"></script>
+<script src="tour.js"></script>
 </body>
 </html>

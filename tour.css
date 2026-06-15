@@ -1,0 +1,138 @@
+/* Product tour — floating draggable card + pulsing highlight on target.
+   Self-contained. Visual language matches the Thread prototype's neutral Slack-ish palette. */
+
+/* ----- Floating card ----- */
+.tour-card {
+  position: fixed;
+  left: 24px; bottom: 24px;
+  width: 360px; max-width: calc(100vw - 48px);
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.08);
+  font-family: "Slack-Lato", "Lato", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1D1C1D;
+  z-index: 1000;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.tour-card.visible { opacity: 1; transform: translateY(0); }
+
+/* ----- Header (drag handle) ----- */
+.tour-card-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #EEEEEE;
+  cursor: grab; user-select: none; touch-action: none;
+}
+.tour-card-header.grabbing { cursor: grabbing; }
+.tour-card-avatar {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, #5A5A5A, #2A2A2A);
+  color: #FFFFFF;
+  font-size: 13px; font-weight: 800;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.tour-card-who { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+.tour-card-who .name {
+  font-size: 13px; font-weight: 700; color: #1D1C1D;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  letter-spacing: -0.01em;
+}
+.tour-card-who .meta { font-size: 11px; color: #868686; font-variant-numeric: tabular-nums; }
+.tour-card-close {
+  background: transparent; border: 0; padding: 4px;
+  color: #868686; font-size: 18px; line-height: 1; cursor: pointer;
+  border-radius: 4px;
+}
+.tour-card-close:hover { color: #1D1C1D; background: #F0F0F0; }
+
+/* ----- Body ----- */
+.tour-card-body {
+  padding: 14px 16px 10px;
+  font-size: 13.5px; line-height: 1.55; color: #1D1C1D;
+  max-height: 24rem; overflow-y: auto;
+}
+.tour-card-title {
+  font-size: 15px; font-weight: 800; color: #1D1C1D;
+  letter-spacing: -0.005em; margin: 0 0 6px;
+}
+.tour-card-text { margin: 0; color: #4A4A4A; }
+
+/* ----- Footer ----- */
+.tour-card-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid #EEEEEE;
+  background: #FFFFFF;
+}
+.tour-progress {
+  font-size: 11px; color: #868686;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.04em;
+  font-family: ui-monospace, "SF Mono", monospace;
+}
+.tour-actions { display: flex; align-items: center; gap: 6px; }
+.tour-btn {
+  background: #FFFFFF; border: 1px solid #C7CACE;
+  border-radius: 6px; color: #1D1C1D;
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  padding: 5px 11px; cursor: pointer;
+  transition: background 80ms, border-color 80ms;
+}
+.tour-btn:hover { background: #F4F4F4; }
+.tour-btn[disabled] { opacity: 0.4; cursor: not-allowed; }
+.tour-btn.primary {
+  background: #1D1C1D; border-color: #1D1C1D; color: #FFFFFF;
+}
+.tour-btn.primary:hover { background: #000000; border-color: #000000; }
+.tour-skip {
+  background: transparent; border: 0; color: #868686;
+  font-size: 12px; cursor: pointer; padding: 0 6px; font-family: inherit;
+}
+.tour-skip:hover { color: #1D1C1D; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ----- Pulsing highlight on the active step's target ----- */
+.tour-highlight {
+  position: relative; z-index: 5;
+  animation: tour-highlight-pulse 2.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+@keyframes tour-highlight-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(18, 100, 163, 0.45), 0 0 14px rgba(18, 100, 163, 0.22); }
+  50%      { box-shadow: 0 0 0 5px rgba(18, 100, 163, 0.65), 0 0 28px rgba(18, 100, 163, 0.36); }
+}
+
+/* ----- Floating "Product tour" relauncher pill (bottom-right) ----- */
+.tour-restart {
+  position: fixed; bottom: 24px; right: 24px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px 6px 8px;
+  background: #FFFFFF;
+  border: 1px solid #C7CACE;
+  color: #1D1C1D;
+  font-family: "Slack-Lato", "Lato", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12.5px; font-weight: 700;
+  border-radius: 999px; cursor: pointer;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  transition: all 150ms ease;
+  z-index: 1400;
+}
+.tour-restart:hover {
+  background: #FAFAFA;
+  border-color: #868686;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+.tour-restart .tour-restart-avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  background: linear-gradient(135deg, #5A5A5A, #2A2A2A);
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+}

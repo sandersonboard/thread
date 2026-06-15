@@ -22,13 +22,12 @@
 (function () {
   const main = () => {
     const state = { current: 1, total: computeTotal(THREAD) };
-    const root = document.getElementById('flow-root');
-    if (!root) return console.error('No #flow-root element');
 
     renderPills(state);
     renderMessages(state);
     renderCaption(state);
-    bindKeyboard(state);
+    // Keyboard navigation is owned by tour.js (←/→/Enter/Esc) — flow.js no longer binds keys
+    // to prevent the tour text and message state from desyncing.
     bindJumpLink(state);
   };
 
@@ -99,8 +98,14 @@
 
     const av = document.createElement('div');
     av.className = 'avatar';
-    av.textContent = author.initials;
-    if (author.tone && !author.isBot) av.style.background = `linear-gradient(135deg, ${author.tone}, ${shade(author.tone, -15)})`;
+    if (author.isBot) {
+      const img = document.createElement('img');
+      img.src = 'optro-mark.svg';
+      img.alt = 'Optro ECM';
+      av.appendChild(img);
+    } else {
+      av.textContent = author.initials;
+    }
     wrap.appendChild(av);
 
     const body = document.createElement('div');
@@ -132,8 +137,15 @@
     }
     if (m.attachment) {
       const att = document.createElement('div');
-      att.style.cssText = 'margin-top:6px; padding:8px 12px; background:#F5F6F7; border:1px solid #DDD; border-radius:4px; font-size:12px; color:#1D1C1D; display:inline-flex; gap:8px; align-items:center;';
-      att.innerHTML = `<span style="font-size:18px;">📎</span><span><strong>${m.attachment}</strong></span>`;
+      att.className = 'slack-attachment';
+      var attName = (typeof m.attachment === 'string') ? m.attachment : m.attachment.name;
+      var attMeta = (typeof m.attachment === 'object' && m.attachment.meta) || null;
+      att.innerHTML = `
+        <span class="att-icon">📎</span>
+        <span>
+          <div class="att-name">${attName}</div>
+          ${attMeta ? `<div class="att-meta">${attMeta}</div>` : ''}
+        </span>`;
       body.appendChild(att);
     }
     if (m.reactions && m.reactions.length) {
@@ -157,9 +169,8 @@
       if (c) {
         const ctx = document.createElement('div');
         ctx.className = 'optro-context';
-        ctx.innerHTML = `<span class="mark"></span><span class="body">${c}</span>`;
+        ctx.innerHTML = `<span>${c}</span>`;
         body.appendChild(ctx);
-        // The "context-only" version doesn't also include a regular paragraph
         if (m.kind === 'context') {
           const ps = body.querySelectorAll('p');
           ps.forEach(p => p.remove());
@@ -234,12 +245,7 @@
       body.appendChild(t);
     }
 
-    // Hover toolbar
-    const tools = document.createElement('div');
-    tools.className = 'hover-tools';
-    tools.innerHTML = '<button>😀</button><button>↩</button><button>📤</button><button>⋯</button>';
     wrap.appendChild(body);
-    wrap.appendChild(tools);
     return wrap;
   }
 
@@ -249,12 +255,21 @@
     if (card.header) {
       const s = document.createElement('div');
       s.className = 'card-section';
-      s.innerHTML = `
-        <div class="card-header">
-          <span class="mark">OE</span>
-          ${card.header}
-          ${card.subtitle ? `<span class="subtitle">${card.subtitle}</span>` : ''}
-        </div>`;
+      var headerHTML = '<div class="card-header"><span class="ai-chip">Optro ECM</span>' + card.header;
+      if (card.subtitle) headerHTML += '<span class="subtitle">' + card.subtitle + '</span>';
+      headerHTML += '</div>';
+      if (card.meta) headerHTML += '<div class="card-meta">' + card.meta + '</div>';
+      s.innerHTML = headerHTML;
+      // Confidence bar row
+      if (card.confidence) {
+        var pct = Math.round(card.confidence.pct);
+        var conf = document.createElement('div');
+        conf.className = 'conf-row';
+        conf.innerHTML = '<span>' + (card.confidence.label || 'Match to your usual pattern') + '</span>'
+          + '<span class="ai-confidence-bar" style="width:100%"><span style="width:' + pct + '%"></span></span>'
+          + '<span class="conf-pct">' + pct + '%</span>';
+        s.appendChild(conf);
+      }
       root.appendChild(s);
     }
     if (card.fields && card.fields.length) {
@@ -355,4 +370,14 @@
   } else {
     main();
   }
+
+  // Expose a minimal Flow API so tour.js can drive state from step.before() callbacks.
+  // Flow.go(n) re-renders the message list to show messages with state <= n.
+  window.Flow = {
+    go: function (n) {
+      var total = computeTotal(THREAD);
+      var s = { current: Math.max(1, Math.min(total, n | 0)), total: total };
+      renderMessages(s);
+    },
+  };
 })();

@@ -1,246 +1,235 @@
-/* Block Kit-flavored card the Optro ECM bot posts inside a Slack message.
-   Neutral gray accents — does not import Luna tokens. */
-
-:root {
-  --card-rule: #3D3D3D;
-  --card-bg: #FFFFFF;
-  --card-border: #DDDDDD;
-  --card-text: #1D1C1D;
-  --card-text-muted: #616061;
-  --card-divider: #EEEEEE;
-  --card-btn-border: #BBBBBB;
-  --card-btn-text: #1D1C1D;
-  --card-btn-bg: #FFFFFF;
-  --card-btn-bg-hover: #F4F4F4;
-  --card-btn-primary-bg: #007A5A;
-  --card-btn-primary-bg-hover: #148567;
-  --card-btn-primary-text: #FFFFFF;
-  --card-btn-danger-border: #C0392B;
-  --card-btn-danger-text: #C0392B;
-  --card-cite: #1264A3;
-}
+/* Bot card — the Block Kit message Optro ECM posts inside a Slack thread.
+   Purple-accented to read as an AI moment. Uses tokens from slack-chrome.css. */
 
 .optro-card {
-  margin-top: 8px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-left: 4px solid var(--card-rule);
-  border-radius: 4px;
-  max-width: 540px;
+  margin-top: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-purple-500);
+  border-radius: var(--radius-md);
+  max-width: 560px;
   overflow: hidden;
-  font-size: 14px;
-  color: var(--card-text);
+  box-shadow: var(--shadow-sm);
 }
 
-.optro-card .card-section {
-  padding: 12px 14px;
-}
-.optro-card .card-divider {
-  height: 1px;
-  background: var(--card-divider);
-  margin: 0;
-}
+.optro-card .card-section { padding: 14px 16px; }
+.optro-card .card-divider { height: 1px; background: var(--divider); margin: 0; }
 
 .optro-card .card-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 14px;
-}
-.optro-card .card-header .mark {
-  width: 18px; height: 18px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #e5e5e5, #c8c8c8);
-  display: grid; place-items: center;
-  font-size: 9px;
+  gap: 10px;
   font-weight: 800;
-  color: #FFFFFF;
+  font-size: 14.5px;
+  color: var(--text);
+  letter-spacing: -0.005em;
+  flex-wrap: wrap;
 }
 .optro-card .card-header .subtitle {
   margin-left: auto;
   font-weight: 400;
   font-size: 12px;
-  color: var(--card-text-muted);
+  color: var(--text-meta);
+}
+
+.optro-card .card-meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 .optro-card .card-fields {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 6px 14px;
+  grid-template-columns: 150px 1fr;
+  gap: 8px 14px;
   font-size: 13px;
 }
 .optro-card .card-fields .label {
-  color: var(--card-text-muted);
+  color: var(--text-muted);
   font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.01em;
 }
 .optro-card .card-fields .value {
-  color: var(--card-text);
+  color: var(--text);
+}
+
+.optro-card .conf-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.optro-card .conf-row .ai-confidence-bar {
+  width: auto; max-width: 220px;
+  height: 5px;
+}
+.optro-card .conf-row .conf-pct {
+  font-weight: 800;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
 .optro-card .card-fact {
   font-size: 13px;
-  color: var(--card-text);
-  line-height: 1.5;
+  color: var(--text-muted);
+  line-height: 1.55;
 }
-.optro-card .card-fact .cite {
-  color: var(--card-cite);
-  text-decoration: none;
-  cursor: pointer;
-}
-.optro-card .card-fact .cite:hover { text-decoration: underline; }
-.optro-card .card-fact .cite::before {
-  content: '🔗 ';
-  font-size: 10px;
-  opacity: 0.6;
-}
+.optro-card .card-fact + .card-fact { margin-top: 6px; }
 
 .optro-card .card-actions {
   display: flex;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 12px 16px;
   flex-wrap: wrap;
+  background: var(--surface-muted);
+  border-top: 1px solid var(--divider);
 }
 .optro-card .card-actions button {
-  padding: 5px 12px;
+  padding: 6px 14px;
   font-size: 13px;
   font-weight: 700;
-  border-radius: 4px;
-  border: 1px solid var(--card-btn-border);
-  background: var(--card-btn-bg);
-  color: var(--card-btn-text);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
   cursor: pointer;
   font-family: inherit;
+  letter-spacing: -0.005em;
+  transition: background 120ms, border-color 120ms;
 }
-.optro-card .card-actions button:hover { background: var(--card-btn-bg-hover); }
+.optro-card .card-actions button:hover { background: var(--surface-muted); border-color: var(--text-muted); }
 .optro-card .card-actions button.primary {
-  background: var(--card-btn-primary-bg);
-  color: var(--card-btn-primary-text);
-  border-color: var(--card-btn-primary-bg);
+  background: var(--accent-green-500);
+  color: #FFFFFF;
+  border-color: var(--accent-green-500);
 }
-.optro-card .card-actions button.primary:hover { background: var(--card-btn-primary-bg-hover); border-color: var(--card-btn-primary-bg-hover); }
+.optro-card .card-actions button.primary:hover {
+  background: var(--accent-green-600);
+  border-color: var(--accent-green-600);
+}
 .optro-card .card-actions button.danger {
-  border-color: var(--card-btn-danger-border);
-  color: var(--card-btn-danger-text);
+  border-color: rgba(192, 57, 43, 0.4);
+  color: #C0392B;
 }
 
-/* Compact context block — used for the bot's "noticed X" lines */
+/* Compact context block — the bot's "noticed X" lines */
 .optro-context {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 8px;
   margin-top: 4px;
   font-size: 13px;
-  color: var(--card-text-muted);
+  color: var(--text-muted);
+  line-height: 1.5;
 }
-.optro-context .mark {
-  width: 14px; height: 14px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #e5e5e5, #c8c8c8);
+.optro-context::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple-500);
+  box-shadow: 0 0 0 2px var(--accent-purple-100);
   flex-shrink: 0;
+  margin-top: 8px;
 }
-.optro-context .body { line-height: 1.4; }
-.optro-context .body .cite {
-  color: var(--card-cite);
-  cursor: pointer;
-}
-.optro-context .body .cite:hover { text-decoration: underline; }
 
-/* Side-by-side diff card (used in role-mediator Take 2 state 5) */
+/* Side-by-side diff */
 .optro-diff {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0;
-  border-top: 1px solid var(--card-divider);
 }
-.optro-diff .col {
-  padding: 10px 14px;
-  font-size: 12px;
-}
-.optro-diff .col + .col {
-  border-left: 1px solid var(--card-divider);
-}
+.optro-diff .col { padding: 12px 16px; font-size: 12px; }
+.optro-diff .col + .col { border-left: 1px solid var(--divider); }
 .optro-diff .col .col-title {
-  font-weight: 700;
-  font-size: 11px;
+  font-weight: 800;
+  font-size: 10.5px;
   text-transform: uppercase;
-  color: var(--card-text-muted);
-  letter-spacing: 0.3px;
-  margin-bottom: 6px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
 }
 .optro-diff .col ul {
-  margin: 0; padding-left: 14px;
-  font-family: ui-monospace, "SF Mono", monospace;
+  margin: 0; padding-left: 0;
+  list-style: none;
+  font-family: var(--font-mono);
   font-size: 12px;
+  color: var(--text);
 }
+.optro-diff .col ul li { padding: 2px 6px; border-radius: 3px; }
 .optro-diff .col ul li.is-new {
-  background: #FFF7DA;
+  background: var(--accent-amber-50);
+  font-weight: 700;
+  color: var(--accent-amber-700);
+}
+
+/* Filing receipt */
+.optro-receipt {
+  margin-top: 6px;
+  padding: 10px 14px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-green-500);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+.optro-receipt strong { color: var(--text); font-weight: 700; }
+
+/* "Why I X here" expander */
+.optro-expander {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--accent-purple-700);
+  cursor: pointer;
   font-weight: 700;
 }
-
-/* Filing receipt — terminal/monospace looking, but Slack-themed */
-.optro-receipt {
-  margin-top: 4px;
-  padding: 8px 12px;
-  background: #F7F8FA;
-  border: 1px solid var(--card-border);
-  border-left: 3px solid var(--card-rule);
-  border-radius: 4px;
-  font-family: ui-monospace, "SF Mono", monospace;
-  font-size: 12px;
-  color: var(--card-text);
-  line-height: 1.5;
-}
-.optro-receipt strong { color: var(--card-text); }
-
-/* "Why I played X here" expander */
-.optro-expander {
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--card-text-muted);
-  cursor: pointer;
-}
-.optro-expander summary {
-  list-style: none;
-  user-select: none;
-}
+.optro-expander summary { list-style: none; user-select: none; letter-spacing: 0.01em; }
 .optro-expander summary::before {
   content: '▸ ';
   font-size: 10px;
   display: inline-block;
-  transition: transform 0.12s;
+  transition: transform 120ms;
+  margin-right: 2px;
 }
-.optro-expander[open] summary::before {
-  content: '▾ ';
-}
+.optro-expander[open] summary::before { content: '▾ '; }
 .optro-expander .reveal {
-  margin-top: 6px;
-  padding: 8px 10px;
-  background: #F7F8FA;
-  border: 1px solid var(--card-border);
-  border-radius: 4px;
-  color: var(--card-text);
-  font-size: 12px;
-  line-height: 1.5;
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent-purple-500);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+  font-weight: 400;
 }
 
-/* Ephemeral interjection (Take 3 / role-silent) */
+/* Ephemeral interjection */
 .optro-ephemeral {
-  margin-top: 4px;
-  padding: 8px 12px;
-  background: #FFF8E1;
-  border: 1px solid #FFE0A6;
-  border-left: 3px solid #C8911D;
-  border-radius: 4px;
-  font-size: 13px;
-  color: #6E5414;
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: var(--accent-amber-50);
+  border: 1px solid var(--accent-amber-100);
+  border-left: 3px solid var(--accent-amber-500);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  color: var(--accent-amber-700);
+  max-width: 560px;
 }
 .optro-ephemeral .label {
   font-weight: 800;
-  font-size: 11px;
-  letter-spacing: 0.3px;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   display: block;
-  margin-bottom: 4px;
-  color: #8A6612;
+  margin-bottom: 6px;
+  color: var(--accent-amber-500);
 }
