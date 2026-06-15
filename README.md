@@ -19,7 +19,7 @@ Multi-party SOX evidence collection in Slack — what changes when the bot, the 
 
 ## Cast
 
-Helios Robotics — Q3 FY26 close — control 4.2.1 (quarterly user-access review on `prod-db-01.helios`).
+Watts Water Technologies — Q3 FY26 close — control 4.2.1 (quarterly user-access review on `prod-db-01.watts`).
 
 - **Weston Prohaska** — IT Lead, control owner
 - **Marie Curie** — Internal Audit, reviewer

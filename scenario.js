@@ -1,12 +1,12 @@
 // Constants reused across the 6 take pages. Story-world only — no family branding.
 
 window.SCENARIO = {
-  company: 'Helios Robotics',
-  workspaceLetter: 'H',
-  workspaceColor: '#266c92',
+  company: 'Watts Water Technologies',
+  workspaceLetter: 'W',
+  workspaceColor: '#1B4D8C',
   control: '4.2.1',
   controlLabel: 'Quarterly user-access review',
-  asset: 'prod-db-01.helios',
+  asset: 'prod-db-01.watts',
   period: 'Q3 FY26',
   cast: {
     weston: { name: 'Weston Prohaska', initials: 'WP', tone: '#5a3a8a', role: 'IT Lead' },
