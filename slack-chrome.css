@@ -89,21 +89,33 @@ body {
   overflow-y: auto;
 }
 .slack-workspace {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 12px 16px 14px;
   border-bottom: 1px solid var(--sidebar-border);
+  min-width: 0;
 }
-.slack-workspace .workspace-tile {
-  display: block;
-  width: 100%;
-  background: #FFFFFF;
-  border-radius: 6px;
-  padding: 10px 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+.slack-workspace .workspace-mark {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  flex-shrink: 0;
 }
-.slack-workspace .workspace-tile img {
+.slack-workspace .workspace-mark img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   display: block;
+}
+.slack-workspace .workspace-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 .slack-section {
   padding: 16px 18px 4px;
