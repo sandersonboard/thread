@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread · One thread per evidence ask</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+</head>
+<body>
+<div id="flow-root" class="page">
+  <div class="page-caption">
+    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Granularity</span>
+    <span class="take-title">One thread per evidence ask</span>
+    <span class="axis-tag">Unit · Ask</span>
+  </div>
+  <div class="state-pills" id="state-pills"></div>
+  <span class="state-pills-controls" id="state-controls"></span>
+  <div class="page-layout">
+    <div class="slack-window">
+      <aside class="slack-sidebar">
+        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+        <div class="slack-section">Open asks</div>
+        <div class="slack-channel"><span class="hash">▸</span> t1 · Q3 AR prod-db</div>
+        <div class="slack-channel is-active"><span class="hash">▸</span> t2 · SOC2 firewall export</div>
+        <div class="slack-channel"><span class="hash">▸</span> t3 · Priv-account list Q3</div>
+        <div class="slack-section">Filed asks (47)</div>
+        <div class="slack-channel" style="color:rgba(255,255,255,0.4);">▾ See archive</div>
+        <div class="slack-section">Direct messages</div>
+        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+      </aside>
+      <main class="slack-main">
+        <header class="slack-header" id="ask-header">
+          <span style="color:#868686;">▸</span>
+          <span id="ask-title">t2 · SOC2 firewall rule export</span>
+          <span class="topic" id="ask-topic">Stalled 3 days · due Wed</span>
+        </header>
+        <div class="slack-messages" id="slack-messages"></div>
+        <div class="slack-composer">
+          <div class="input-shell">
+            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
+            <div class="input-line is-ghost">Reply in this thread</div>
+            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="page-side">
+      <div class="state-caption" id="state-caption"></div>
+      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Thread · One thread per evidence ask</span>
+    <span><a href="index.html">← All takes</a></span>
+  </div>
+</div>
+
+<script src="scenario.js"></script>
+<script>
+const STATE_CAPTIONS = {
+  1:  "t2 (SOC2 firewall) — Optro ECM's opening ask, posted Tuesday.",
+  2:  "Day 1 — Weston doesn't reply.",
+  3:  "Day 3 — Bot posts a soft nudge.",
+  4:  "Weston responds, drops the artifact.",
+  5:  "Bot auto-tags, seals thread t2.",
+  6:  "Switch to t1 (Q3 AR prod-db) — Marie just approved.",
+  7:  "Bot seals t1 with receipt.",
+  8:  "Switch to t3 (priv-account list) — bot's opening ask only.",
+  9:  "Switch to 'Filed asks' archive — scroll feed of 47 sealed threads.",
+  10: "A new ask thread t-q4-1 appears at top: Sarah Kim referencing a Q2 sealed thread.",
+};
+
+window.addEventListener('load', () => {
+  const headerMap = {
+    1: { title: 't2 · SOC2 firewall rule export', topic: 'Stalled 3 days · due Wed' },
+    2: { title: 't2 · SOC2 firewall rule export', topic: 'Day 1 — no reply' },
+    3: { title: 't2 · SOC2 firewall rule export', topic: 'Day 3 — bot nudge' },
+    4: { title: 't2 · SOC2 firewall rule export', topic: 'Day 3 — artifact dropped' },
+    5: { title: 't2 · SOC2 firewall rule export', topic: 'Sealed · 4 messages' },
+    6: { title: 't1 · Q3 AR prod-db', topic: 'Mid-review · Marie just approved' },
+    7: { title: 't1 · Q3 AR prod-db', topic: 'Sealed · 6 messages' },
+    8: { title: 't3 · Priv-account list Q3', topic: 'Just opened · awaiting Weston' },
+    9: { title: 'Filed asks · this quarter', topic: '47 sealed threads' },
+    10: { title: 't-q4-1 · Q4 backup retention attestation', topic: 'Just opened by Sarah Kim · references Q2 sealed thread' },
+  };
+  const updateHeader = (n) => {
+    const t = document.getElementById('ask-title');
+    const topic = document.getElementById('ask-topic');
+    if (t && headerMap[n]) t.textContent = headerMap[n].title;
+    if (topic && headerMap[n]) topic.textContent = headerMap[n].topic;
+  };
+  const pills = document.getElementById('state-pills');
+  if (!pills) return;
+  const observer = new MutationObserver(() => {
+    const active = pills.querySelector('.pill.is-active');
+    if (active) updateHeader(Number(active.dataset.state));
+  });
+  observer.observe(pills, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  setTimeout(() => updateHeader(1), 0);
+});
+
+const THREAD = [
+  { state: 1, author: 'optro', ts: 'Tue · 9:00 AM',
+    body: 'Q3 SOC2 firewall rule export needed by Wed close.',
+    kind: 'card',
+    card: {
+      header: 'Evidence ask · SOC2 firewall rules',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Control',       'SOC2-CC6.1'],
+        ['Due',           'Wed Apr 30, 17:00'],
+        ['Reviewer',      'Marie Curie'],
+        ['Suggested artifact', '<span class="cite">snow-fw-export.csv</span> (same as Q2)'],
+      ],
+      actions: [
+        { label: '✓ Approve & file', primary: true },
+        { label: 'Upload your own' },
+      ],
+    } },
+  { state: 2, author: 'optro', ts: 'Tue · 9:00 AM', kind: 'context',
+    body: 'waiting on Weston · 0 replies' },
+
+  { state: 3, author: 'optro', ts: 'Thu · 8:45 AM',
+    body: 'Heads up Weston — this is due Wed (today). Want me to ping you again tomorrow morning?',
+    kind: 'buttons-only',
+    buttons: [
+      { label: 'Snooze 24hr' },
+      { label: 'I\'ll file it now', primary: true },
+    ] },
+
+  { state: 4, author: 'weston', ts: 'Thu · 9:12 AM',
+    body: 'Sorry, in IDS-tuning all week — file attached.',
+    attachment: 'snow-fw-export-q3.csv' },
+
+  { state: 5, author: 'optro', ts: 'Thu · 9:12 AM', kind: 'receipt',
+    receipt: 'filed: <strong>snow-fw-export-q3.csv</strong> → SOC2-CC6.1 · classifier 96% · routed=Marie · 1 bot nudge + 1 reply · thread sealed' },
+
+  { state: 6, author: 'weston', ts: 'Fri · 2:48 PM',
+    body: 'Q3 AR attached.',
+    attachment: 'AR-Q3FY26-prod-db.csv' },
+
+  { state: 6, author: 'marie', ts: 'Fri · 3:00 PM',
+    body: 'Approved — clean Q3, consistent with Q2.',
+    reactions: ['✅ 1'] },
+
+  { state: 7, author: 'optro', ts: 'Fri · 3:00 PM', kind: 'receipt',
+    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · classifier 94% · routed=Marie · 6 messages · thread sealed · chain=block #4,180,318' },
+
+  { state: 8, author: 'optro', ts: 'Fri · 4:10 PM',
+    body: 'Q3 priv-account list ask for IT Lead.',
+    kind: 'card',
+    card: {
+      header: 'Evidence ask · Privileged account list',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Control',  '5.1.2'],
+        ['Due',      'Mon Apr 28'],
+        ['Reviewer', 'Marie Curie'],
+      ],
+      actions: [
+        { label: '✓ Approve & file', primary: true },
+        { label: 'Upload your own' },
+      ],
+    } },
+  { state: 8, author: 'optro', ts: 'Fri · 4:10 PM', kind: 'context',
+    body: 'thread just opened · awaiting Weston · 0 replies' },
+
+  { state: 9, author: 'optro', ts: 'Filed feed', kind: 'card',
+    card: {
+      header: '47 sealed threads · Q3 FY26',
+      subtitle: 'Filed asks archive',
+      facts: [
+        '<span class="cite">t1 · Q3 AR prod-db</span> — sealed Fri 3:00 PM · chain #4,180,318',
+        '<span class="cite">t2 · SOC2 firewall export</span> — sealed Thu 9:12 AM',
+        '<span class="cite">t-43 · Q3 backup retention</span> — sealed Apr 8',
+        '<span class="cite">t-42 · IAM role review</span> — sealed Apr 7',
+        '… 43 more',
+      ],
+    } },
+
+  { state: 10, author: 'sarah', ts: 'Tue · 10:14 AM',
+    body: 'Opening a new ask for Q4 backup retention — referencing the Q2 sealed thread for context.',
+    kind: 'card',
+    card: {
+      header: 'New ask · Q4 backup retention attestation',
+      subtitle: 'Sarah Kim · External Auditor',
+      fields: [
+        ['References', '<span class="cite">t-22 · Q2 backup retention · sealed Jan 3, 2026</span>'],
+        ['Control',    '7.3.4'],
+        ['Due',        'May 30'],
+      ],
+      facts: ['Q2 sealed thread auto-attached. Optro ECM resurrected the relevant context (reviewer note, artifact, chain anchor) for Sarah\'s reference.'],
+    } },
+];
+</script>
+<script src="flow.js"></script>
+</body>
+</html>
