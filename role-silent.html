@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread · Optro ECM as Silent Auditor</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+</head>
+<body>
+<div id="flow-root" class="page">
+  <div class="page-caption">
+    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Bot's role</span>
+    <span class="take-title">Optro ECM as Silent Auditor</span>
+    <span class="axis-tag">Role · Silent</span>
+  </div>
+  <div class="state-pills" id="state-pills"></div>
+  <span class="state-pills-controls" id="state-controls"></span>
+  <div class="page-layout">
+    <div class="slack-window">
+      <aside class="slack-sidebar">
+        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+        <div class="slack-section">Channels</div>
+        <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
+        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+        <div class="slack-channel"><span class="hash">#</span> dba-team</div>
+        <div class="slack-section">Direct messages</div>
+        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+        <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
+      </aside>
+      <main class="slack-main">
+        <header class="slack-header">
+          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span> ctrl-4-2-1
+          <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
+        </header>
+        <div class="slack-messages" id="slack-messages"></div>
+        <div class="slack-composer">
+          <div class="input-shell">
+            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
+            <div class="input-line is-ghost">Message #ctrl-4-2-1</div>
+            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="page-side">
+      <div class="state-caption" id="state-caption"></div>
+      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Thread · Optro ECM as Silent Auditor</span>
+    <span><a href="index.html">← All takes</a></span>
+  </div>
+</div>
+
+<script src="scenario.js"></script>
+<script>
+const STATE_CAPTIONS = {
+  1:  "Weston posts. Bot silent.",
+  2:  "Marie acknowledges. Bot silent.",
+  3:  "Marie hovers her sign-off button. Bot interjects ONCE.",
+  4:  "The single context fact behind the interjection.",
+  5:  "Marie asks Weston. Bot silent.",
+  6:  "Weston pings the DBA lead in a side thread. Bot silent.",
+  7:  "DBA lead responds in the side thread (visible as a pill).",
+  8:  "Bot auto-links the side-thread resolution into the main thread.",
+  9:  "Marie signs off with the addendum stapled on.",
+  10: "Final receipt with the anomaly flag + resolution.",
+  11: "Footer expander: why the bot interrupted.",
+  12: "Bot's silence after sealing — no chatter, no follow-up.",
+};
+
+const THREAD = [
+  { state: 1, author: 'weston', ts: '11:02 AM',
+    body: 'Q3 AR done — same as Q2, file attached.',
+    attachment: 'AR-Q3FY26-prod-db.csv' },
+
+  { state: 2, author: 'marie', ts: '11:21 AM',
+    body: 'Looks good — signing off.' },
+
+  { state: 3, author: 'optro', ts: '11:21 AM', kind: 'ephemeral',
+    ephemeral: {
+      label: 'Before you sign — heads up',
+      body: 'DBA cleanup ticket <span class="cite">DBA-2407</span> closed Friday without an attestation from the DBA-team lead. <strong>First time in 4 quarters that\'s happened.</strong>',
+    } },
+
+  { state: 4, author: 'optro', ts: '11:21 AM', kind: 'context',
+    body: '4 prior quarters had a DBA attestation within 48hr of cleanup-ticket close. Q3 broke that pattern.' },
+
+  { state: 5, author: 'marie', ts: '11:23 AM',
+    body: 'Weston, did you see this?' },
+
+  { state: 6, author: 'weston', ts: '11:24 AM',
+    body: "Hmm — that's weird. Let me ping the DBA lead." },
+
+  { state: 7, author: 'weston', ts: '11:31 AM',
+    body: 'Side thread with DBA lead:',
+    kind: 'side-thread',
+    sideThread: {
+      participants: ['weston', 'optro'],
+      summary: 'Last reply 4m ago — DBA lead confirmed cleanup, sent attestation',
+      count: 3,
+    } },
+
+  { state: 8, author: 'optro', ts: '11:35 AM', kind: 'context',
+    body: 'attestation received · DBA-team-lead · <span class="cite">linked here</span>' },
+
+  { state: 9, author: 'marie', ts: '11:38 AM', kind: 'card',
+    card: {
+      header: 'Reviewer sign-off · Q3 FY26',
+      subtitle: 'Marie Curie',
+      fields: [
+        ['Outcome', '<strong>Approved with addendum</strong>'],
+        ['Reviewer note', '"Verified — required additional attestation from DBA-team lead, see linked side thread."'],
+        ['Addendum',    '<span class="cite">DBA-team-lead attestation · 11:35 AM Apr 14</span>'],
+      ],
+    } },
+
+  { state: 10, author: 'optro', ts: '11:38 AM', kind: 'receipt',
+    receipt: 'filed: <strong>AR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · 1 anomaly flagged + resolved · 2 attestations attached · chain=block #4,180,402' },
+
+  { state: 11, author: 'optro', ts: '11:38 AM', kind: 'expander',
+    expander: {
+      summary: 'Why I interrupted',
+      reveal: '4 prior quarters had a DBA-team-lead attestation within 48hr of cleanup-ticket close. Q3 had no attestation. The bot stays silent unless prior pattern breaks at a confidence threshold of 0.9 or higher. This was 1.0.',
+    } },
+
+  { state: 12, author: 'optro', ts: '11:39 AM', kind: 'context',
+    body: 'thread sealed · 12 messages · 1 bot interjection · 0 bot follow-ups' },
+];
+</script>
+<script src="flow.js"></script>
+</body>
+</html>
