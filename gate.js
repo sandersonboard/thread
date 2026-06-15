@@ -19,7 +19,7 @@
     '    <div style="width:32px;height:32px;border-radius:6px;background:#266c92;display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;">🔒</div>' +
     '    <h2 style="margin:0;font-size:17px;font-weight:700;">Password required</h2>' +
     '  </div>' +
-    '  <p style="font-size:13px;color:#475569;margin:8px 0 18px;line-height:1.5;">Optro Signal — internal preview.</p>' +
+    '  <p style="font-size:13px;color:#475569;margin:8px 0 18px;line-height:1.5;">Thread — internal preview.</p>' +
     '  <form id="borb-pw-form" style="display:flex;flex-direction:column;gap:12px;">' +
     '    <input id="borb-pw-input" type="password" placeholder="Password" autocomplete="off" autofocus style="padding:10px 12px;font-size:14px;border:1px solid #cbd5e1;border-radius:6px;font-family:inherit;outline:none;color:#0f172a;background:#fff;" />' +
     '    <div id="borb-pw-error" style="font-size:12px;color:#db3535;display:none;">Incorrect password.</div>' +
