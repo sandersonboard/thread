@@ -4,209 +4,292 @@
 <script src="gate.js"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Thread — multi-party SOX evidence, in Slack</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
-<link rel="stylesheet" href="optro-card.css?v=20260615c" />
+<title>Optro Thread — multi-party AI for SOX evidence, in Slack</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615d" />
+<link rel="stylesheet" href="optro-card.css?v=20260615d" />
 <style>
-html, body { height: auto; margin: 0; overflow: auto; background: var(--page-bg); }
+html, body { height: auto; margin: 0; overflow: auto; background: #FFFFFF; }
 body { display: block; min-height: 100vh; }
 
+/* ====== Top navigation ====== */
 .site-nav {
-  height: 64px;
-  padding: 0 32px;
+  height: 68px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--divider);
-  position: sticky; top: 0; z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: sticky; top: 0; z-index: 50;
 }
 .site-nav .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--text);
   text-decoration: none;
+  color: var(--text);
 }
-.site-nav .brand-mark {
+.site-nav .brand-logo {
   width: 30px; height: 30px;
-  border-radius: 7px;
-  background: linear-gradient(135deg, var(--accent-purple-500), var(--accent-blue-500));
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
   display: grid; place-items: center;
-  color: #FFFFFF;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  padding: 6px;
 }
-.site-nav .tag {
+.site-nav .brand-logo img { width: 100%; height: auto; display: block; }
+.site-nav .brand-name {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.site-nav .product-tag {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 4px 10px;
-  background: linear-gradient(135deg, var(--accent-purple-50), var(--accent-blue-50));
-  color: var(--accent-purple-700);
-  border: 1px solid var(--accent-purple-100);
-  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  padding-left: 14px;
+  margin-left: 4px;
+  border-left: 1px solid var(--border);
 }
-.site-nav .right {
+.site-nav .nav-right {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 18px;
-  font-size: 13px;
+  gap: 28px;
+  font-size: 13.5px;
   color: var(--text-muted);
+  font-weight: 600;
 }
-.site-nav .right a { color: var(--text-muted); text-decoration: none; }
-.site-nav .right a:hover { color: var(--text); }
+.site-nav .nav-right a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 120ms;
+}
+.site-nav .nav-right a:hover { color: var(--text); }
+.site-nav .nav-cta {
+  padding: 8px 16px;
+  background: var(--text);
+  color: #FFFFFF !important;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.005em;
+}
+.site-nav .nav-cta:hover { background: #000000; }
 
+/* ====== Hero ====== */
 .hero {
-  max-width: 1080px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 80px 32px 56px;
+  padding: 96px 40px 56px;
   text-align: center;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 30%, rgba(124, 58, 237, 0.08), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 .hero .eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-purple-700);
-  background: linear-gradient(135deg, var(--accent-purple-50), var(--accent-blue-50));
-  border: 1px solid var(--accent-purple-100);
-  padding: 5px 14px;
+  padding: 6px 14px;
+  background: rgba(124, 58, 237, 0.06);
+  border: 1px solid rgba(124, 58, 237, 0.16);
   border-radius: var(--radius-full);
   margin-bottom: 28px;
 }
+.hero .eyebrow .pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-purple-500);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+}
 .hero h1 {
   font-family: var(--font-sans);
-  font-size: 56px;
-  line-height: 1.06;
+  font-size: 64px;
+  line-height: 1.04;
   font-weight: 900;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--text);
-  margin: 0 0 18px;
+  margin: 0 0 24px;
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .hero h1 .accent {
-  background: linear-gradient(135deg, var(--accent-purple-500), var(--accent-teal-500));
+  background: linear-gradient(135deg, var(--accent-purple-500) 0%, var(--accent-blue-500) 50%, var(--accent-teal-500) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
 .hero .lede {
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.55;
   color: var(--text-muted);
-  max-width: 720px;
-  margin: 0 auto 36px;
+  max-width: 680px;
+  margin: 0 auto 40px;
   letter-spacing: -0.005em;
 }
-
-.hero-preview {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 32px;
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
 }
-.hero-preview .preview-card {
+.hero-cta .primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: var(--text);
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: background 120ms, transform 120ms;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+.hero-cta .primary:hover { background: #000000; transform: translateY(-1px); }
+.hero-cta .secondary {
+  padding: 14px 20px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+.hero-cta .secondary:hover { color: var(--text); }
+
+/* ====== Hero preview — live Slack thread embed ====== */
+.hero-preview-wrap {
+  max-width: 1180px;
+  margin: 56px auto 0;
+  padding: 0 40px;
+  position: relative;
+}
+.hero-preview {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: 16px;
+  box-shadow:
+    0 40px 80px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(15, 23, 42, 0.03),
+    0 0 60px rgba(124, 58, 237, 0.08);
   overflow: hidden;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 240px 1fr;
 }
-.hero-preview .preview-sidebar {
+.hero-preview .pv-sidebar {
   background: var(--sidebar-bg);
   color: var(--sidebar-text);
-  padding: 14px 0;
-  font-size: 13px;
+  padding: 16px 0;
+  font-size: 13.5px;
 }
-.hero-preview .preview-sidebar .ws {
-  padding: 4px 16px 12px;
-  font-size: 14px; font-weight: 800; color: #fff;
+.hero-preview .pv-ws {
+  padding: 4px 18px 14px;
+  font-size: 15px; font-weight: 800; color: #fff;
   border-bottom: 1px solid var(--sidebar-border);
   display: flex; align-items: center; gap: 8px;
+  letter-spacing: -0.01em;
 }
-.hero-preview .preview-sidebar .ws .mark {
-  width: 22px; height: 22px;
-  border-radius: 4px;
+.hero-preview .pv-ws .mark {
+  width: 24px; height: 24px;
+  border-radius: 5px;
   background: #266c92;
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   display: grid; place-items: center;
 }
-.hero-preview .preview-sidebar .sec {
-  font-size: 10px;
+.hero-preview .pv-sec {
+  font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--sidebar-text-dim);
-  padding: 12px 16px 2px;
+  padding: 14px 18px 4px;
   font-weight: 700;
 }
-.hero-preview .preview-sidebar .ch {
-  padding: 3px 16px 3px 24px;
-  font-size: 13px;
+.hero-preview .pv-ch {
+  padding: 4px 18px 4px 26px;
+  font-size: 13.5px;
   display: flex; align-items: center; gap: 6px;
 }
-.hero-preview .preview-sidebar .ch.active {
+.hero-preview .pv-ch.active {
   background: var(--sidebar-active-bg);
   color: #fff;
   font-weight: 700;
 }
-.hero-preview .preview-sidebar .ch .h {
+.hero-preview .pv-ch .h {
   opacity: 0.5;
   font-family: var(--font-mono);
 }
-.hero-preview .preview-sidebar .ch.active .h { opacity: 0.9; }
+.hero-preview .pv-ch.active .h { opacity: 0.9; }
+.hero-preview .pv-ch .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+.hero-preview .pv-ch .dot.online { background: #2BAC76; }
 
-.hero-preview .preview-main { padding: 16px 22px 22px; }
-.hero-preview .preview-head {
-  font-size: 15px;
+.hero-preview .pv-main { display: flex; flex-direction: column; min-width: 0; }
+.hero-preview .pv-head {
+  padding: 18px 24px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--text);
-  padding-bottom: 10px;
   border-bottom: 1px solid var(--divider);
   display: flex; align-items: center; gap: 8px;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
 }
-.hero-preview .preview-head .h { font-family: var(--font-mono); color: var(--text-meta); font-weight: 500; }
-.hero-preview .preview-head .topic { font-size: 12px; font-weight: 400; color: var(--text-muted); margin-left: 4px; }
-.hero-preview .msg-list {
-  display: flex; flex-direction: column; gap: 14px;
-  padding: 14px 0 0;
+.hero-preview .pv-head .h { font-family: var(--font-mono); color: var(--text-meta); font-weight: 500; }
+.hero-preview .pv-head .topic { font-size: 12.5px; font-weight: 400; color: var(--text-muted); margin-left: 4px; letter-spacing: 0; }
+.hero-preview .pv-msgs {
+  padding: 22px 26px 26px;
+  display: flex; flex-direction: column; gap: 18px;
 }
-.hero-preview .msg {
+.hero-preview .pv-msg {
   display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 10px;
+  grid-template-columns: 44px 1fr;
+  gap: 12px;
   align-items: flex-start;
 }
-.hero-preview .msg .av {
-  width: 32px; height: 32px;
-  border-radius: 7px;
+.hero-preview .pv-msg .av {
+  width: 36px; height: 36px;
+  border-radius: 8px;
   display: grid; place-items: center;
   font-weight: 800;
-  font-size: 12px;
+  font-size: 12.5px;
 }
-.hero-preview .msg.is-w .av { background: linear-gradient(135deg, #c6f1ec, #dbeafe); color: #0f766e; }
-.hero-preview .msg.is-m .av { background: linear-gradient(135deg, #fde2e8, #fff1d6); color: #b1325c; }
-.hero-preview .msg.is-o .av {
+.hero-preview .pv-msg.weston .av { background: linear-gradient(135deg, #c6f1ec, #dbeafe); color: #0f766e; }
+.hero-preview .pv-msg.marie .av  { background: linear-gradient(135deg, #fde2e8, #fff1d6); color: #b1325c; }
+.hero-preview .pv-msg.bot .av {
   background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
-  padding: 5px;
+  padding: 6px;
 }
-.hero-preview .msg.is-o .av img { width: 100%; height: auto; }
-.hero-preview .msg .who {
-  font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 1px;
+.hero-preview .pv-msg.bot .av img { width: 100%; height: auto; display: block; }
+.hero-preview .pv-msg .who {
+  font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 2px;
+  letter-spacing: -0.005em;
 }
-.hero-preview .msg .who .tag {
-  font-size: 9.5px; font-weight: 800; letter-spacing: 0.05em;
+.hero-preview .pv-msg .who .tag {
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 1px 5px;
   background: var(--accent-purple-100);
@@ -214,71 +297,168 @@ body { display: block; min-height: 100vh; }
   border-radius: 3px;
   margin-left: 4px;
 }
-.hero-preview .msg .who .ts { font-size: 11px; font-weight: 400; color: var(--text-meta); margin-left: 6px; }
-.hero-preview .msg .txt { font-size: 13px; line-height: 1.5; color: var(--text); }
-.hero-preview .pulse-dot {
+.hero-preview .pv-msg .who .ts { font-size: 12px; font-weight: 400; color: var(--text-meta); margin-left: 6px; }
+.hero-preview .pv-msg .txt { font-size: 14px; line-height: 1.55; color: var(--text); }
+.hero-preview .pv-msg .pulse-dot {
   display: inline-block; width: 6px; height: 6px; border-radius: 50%;
   background: var(--accent-purple-500);
   box-shadow: 0 0 0 2px var(--accent-purple-100);
-  vertical-align: middle; margin-right: 6px;
+  vertical-align: middle; margin-right: 8px;
+}
+.hero-preview .pv-msg .attach {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 12.5px;
+  display: inline-flex; gap: 10px; align-items: center;
+}
+.hero-preview .pv-msg .attach .icon {
+  width: 28px; height: 28px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
+  display: grid; place-items: center;
+  font-size: 14px;
+}
+.hero-preview .pv-msg .attach .name { font-weight: 700; }
+.hero-preview .pv-msg .attach .meta { font-size: 11px; color: var(--text-meta); margin-top: 1px; }
+
+/* ====== Trust strip ====== */
+.trust-strip {
+  max-width: 1180px;
+  margin: 96px auto 0;
+  padding: 0 40px;
+  text-align: center;
+}
+.trust-strip .label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: 20px;
+}
+.trust-strip .badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  opacity: 0.7;
+}
+.trust-strip .badges .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.trust-strip .badges .badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-teal-500);
 }
 
+/* ====== Problem section ====== */
+.problem {
+  max-width: 1180px;
+  margin: 96px auto 0;
+  padding: 0 40px;
+}
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.problem-grid .col h2 {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 18px;
+  line-height: 1.12;
+}
+.problem-grid .col p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+.problem-grid .col p strong { color: var(--text); font-weight: 700; }
+.problem-grid .col .eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-purple-700);
+  margin-bottom: 12px;
+}
+
+/* ====== Takes section ====== */
 .takes-section {
-  max-width: 1080px;
-  margin: 80px auto 64px;
-  padding: 0 32px;
+  max-width: 1180px;
+  margin: 120px auto 0;
+  padding: 0 40px;
 }
 .takes-section .section-head {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 56px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .takes-section .section-eyebrow {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-meta);
-  margin-bottom: 10px;
+  color: var(--accent-purple-700);
+  margin-bottom: 14px;
 }
 .takes-section .section-title {
-  font-size: 36px;
+  font-size: 44px;
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--text);
-  margin: 0 0 8px;
-  line-height: 1.12;
+  margin: 0 0 14px;
+  line-height: 1.1;
 }
 .takes-section .section-sub {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text-muted);
-  max-width: 620px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 1.55;
+  letter-spacing: -0.005em;
 }
 
-.axis-row { margin-bottom: 48px; }
-.axis-row .axis-head {
+.axis-block { margin-bottom: 56px; }
+.axis-block .axis-head {
   display: flex; align-items: baseline; gap: 12px;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--divider);
 }
-.axis-row .axis-num {
+.axis-block .axis-num {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--accent-purple-500);
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
 }
-.axis-row .axis-name {
-  font-size: 20px;
+.axis-block .axis-name {
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--text);
 }
-.axis-row .axis-q {
+.axis-block .axis-q {
   margin-left: auto;
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--text-muted);
   font-style: italic;
   letter-spacing: -0.005em;
@@ -287,112 +467,230 @@ body { display: block; min-height: 100vh; }
 .tiles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
 }
 .tile {
   position: relative;
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 22px 22px 20px;
+  border-radius: 14px;
+  padding: 28px 26px 24px;
   background: var(--surface);
   text-decoration: none;
   color: var(--text);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: border-color 160ms, box-shadow 160ms, transform 160ms;
+  gap: 12px;
+  transition: border-color 200ms, box-shadow 200ms, transform 200ms;
   overflow: hidden;
 }
 .tile::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-purple-500), var(--accent-teal-500));
-  opacity: 0.7;
-  transition: opacity 160ms;
+  inset: 0 0 auto 0;
+  height: 100%;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124, 58, 237, 0.05), transparent 60%);
+  opacity: 0;
+  transition: opacity 200ms;
+  pointer-events: none;
 }
 .tile:hover {
-  border-color: var(--accent-purple-100);
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
-  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-3px);
 }
 .tile:hover::before { opacity: 1; }
-.tile .tile-num {
+.tile-num {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-meta);
   letter-spacing: 0.08em;
   font-weight: 700;
 }
-.tile .tile-title {
-  font-size: 21px;
+.tile-title {
+  font-size: 24px;
   font-weight: 900;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   color: var(--text);
-  line-height: 1.15;
+  line-height: 1.12;
 }
-.tile .tile-hook {
-  font-size: 13.5px;
+.tile-hook {
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
   flex: 1;
+  letter-spacing: -0.005em;
 }
-.tile .tile-foot {
+.tile-foot {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-top: 10px;
+  padding-top: 14px;
   border-top: 1px solid var(--divider);
-  margin-top: 4px;
+  margin-top: 6px;
 }
-.tile .tile-stat {
+.tile-stat {
   font-size: 11px;
   font-weight: 700;
   color: var(--text-meta);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.tile .tile-stat .num {
+.tile-stat .num {
   color: var(--text);
   font-size: 13px;
   font-family: var(--font-mono);
 }
-.tile .tile-arrow {
+.tile-arrow {
   margin-left: auto;
-  font-size: 13px;
-  color: var(--accent-purple-500);
+  font-size: 13.5px;
+  color: var(--accent-purple-700);
   font-weight: 700;
+  letter-spacing: -0.005em;
 }
 
+/* ====== Thesis section ====== */
+.thesis {
+  max-width: 1180px;
+  margin: 120px auto 0;
+  padding: 0 40px;
+}
+.thesis-card {
+  background: linear-gradient(180deg, #FAFBFC 0%, #F4F5F7 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 56px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.thesis-card::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.08), transparent 70%);
+  pointer-events: none;
+}
+.thesis-card .eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-purple-700);
+  margin-bottom: 14px;
+}
+.thesis-card h2 {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 32px;
+  max-width: 720px;
+  line-height: 1.15;
+}
+.thesis-card .three-up {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.thesis-card .three-up .col {
+  padding: 0;
+}
+.thesis-card .three-up .col .num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-purple-500);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.thesis-card .three-up .col .h {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.thesis-card .three-up .col p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ====== Footer ====== */
 .site-footer {
-  max-width: 1080px;
+  margin: 120px 0 0;
+  padding: 56px 40px 64px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.site-footer .footer-inner {
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 56px 32px 64px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+}
+.site-footer .brand-block {
+  display: flex; align-items: center; gap: 14px;
+}
+.site-footer .footer-logo {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
+  padding: 7px;
+}
+.site-footer .footer-logo img { width: 100%; height: auto; display: block; }
+.site-footer .footer-name {
+  font-size: 20px; font-weight: 900; letter-spacing: -0.02em; color: var(--text);
+}
+.site-footer .footer-tagline {
+  font-size: 13px; color: var(--text-muted); margin-top: 4px; letter-spacing: -0.005em;
+}
+.site-footer .footer-meta {
+  display: flex; gap: 32px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  letter-spacing: -0.005em;
+}
+.site-footer .footer-meta .col .h {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.site-footer .footer-meta .col a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.site-footer .footer-meta .col a:hover { color: var(--text); }
+.site-footer .bottom {
+  max-width: 1180px;
+  margin: 32px auto 0;
+  padding-top: 24px;
   border-top: 1px solid var(--divider);
   display: flex; justify-content: space-between; align-items: center;
   font-size: 12px;
   color: var(--text-meta);
-  flex-wrap: wrap;
-  gap: 12px;
 }
-.site-footer .scenario {
-  display: inline-flex; align-items: center; gap: 8px;
-  letter-spacing: 0.01em;
-}
-.site-footer .scenario .label { color: var(--text-muted); font-weight: 700; }
-.site-footer .scenario .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border-strong); }
-.site-footer .gate {
+.site-footer .bottom .gate {
   font-family: var(--font-mono);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   font-weight: 700;
-  color: var(--text-meta);
 }
 
-@media (max-width: 900px) {
-  .hero h1 { font-size: 40px; }
-  .hero-preview .preview-card { grid-template-columns: 160px 1fr; }
+@media (max-width: 960px) {
+  .hero h1 { font-size: 44px; }
+  .problem-grid { grid-template-columns: 1fr; gap: 32px; }
+  .takes-section .section-title { font-size: 32px; }
   .tiles { grid-template-columns: 1fr; }
+  .thesis-card { padding: 36px 28px; }
+  .thesis-card .three-up { grid-template-columns: 1fr; gap: 20px; }
+  .hero-preview { grid-template-columns: 160px 1fr; }
 }
 </style>
 </head>
@@ -400,63 +698,78 @@ body { display: block; min-height: 100vh; }
 
 <nav class="site-nav">
   <a href="index.html" class="brand">
-    <span class="brand-mark">TH</span>
-    Thread
+    <span class="brand-logo"><img src="optro-mark.svg" alt="Optro" /></span>
+    <span class="brand-name">Optro</span>
   </a>
-  <span class="tag">Prototype · Pre-Series A</span>
-  <div class="right">
+  <span class="product-tag">Thread</span>
+  <div class="nav-right">
+    <a href="#problem">Problem</a>
     <a href="#takes">Takes</a>
-    <a href="#scenario">Scenario</a>
+    <a href="#thesis">Thesis</a>
+    <a href="role-mediator.html" class="nav-cta">See the demo →</a>
   </div>
 </nav>
 
 <section class="hero">
-  <span class="eyebrow">Multi-party AI for SOX evidence</span>
-  <h1>Most ECM tools assume the AI talks to <span class="accent">one person at a time.</span></h1>
+  <span class="eyebrow"><span class="pulse"></span>Multi-party AI for SOX evidence</span>
+  <h1>SOX evidence collection — where the work <span class="accent">actually happens.</span></h1>
   <p class="lede">
-    What changes when the bot, the control owner, and the reviewer are all in the same Slack thread —
-    and the thread itself becomes the judgment artifact the auditor sees later?
-    This prototype is six answers, on two axes.
+    Optro Thread brings the bot, the control owner, and the reviewer into one Slack thread —
+    and turns the thread itself into the judgment artifact the auditor sees later.
+    Six implementations, one quarterly close.
   </p>
+  <div class="hero-cta">
+    <a href="role-mediator.html" class="primary">Open the canonical demo →</a>
+    <a href="#takes" class="secondary">See all six takes</a>
+  </div>
 </section>
 
-<section class="hero-preview">
-  <div class="preview-card">
-    <aside class="preview-sidebar">
-      <div class="ws"><span class="mark">H</span>Helios Robotics</div>
-      <div class="sec">Channels</div>
-      <div class="ch"><span class="h">#</span> sox-q3-close</div>
-      <div class="ch active"><span class="h">#</span> ctrl-4-2-1</div>
-      <div class="ch"><span class="h">#</span> dba-team</div>
-      <div class="sec">Direct messages</div>
-      <div class="ch">● Optro ECM</div>
-      <div class="ch">○ Marie Curie</div>
+<section class="hero-preview-wrap">
+  <div class="hero-preview">
+    <aside class="pv-sidebar">
+      <div class="pv-ws"><span class="mark">H</span>Helios Robotics</div>
+      <div class="pv-sec">Channels</div>
+      <div class="pv-ch"><span class="h">#</span> sox-q3-close</div>
+      <div class="pv-ch active"><span class="h">#</span> ctrl-4-2-1</div>
+      <div class="pv-ch"><span class="h">#</span> dba-team</div>
+      <div class="pv-ch"><span class="h">#</span> it-security</div>
+      <div class="pv-sec">Direct messages</div>
+      <div class="pv-ch"><span class="dot online"></span> Optro ECM</div>
+      <div class="pv-ch"><span class="dot"></span> Marie Curie</div>
+      <div class="pv-ch"><span class="dot"></span> Ada Lovelace</div>
     </aside>
-    <main class="preview-main">
-      <div class="preview-head">
+    <main class="pv-main">
+      <div class="pv-head">
         <span class="h">#</span> ctrl-4-2-1
         <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
       </div>
-      <div class="msg-list">
-        <div class="msg is-w">
+      <div class="pv-msgs">
+        <div class="pv-msg weston">
           <div class="av">WP</div>
           <div>
             <div class="who">Weston Prohaska <span class="ts">2:48 PM</span></div>
             <div class="txt">Q3 AR attached. Same query as last quarter.</div>
+            <div class="attach">
+              <span class="icon">📎</span>
+              <span>
+                <div class="name">AR-Q3FY26-prod-db.csv</div>
+                <div class="meta">12 cols · 261 rows · 154 KB</div>
+              </span>
+            </div>
           </div>
         </div>
-        <div class="msg is-m">
+        <div class="pv-msg marie">
           <div class="av">MC</div>
           <div>
             <div class="who">Marie Curie <span class="ts">2:51 PM</span></div>
             <div class="txt">Quick question — there's a new column. Where'd it come from?</div>
           </div>
         </div>
-        <div class="msg is-o">
+        <div class="pv-msg bot">
           <div class="av"><img src="optro-mark.svg" alt="Optro" /></div>
           <div>
             <div class="who">Optro ECM <span class="tag">APP</span> <span class="ts">2:51 PM</span></div>
-            <div class="txt"><span class="pulse-dot"></span>Noticed the schema diff: <strong>+1 field</strong> vs Q2 — <span class="ai-citation">termination_date_normalized</span>.</div>
+            <div class="txt"><span class="pulse-dot"></span>Noticed the schema diff: <strong>+1 field</strong> vs Q2 — <span class="ai-citation">termination_date_normalized</span>. Cross-linked to <span class="ai-citation">DBA-CR-2401</span> · Oracle patch log.</div>
           </div>
         </div>
       </div>
@@ -464,17 +777,55 @@ body { display: block; min-height: 100vh; }
   </div>
 </section>
 
+<section class="trust-strip">
+  <div class="label">Built for the systems where audit work already lives</div>
+  <div class="badges">
+    <span class="badge"><span class="dot"></span>Slack</span>
+    <span class="badge"><span class="dot"></span>Microsoft Teams</span>
+    <span class="badge"><span class="dot"></span>ServiceNow</span>
+    <span class="badge"><span class="dot"></span>Jira</span>
+    <span class="badge"><span class="dot"></span>Oracle</span>
+    <span class="badge"><span class="dot"></span>Salesforce</span>
+  </div>
+</section>
+
+<section class="problem" id="problem">
+  <div class="problem-grid">
+    <div class="col">
+      <div class="eyebrow">The problem</div>
+      <h2>ECM was built for one person at a time.</h2>
+      <p>
+        Every legacy evidence-collection tool — including the ones we built — assumes a single user uploading to a single web app, with reviewers chasing them by email afterward.
+      </p>
+      <p>
+        The bot, the control owner, the reviewer, and the auditor each end up with their own slice of the story.
+        <strong>None of them see the same thing.</strong> The judgment behind every approval gets lost in PDF receipts.
+      </p>
+    </div>
+    <div class="col">
+      <div class="eyebrow">The wedge</div>
+      <h2>The thread is the evidence.</h2>
+      <p>
+        Move the conversation into Slack — where the work already happens — and put Optro ECM into the thread as a first-class participant. The bot surfaces facts, finds linked tickets, summarizes disagreements, and anchors the receipt to chain.
+      </p>
+      <p>
+        <strong>The thread becomes the artifact.</strong> Not a PDF after the fact. The conversation IS the audit trail — searchable, attestable, and ready for the next quarter's close.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="takes-section" id="takes">
   <div class="section-head">
     <div class="section-eyebrow">Six takes · two axes</div>
-    <h2 class="section-title">Pick a question, see how it plays</h2>
+    <h2 class="section-title">Pick how Optro Thread should work for you.</h2>
     <p class="section-sub">
-      Each take is a 10–13 step product-tour walkthrough of a single Q3 close scenario, with the bot
-      playing a different role or the thread organized at a different unit of work.
+      Each take is a 10–13 step walkthrough of a real Q3 FY26 close at Helios Robotics — same scenario, different
+      bot posture or thread structure. Compare them side by side.
     </p>
   </div>
 
-  <div class="axis-row">
+  <div class="axis-block">
     <div class="axis-head">
       <span class="axis-num">AXIS · 01</span>
       <span class="axis-name">Bot's role in the thread</span>
@@ -482,16 +833,16 @@ body { display: block; min-height: 100vh; }
     </div>
     <div class="tiles">
       <a class="tile" href="role-drafter.html">
-        <span class="tile-num">TAKE · 01</span>
+        <span class="tile-num">TAKE · 01 · ROLE</span>
         <div class="tile-title">Drafter</div>
-        <div class="tile-hook">Fifth identical-shape quarter. The bot writes the ask, the artifact, and Marie's reviewer note in her voice. Humans approve.</div>
+        <div class="tile-hook">Fifth identical-shape quarter. The bot writes the ask, the artifact, and the reviewer's sign-off note in their voice. Humans approve.</div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">10</span> · steps</span>
           <span class="tile-arrow">Open take →</span>
         </div>
       </a>
       <a class="tile" href="role-mediator.html">
-        <span class="tile-num">TAKE · 02</span>
+        <span class="tile-num">TAKE · 02 · ROLE</span>
         <div class="tile-title">Mediator</div>
         <div class="tile-hook">A new column shows up in the Q3 export. Marie pushes back. The bot surfaces the diff, finds the change ticket, doesn't take sides.</div>
         <div class="tile-foot">
@@ -500,7 +851,7 @@ body { display: block; min-height: 100vh; }
         </div>
       </a>
       <a class="tile" href="role-silent.html">
-        <span class="tile-num">TAKE · 03</span>
+        <span class="tile-num">TAKE · 03 · ROLE</span>
         <div class="tile-title">Silent Auditor</div>
         <div class="tile-hook">Weston files. Marie's about to sign. The bot is silent the whole conversation — except for one quiet interjection before sign-off.</div>
         <div class="tile-foot">
@@ -511,7 +862,7 @@ body { display: block; min-height: 100vh; }
     </div>
   </div>
 
-  <div class="axis-row">
+  <div class="axis-block">
     <div class="axis-head">
       <span class="axis-num">AXIS · 02</span>
       <span class="axis-name">Thread granularity</span>
@@ -519,16 +870,16 @@ body { display: block; min-height: 100vh; }
     </div>
     <div class="tiles">
       <a class="tile" href="unit-ask.html">
-        <span class="tile-num">TAKE · 04</span>
+        <span class="tile-num">TAKE · 04 · UNIT</span>
         <div class="tile-title">Per ask</div>
-        <div class="tile-hook">Every evidence ask is its own short-lived thread. Born when needed, sealed when done. 47 sealed threads in the archive. The graph wires them.</div>
+        <div class="tile-hook">Every evidence ask is its own short-lived thread. Born when needed, sealed when done. 47 sealed threads, all wired through the graph.</div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">10</span> · steps</span>
           <span class="tile-arrow">Open take →</span>
         </div>
       </a>
       <a class="tile" href="unit-control.html">
-        <span class="tile-num">TAKE · 05</span>
+        <span class="tile-num">TAKE · 05 · UNIT</span>
         <div class="tile-title">Per control</div>
         <div class="tile-hook">The control IS the thread. Four quarters of sign-offs collapsed at the top, the current quarter expanded at the bottom, a pinned health card.</div>
         <div class="tile-foot">
@@ -537,7 +888,7 @@ body { display: block; min-height: 100vh; }
         </div>
       </a>
       <a class="tile" href="unit-period.html">
-        <span class="tile-num">TAKE · 06</span>
+        <span class="tile-num">TAKE · 06 · UNIT</span>
         <div class="tile-title">Per period</div>
         <div class="tile-hook">One omnibus thread for the entire quarter close. Daily digests, inline filings, mid-quarter risk escalations. The final message <em>is</em> the close package.</div>
         <div class="tile-foot">
@@ -549,18 +900,66 @@ body { display: block; min-height: 100vh; }
   </div>
 </section>
 
-<footer class="site-footer" id="scenario">
-  <div class="scenario">
-    <span class="label">Scenario</span>
-    <span>Helios Robotics</span>
-    <span class="dot"></span>
-    <span>control 4.2.1</span>
-    <span class="dot"></span>
-    <span>Q3 FY26 close</span>
-    <span class="dot"></span>
-    <span>Weston · Marie · Ada · Optro ECM</span>
+<section class="thesis" id="thesis">
+  <div class="thesis-card">
+    <div class="eyebrow">Why Optro</div>
+    <h2>The conversation surface is a wrapper. The graph underneath is the moat.</h2>
+    <div class="three-up">
+      <div class="col">
+        <div class="num">01</div>
+        <div class="h">Attestation graph</div>
+        <p>
+          Five quarters of identical-shape sign-offs is what earns Optro ECM the right to draft. Without the underlying graph, drafting is reckless. With it, it's just operator labor.
+        </p>
+      </div>
+      <div class="col">
+        <div class="num">02</div>
+        <div class="h">Integration graph</div>
+        <p>
+          When Marie asks "where did this column come from," the bot finds the Oracle patch, the Jira CR, and the legal memo on its own. The cross-system reach is the work LLMs can't do alone.
+        </p>
+      </div>
+      <div class="col">
+        <div class="num">03</div>
+        <div class="h">Audit-grade output</div>
+        <p>
+          Every thread terminates in a chain-anchored receipt that the next auditor can read, verify, and re-open. The judgment IS the evidence — not a PDF stapled on after the fact.
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="gate">BORB</div>
+</section>
+
+<footer class="site-footer" id="scenario">
+  <div class="footer-inner">
+    <div>
+      <div class="brand-block">
+        <span class="footer-logo"><img src="optro-mark.svg" alt="Optro" /></span>
+        <div>
+          <div class="footer-name">Optro</div>
+          <div class="footer-tagline">Audit-grade evidence, where the work happens.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <div class="col">
+        <div class="h">Product</div>
+        <a href="role-mediator.html">Live demo</a>
+        <a href="#takes">All six takes</a>
+        <a href="#thesis">Strategic thesis</a>
+      </div>
+      <div class="col">
+        <div class="h">Scenario</div>
+        <a>Helios Robotics</a>
+        <a>Q3 FY26 close</a>
+        <a>control 4.2.1</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>© 2026 Optro · Internal preview · Helios Robotics is illustrative</span>
+    <span class="gate">BORB</span>
+  </div>
 </footer>
 
 </body>
