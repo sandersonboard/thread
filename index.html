@@ -399,6 +399,195 @@ body { display: block; min-height: 100vh; }
   margin-bottom: 12px;
 }
 
+/* ====== How it works section ====== */
+.how {
+  max-width: 1180px;
+  margin: 120px auto 0;
+  padding: 0 40px;
+}
+.how-head {
+  text-align: center;
+  margin-bottom: 56px;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.how-head .section-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-purple-700);
+  margin-bottom: 14px;
+}
+.how-head .section-title {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin: 0 0 14px;
+  line-height: 1.1;
+}
+.how-head .section-title .accent-text {
+  background: linear-gradient(135deg, var(--accent-purple-500), var(--accent-teal-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.how-head .section-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+.how-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 32px 28px;
+  box-shadow: var(--shadow-sm);
+}
+.how-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  margin-bottom: 12px;
+}
+.how-lede {
+  font-size: 15.5px;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 0 0 24px;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+}
+.mode-stack, .view-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.mode-row, .view-row {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.mode-tag, .view-tag {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.mode-tag .mode-meta, .view-tag .view-meta {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  opacity: 0.7;
+  font-style: italic;
+}
+.mode-mediator {
+  background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
+  color: var(--accent-purple-700);
+}
+.mode-drafter {
+  background: linear-gradient(135deg, var(--accent-teal-100), var(--accent-purple-100));
+  color: var(--accent-teal-700);
+}
+.mode-silent {
+  background: linear-gradient(135deg, var(--accent-amber-50), var(--accent-amber-100));
+  color: var(--accent-amber-700);
+}
+.view-control {
+  background: linear-gradient(135deg, var(--accent-purple-100), var(--accent-blue-100));
+  color: var(--accent-purple-700);
+}
+.view-ask {
+  background: linear-gradient(135deg, var(--accent-blue-100), var(--accent-teal-100));
+  color: var(--accent-blue-500);
+}
+.view-period {
+  background: linear-gradient(135deg, var(--accent-teal-100), var(--accent-blue-100));
+  color: var(--accent-teal-700);
+}
+.mode-copy, .view-copy {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  letter-spacing: -0.005em;
+}
+.mode-copy strong, .view-copy strong { color: var(--text); font-weight: 700; }
+
+/* ====== Canonical callout ====== */
+.canonical-callout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 28px 36px;
+  background: var(--text);
+  color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 24px 56px rgba(15, 23, 42, 0.18);
+}
+.canonical-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-purple-100);
+  margin-bottom: 8px;
+}
+.canonical-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-purple-100) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.canonical-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: -0.005em;
+  max-width: 640px;
+}
+.canonical-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 22px;
+  background: #FFFFFF;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: transform 120ms;
+}
+.canonical-cta:hover { transform: translateY(-1px); }
+
 /* ====== Takes section ====== */
 .takes-section {
   max-width: 1180px;
@@ -691,6 +880,10 @@ body { display: block; min-height: 100vh; }
   .hero h1 { font-size: 44px; }
   .problem-grid { grid-template-columns: 1fr; gap: 32px; }
   .takes-section .section-title { font-size: 32px; }
+  .how-head .section-title { font-size: 32px; }
+  .how-grid { grid-template-columns: 1fr; gap: 20px; }
+  .canonical-callout { grid-template-columns: 1fr; gap: 20px; padding: 24px 24px; }
+  .mode-row, .view-row { grid-template-columns: 1fr; gap: 8px; }
   .tiles { grid-template-columns: 1fr; }
   .thesis-card { padding: 36px 28px; }
   .thesis-card .three-up { grid-template-columns: 1fr; gap: 20px; }
@@ -715,16 +908,16 @@ body { display: block; min-height: 100vh; }
 </nav>
 
 <section class="hero">
-  <span class="eyebrow"><span class="pulse"></span>Multi-party AI for SOX evidence</span>
+  <span class="eyebrow"><span class="pulse"></span>One product · three modes × three views · one graph</span>
   <h1>SOX evidence collection — where the work <span class="accent">actually happens.</span></h1>
   <p class="lede">
     Optro Thread brings the bot, the control owner, and the reviewer into one Slack thread —
     and turns the thread itself into the judgment artifact the auditor sees later.
-    Six implementations, one quarterly close.
+    The bot's posture adapts to the graph. The thread is just a lens.
   </p>
   <div class="hero-cta">
     <a href="role-mediator.html" class="primary">Open the canonical demo →</a>
-    <a href="#takes" class="secondary">See all six takes</a>
+    <a href="#how" class="secondary">How it works</a>
   </div>
 </section>
 
@@ -819,48 +1012,128 @@ body { display: block; min-height: 100vh; }
   </div>
 </section>
 
+<section class="how" id="how">
+  <div class="how-head">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">One product. The bot's posture and the thread's view are <span class="accent-text">functions of the graph.</span></h2>
+    <p class="section-sub">
+      The same Optro ECM behaves differently on a routine drop than on a contested one — and the same data
+      shows up as an ask thread, a control thread, or a close-period thread depending on what you're looking for.
+    </p>
+  </div>
+
+  <div class="how-grid">
+    <div class="how-block">
+      <div class="how-eyebrow">Three modes · the bot's posture</div>
+      <p class="how-lede">
+        Optro ECM is not a chatbot with a personality. Its role is a function of pattern depth — and the bot escalates or recedes accordingly.
+      </p>
+      <div class="mode-stack">
+        <div class="mode-row">
+          <div class="mode-tag mode-mediator">MEDIATOR <span class="mode-meta">default</span></div>
+          <div class="mode-copy">
+            <strong>The universal entry point.</strong> Surfaces facts, finds linked tickets, summarizes disagreements. Never takes a side.
+            This is what the bot does <em>by default</em> on every control, every quarter.
+          </div>
+        </div>
+        <div class="mode-row">
+          <div class="mode-tag mode-drafter">DRAFTER <span class="mode-meta">earned</span></div>
+          <div class="mode-copy">
+            <strong>Activates when the graph is mature.</strong> Pattern depth ≥ 4 quarters, drift &lt; 0.05, reviewer-style match &gt; 0.85. The bot drafts the ask, the artifact, the sign-off note. <em>A privilege the bot earns from history</em> — not a setting a buyer toggles.
+          </div>
+        </div>
+        <div class="mode-row">
+          <div class="mode-tag mode-silent">SILENT <span class="mode-meta">load-bearing</span></div>
+          <div class="mode-copy">
+            <strong>Activates when humans are actively engaged.</strong> The bot stays out of the conversation — until a 4-quarter pattern breaks at confidence ≥ 0.9. One interjection. Zero follow-ups. Restraint as a feature.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-block">
+      <div class="how-eyebrow">Three views · one underlying graph</div>
+      <p class="how-lede">
+        Per-ask, per-control, and per-period are not three data models — they are three Slack-shaped lenses over the same graph of artifacts × attestations × time.
+      </p>
+      <div class="view-stack">
+        <div class="view-row">
+          <div class="view-tag view-ask">PER ASK <span class="view-meta">atomic</span></div>
+          <div class="view-copy">
+            The live workspace. One thread per evidence request. Where control owners and reviewers spend most of their day. The atomic unit.
+          </div>
+        </div>
+        <div class="view-row">
+          <div class="view-tag view-control">PER CONTROL <span class="view-meta">longitudinal</span></div>
+          <div class="view-copy">
+            A reviewer's lens. Four quarters of sign-offs collapsed at the top, current quarter expanded below, a pinned health card under it. <em>This is the lock-in surface</em> — every quarter of history compounds.
+          </div>
+        </div>
+        <div class="view-row">
+          <div class="view-tag view-period">PER PERIOD <span class="view-meta">temporal</span></div>
+          <div class="view-copy">
+            The PMO's lens. One omnibus thread per quarter close. Daily digests, inline filings, mid-quarter risk escalations. The final message IS the close package.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="canonical-callout">
+    <div class="canonical-text">
+      <div class="canonical-eyebrow">Canonical entry point</div>
+      <div class="canonical-title">Mediator × Per Control</div>
+      <div class="canonical-body">
+        Start here. The default bot posture on the deepest-history view. Walks through 11 steps of a real Q3 disagreement
+        — and shows why competitors take 4 quarters to catch up.
+      </div>
+    </div>
+    <a href="role-mediator.html" class="canonical-cta">Open canonical demo →</a>
+  </div>
+</section>
+
 <section class="takes-section" id="takes">
   <div class="section-head">
-    <div class="section-eyebrow">Six takes · two axes</div>
-    <h2 class="section-title">Pick how Optro Thread should work for you.</h2>
+    <div class="section-eyebrow">Walkthroughs · isolate one cell at a time</div>
+    <h2 class="section-title">See each mode and view in isolation.</h2>
     <p class="section-sub">
-      Each take is a 10–13 step walkthrough of a real Q3 FY26 close at Helios Robotics — same scenario, different
-      bot posture or thread structure. Compare them side by side.
+      Six 10–13 step product-tour walkthroughs of the same Helios Q3 close, each isolating one mode or one view.
+      Use them to compare what the bot's posture does to the same scenario, or what each lens reveals about the same data.
     </p>
   </div>
 
   <div class="axis-block">
     <div class="axis-head">
-      <span class="axis-num">AXIS · 01</span>
-      <span class="axis-name">Bot's role in the thread</span>
-      <span class="axis-q">What does AI sound like when humans are in the room?</span>
+      <span class="axis-num">MODES · 03</span>
+      <span class="axis-name">The bot's posture</span>
+      <span class="axis-q">What does AI sound like in this conversation?</span>
     </div>
     <div class="tiles">
-      <a class="tile" href="role-drafter.html">
-        <span class="tile-num">TAKE · 01 · ROLE</span>
-        <div class="tile-title">Drafter</div>
-        <div class="tile-hook">Fifth identical-shape quarter. The bot writes the ask, the artifact, and the reviewer's sign-off note in their voice. Humans approve.</div>
-        <div class="tile-foot">
-          <span class="tile-stat"><span class="num">10</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
-        </div>
-      </a>
       <a class="tile" href="role-mediator.html">
-        <span class="tile-num">TAKE · 02 · ROLE</span>
+        <span class="tile-num">MODE · DEFAULT</span>
         <div class="tile-title">Mediator</div>
-        <div class="tile-hook">A new column shows up in the Q3 export. Marie pushes back. The bot surfaces the diff, finds the change ticket, doesn't take sides.</div>
+        <div class="tile-hook">A new column shows up in the Q3 export. Marie pushes back. The bot surfaces the diff, finds the change ticket, doesn't take sides. <strong>This is the canonical posture.</strong></div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">11</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
+          <span class="tile-arrow">Open mode →</span>
+        </div>
+      </a>
+      <a class="tile" href="role-drafter.html">
+        <span class="tile-num">MODE · EARNED</span>
+        <div class="tile-title">Drafter</div>
+        <div class="tile-hook">Fifth identical-shape quarter in a row. The bot has earned the right to write everything in the reviewer's voice. Humans approve.</div>
+        <div class="tile-foot">
+          <span class="tile-stat"><span class="num">10</span> · steps</span>
+          <span class="tile-arrow">Open mode →</span>
         </div>
       </a>
       <a class="tile" href="role-silent.html">
-        <span class="tile-num">TAKE · 03 · ROLE</span>
+        <span class="tile-num">MODE · LOAD-BEARING</span>
         <div class="tile-title">Silent Auditor</div>
         <div class="tile-hook">Weston files. Marie's about to sign. The bot is silent the whole conversation — except for one quiet interjection before sign-off.</div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">12</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
+          <span class="tile-arrow">Open mode →</span>
         </div>
       </a>
     </div>
@@ -868,36 +1141,36 @@ body { display: block; min-height: 100vh; }
 
   <div class="axis-block">
     <div class="axis-head">
-      <span class="axis-num">AXIS · 02</span>
-      <span class="axis-name">Thread granularity</span>
-      <span class="axis-q">What is the unit of conversation?</span>
+      <span class="axis-num">VIEWS · 03</span>
+      <span class="axis-name">The thread's lens</span>
+      <span class="axis-q">What is the unit you're scanning?</span>
     </div>
     <div class="tiles">
-      <a class="tile" href="unit-ask.html">
-        <span class="tile-num">TAKE · 04 · UNIT</span>
-        <div class="tile-title">Per ask</div>
-        <div class="tile-hook">Every evidence ask is its own short-lived thread. Born when needed, sealed when done. 47 sealed threads, all wired through the graph.</div>
+      <a class="tile" href="unit-control.html">
+        <span class="tile-num">VIEW · LONGITUDINAL</span>
+        <div class="tile-title">Per control</div>
+        <div class="tile-hook">The control IS the thread. Four quarters of sign-offs at the top, the current quarter expanded below, a pinned health card. <strong>This is the lock-in surface.</strong></div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">10</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
+          <span class="tile-arrow">Open view →</span>
         </div>
       </a>
-      <a class="tile" href="unit-control.html">
-        <span class="tile-num">TAKE · 05 · UNIT</span>
-        <div class="tile-title">Per control</div>
-        <div class="tile-hook">The control IS the thread. Four quarters of sign-offs collapsed at the top, the current quarter expanded at the bottom, a pinned health card.</div>
+      <a class="tile" href="unit-ask.html">
+        <span class="tile-num">VIEW · ATOMIC</span>
+        <div class="tile-title">Per ask</div>
+        <div class="tile-hook">Every evidence ask is its own short-lived thread. 47 sealed threads in the archive, all wired through the graph. The day-to-day surface.</div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">10</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
+          <span class="tile-arrow">Open view →</span>
         </div>
       </a>
       <a class="tile" href="unit-period.html">
-        <span class="tile-num">TAKE · 06 · UNIT</span>
+        <span class="tile-num">VIEW · TEMPORAL</span>
         <div class="tile-title">Per period</div>
         <div class="tile-hook">One omnibus thread for the entire quarter close. Daily digests, inline filings, mid-quarter risk escalations. The final message <em>is</em> the close package.</div>
         <div class="tile-foot">
           <span class="tile-stat"><span class="num">13</span> · steps</span>
-          <span class="tile-arrow">Open take →</span>
+          <span class="tile-arrow">Open view →</span>
         </div>
       </a>
     </div>
@@ -906,28 +1179,28 @@ body { display: block; min-height: 100vh; }
 
 <section class="thesis" id="thesis">
   <div class="thesis-card">
-    <div class="eyebrow">Why Optro</div>
-    <h2>The conversation surface is a wrapper. The graph underneath is the moat.</h2>
+    <div class="eyebrow">The moat</div>
+    <h2>The conversation is the surface. The graph underneath is what competitors take four quarters to catch up on.</h2>
     <div class="three-up">
       <div class="col">
         <div class="num">01</div>
         <div class="h">Attestation graph</div>
         <p>
-          Five quarters of identical-shape sign-offs is what earns Optro ECM the right to draft. Without the underlying graph, drafting is reckless. With it, it's just operator labor.
+          Drafter mode activates only after 4 quarters of identical-shape sign-offs at confidence ≥ 0.85. That depth is what a new entrant cannot fabricate. By Q4 of an Optro Thread deployment, the customer has accumulated a private graph that's worth more than the product itself.
         </p>
       </div>
       <div class="col">
         <div class="num">02</div>
         <div class="h">Integration graph</div>
         <p>
-          When Marie asks "where did this column come from," the bot finds the Oracle patch, the Jira CR, and the legal memo on its own. The cross-system reach is the work LLMs can't do alone.
+          When Marie asks "where did this column come from," the bot follows the Oracle patch log to the Jira CR to the legal counsel memo — all on its own. The cross-system reach is the work an LLM cannot do alone, and it's the reason Mediator mode feels load-bearing on day one.
         </p>
       </div>
       <div class="col">
         <div class="num">03</div>
         <div class="h">Audit-grade output</div>
         <p>
-          Every thread terminates in a chain-anchored receipt that the next auditor can read, verify, and re-open. The judgment IS the evidence — not a PDF stapled on after the fact.
+          Every thread terminates in a chain-anchored receipt. The judgment IS the evidence — not a PDF stapled on after the fact. The auditor's verification flow is part of the product, which is what makes this defensible against productivity-only competitors.
         </p>
       </div>
     </div>
