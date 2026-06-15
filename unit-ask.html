@@ -80,7 +80,7 @@ window.addEventListener('load', () => {
   setTimeout(() => updateHeader(1), 0);
 });
 
-const THREAD = [
+window.THREAD = [
   { state: 1, author: 'optro', ts: 'Tue · 9:00 AM',
     body: 'Q3 SOC2 firewall rule export needed by Wed close.',
     kind: 'card',
@@ -177,7 +177,7 @@ const THREAD = [
     } },
 ];
 
-const TOUR = {
+window.TOUR = {
   title: 'One thread per evidence ask',
   steps: [
     { title: 't2 · A stalled SOC2 firewall ask',

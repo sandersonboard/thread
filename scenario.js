@@ -1,6 +1,6 @@
 // Constants reused across the 6 take pages. Story-world only — no family branding.
 
-const SCENARIO = {
+window.SCENARIO = {
   company: 'Helios Robotics',
   workspaceLetter: 'H',
   workspaceColor: '#266c92',
