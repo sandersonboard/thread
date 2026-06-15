@@ -5,30 +5,45 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · One thread per evidence ask</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615c" />
-<link rel="stylesheet" href="optro-card.css?v=20260615c" />
-<link rel="stylesheet" href="flow.css?v=20260615c" />
-<link rel="stylesheet" href="tour.css?v=20260615c" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615e" />
+<link rel="stylesheet" href="optro-card.css?v=20260615e" />
+<link rel="stylesheet" href="flow.css?v=20260615e" />
+<link rel="stylesheet" href="tour.css?v=20260615e" />
 </head>
 <body>
 
 <div class="take-topbar">
   <a href="index.html" class="brand">
-    <span class="brand-mark">TH</span>
-    Thread
+    <span class="brand-mark"><img src="optro-mark.svg" alt="Optro" /></span>
+    <span class="brand-name">Optro</span>
   </a>
   <span class="brand-sep"></span>
-  <span class="crumbs">Granularity</span>
-  <span class="take-title">One thread per evidence ask</span>
-  <span class="axis-tag">Unit · Ask</span>
+  <span class="crumbs">Thread · Per ask</span>
   <div class="right-actions">
     <a href="index.html" class="back-link">← All takes</a>
   </div>
 </div>
 
+<div class="take-page">
+  <div class="take-header">
+    <div class="lead">
+      <div class="breadcrumb">View · Per ask <span class="axis-tag">Atomic surface</span></div>
+      <h1>One thread per evidence ask.</h1>
+      <p class="subtitle">Each evidence request lives in its own short-lived Slack thread. Born when needed, closed when done. Forty-seven closed evidence requests across a quarter, all wired together by the underlying graph.</p>
+    </div>
+    <div class="meta">
+      <span class="chip"><span class="dot"></span>10 steps</span>
+      <span class="chip">Q3 FY26 · 3 open asks</span>
+    </div>
+  </div>
+
 <div class="slack-window">
   <aside class="slack-sidebar">
-    <div class="slack-workspace"><span class="workspace-mark" style="background:#1B4D8C;">W</span>Watts Water Technologies</div>
+    <div class="slack-workspace">
+      <a class="workspace-tile" href="#" aria-label="Watts Water Technologies workspace">
+        <img src="watts-logo.jpg" alt="Watts Water Technologies" />
+      </a>
+    </div>
     <div class="slack-section">Open asks</div>
     <div class="slack-channel"><span class="hash">▸</span> t1 · Q3 AR prod-db</div>
     <div class="slack-channel is-active"><span class="hash">▸</span> t2 · SOC2 firewall export</div>
@@ -49,6 +64,8 @@
       <div class="input-shell">Reply in this thread</div>
     </div>
   </main>
+</div>
+
 </div>
 
 <script src="scenario.js"></script>
