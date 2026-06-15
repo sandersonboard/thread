@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread — multi-party SOX evidence in Slack</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+<style>
+.landing { max-width: 1180px; margin: 0 auto; padding: 36px 24px 64px; }
+.landing .hero-still {
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  margin-bottom: 28px;
+  height: 360px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #F8F9FA, #EEF1F4);
+  color: #4A4A4A;
+  font-size: 14px;
+  font-style: italic;
+}
+.landing h1 {
+  font-family: "Slack-Lato", "Lato", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: #1D1C1D;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.landing .premise {
+  font-size: 16px;
+  color: #4A4A4A;
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 0 0 36px;
+}
+.axis-row { margin-bottom: 32px; }
+.axis-row .axis-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #868686;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.axis-row .tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.axis-row .tile {
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  padding: 18px 18px 16px;
+  background: #FFFFFF;
+  text-decoration: none;
+  color: #1D1C1D;
+  display: block;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+.axis-row .tile:hover {
+  border-color: #1264A3;
+  box-shadow: 0 4px 16px rgba(18, 100, 163, 0.10);
+}
+.axis-row .tile .tile-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.axis-row .tile .tile-hook {
+  font-size: 13px;
+  color: #4A4A4A;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.axis-row .tile .arrow {
+  font-size: 13px;
+  color: #1264A3;
+  font-weight: 700;
+}
+.landing-footer {
+  margin-top: 48px;
+  padding-top: 18px;
+  border-top: 1px solid #DDDDDD;
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+.landing-footer .gate-hint {
+  font-family: ui-monospace, "SF Mono", monospace;
+  color: #B0B0B0;
+}
+</style>
+</head>
+<body>
+<div class="landing">
+
+  <div class="hero-still">[hero still — placeholder for screenshot of a live thread with all 3 humans + Optro ECM visible]</div>
+
+  <h1>Most ECM tools assume the AI talks to one person at a time.</h1>
+  <p class="premise">
+    What changes when the bot, the control owner, and the reviewer are all in the same Slack thread —
+    and the thread itself becomes the judgment artifact the auditor sees later?
+    This prototype is six answers, on two axes.
+  </p>
+
+  <div class="axis-row">
+    <div class="axis-label">Bot's role in the thread</div>
+    <div class="tiles">
+      <a class="tile" href="role-drafter.html">
+        <div class="tile-title">Drafter</div>
+        <div class="tile-hook">5 identical-shape quarters in a row. Bot writes the ask, the artifact, and Marie's reviewer note in her voice. Humans approve.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+      <a class="tile" href="role-mediator.html">
+        <div class="tile-title">Mediator</div>
+        <div class="tile-hook">A new column shows up in the Q3 export. Marie pushes back. Bot surfaces the diff, finds the change-management ticket, doesn't take sides.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+      <a class="tile" href="role-silent.html">
+        <div class="tile-title">Silent Auditor</div>
+        <div class="tile-hook">Weston files. Marie's about to sign. The bot was silent the whole conversation — except for one quiet interjection right before sign-off.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="axis-row">
+    <div class="axis-label">Thread granularity</div>
+    <div class="tiles">
+      <a class="tile" href="unit-ask.html">
+        <div class="tile-title">Per ask</div>
+        <div class="tile-hook">Every evidence ask is its own short-lived thread. Born when needed, sealed when done. 47 sealed threads in the archive. The graph wires them.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+      <a class="tile" href="unit-control.html">
+        <div class="tile-title">Per control</div>
+        <div class="tile-hook">The control IS the thread. 4 quarters of sign-offs collapsed at the top, the current quarter expanded at the bottom, a pinned health card under it.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+      <a class="tile" href="unit-period.html">
+        <div class="tile-title">Per period</div>
+        <div class="tile-hook">One omnibus thread for the whole quarter close. Daily digests, inline filings, mid-quarter risk escalations. The final message <em>is</em> the close package.</div>
+        <div class="arrow">Open take →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="landing-footer">
+    <span>Helios Robotics · control 4.2.1 · Q3 FY26 · Weston · Marie · Ada</span>
+    <span class="gate-hint">BORB</span>
+  </div>
+</div>
+</body>
+</html>
