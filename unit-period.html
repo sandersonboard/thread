@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread · One thread per close period</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+<style>
+.day-marker {
+  display: flex;
+  align-items: center;
+  margin: 14px 20px 4px;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #868686;
+  text-transform: uppercase;
+}
+.day-marker::before, .day-marker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #DDDDDD;
+}
+</style>
+</head>
+<body>
+<div id="flow-root" class="page">
+  <div class="page-caption">
+    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Granularity</span>
+    <span class="take-title">One thread per close period</span>
+    <span class="axis-tag">Unit · Period</span>
+  </div>
+  <div class="state-pills" id="state-pills"></div>
+  <span class="state-pills-controls" id="state-controls"></span>
+  <div class="page-layout">
+    <div class="slack-window">
+      <aside class="slack-sidebar">
+        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+        <div class="slack-section">Close periods</div>
+        <div class="slack-channel is-active"><span class="hash">#</span> q3-fy26-close</div>
+        <div class="slack-channel"><span class="hash">#</span> q2-fy26-close · sealed</div>
+        <div class="slack-channel"><span class="hash">#</span> q1-fy26-close · sealed</div>
+        <div class="slack-section">SOX controls</div>
+        <div class="slack-channel"><span class="hash">#</span> ctrl-4-2-1</div>
+        <div class="slack-channel"><span class="hash">#</span> ctrl-5-1-2</div>
+        <div class="slack-section">Direct messages</div>
+        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+      </aside>
+      <main class="slack-main">
+        <header class="slack-header">
+          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span> q3-fy26-close
+          <span class="topic">Quarterly SOX close · 47 controls · Mar 1 → Mar 31 2026</span>
+        </header>
+        <div class="slack-messages" id="slack-messages"></div>
+        <div class="slack-composer">
+          <div class="input-shell">
+            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
+            <div class="input-line is-ghost">Message #q3-fy26-close</div>
+            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="page-side">
+      <div class="state-caption" id="state-caption"></div>
+      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Thread · One thread per close period</span>
+    <span><a href="index.html">← All takes</a></span>
+  </div>
+</div>
+
+<script src="scenario.js"></script>
+<script>
+const STATE_CAPTIONS = {
+  1:  "Day 1 — Optro ECM opens the close thread. Pings Ada.",
+  2:  "Day 1 — Ada posts the kickoff.",
+  3:  "Day 4 — first daily digest.",
+  4:  "Day 12 — digest names top-of-pile.",
+  5:  "Day 12 — Weston files 4.2.1 inline.",
+  6:  "Day 14 — Marie approves inline.",
+  7:  "Day 22 — bot escalates a risk to Ada.",
+  8:  "Day 22 — Ada joins the risk sub-thread, pings DBA lead.",
+  9:  "Day 24 — DBA freeze partially lifted for SOX controls.",
+  10: "Day 26 — daily digest, 42/47 cleared.",
+  11: "Day 28 — close-package preview.",
+  12: "Day 30 — final 5 clear. Bot posts the close-package summary.",
+  13: "Day 30 — audit-evidence bundle generated. Thread is the close.",
+};
+
+window.addEventListener('load', () => {
+  const pills = document.getElementById('state-pills');
+  const msgs = document.getElementById('slack-messages');
+  if (!pills || !msgs) return;
+  const decorate = () => {
+    msgs.querySelectorAll('.day-marker').forEach(n => n.remove());
+  };
+  new MutationObserver(decorate).observe(msgs, { childList: true });
+  setTimeout(decorate, 0);
+});
+
+const THREAD = [
+  { state: 1, author: 'optro', ts: 'Mar 1 · 9:00 AM',
+    body: 'Q3 FY26 close opens. Daily digest at 5pm.',
+    kind: 'card',
+    card: {
+      header: 'Q3 FY26 close · kickoff',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Controls due',  '47'],
+        ['Window',        'Mar 1 → Mar 31'],
+        ['PMO',           'Ada Lovelace'],
+        ['Daily digest',  '5:00 PM workspace local'],
+      ],
+    } },
+  { state: 1, author: 'optro', ts: 'Mar 1 · 9:00 AM', kind: 'context',
+    body: 'pinged @Ada · 47 controls assigned to 9 owners' },
+
+  { state: 2, author: 'ada', ts: 'Mar 1 · 9:14 AM',
+    body: "Let's go. Flag anything stuck within 48hr." },
+
+  { state: 3, author: 'optro', ts: 'Mar 4 · 5:00 PM', kind: 'context',
+    body: 'Day 4 · 3/47 cleared · 0 stalled · 0 disputes' },
+
+  { state: 4, author: 'optro', ts: 'Mar 12 · 5:00 PM',
+    body: 'Day 12 digest.',
+    kind: 'card',
+    card: {
+      header: 'Day 12 · digest',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Cleared',    '23/47'],
+        ['Disputes',   '2 open'],
+        ['Missing',    '1 attestation'],
+        ['Top of pile','4.2.1, 5.1.2'],
+      ],
+    } },
+
+  { state: 5, author: 'weston', ts: 'Mar 12 · 5:14 PM',
+    body: 'Filing 4.2.1 — Q3 AR for prod-db.',
+    attachment: 'AR-Q3FY26-prod-db.csv' },
+
+  { state: 6, author: 'marie', ts: 'Mar 14 · 10:02 AM',
+    body: '4.2.1 approved — clean.',
+    reactions: ['✅ 1'] },
+
+  { state: 7, author: 'optro', ts: 'Mar 22 · 11:30 AM', kind: 'card',
+    card: {
+      header: '⚠ Risk escalation',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Risk',     '3 controls depend on the DBA team\'s frozen change window'],
+        ['Affected', '6.1.4, 6.2.1, 6.2.2'],
+        ['Freeze ends', 'Mar 26 (Day 26)'],
+        ['Recommend', 'Escalate to @Ada · request partial unfreeze for SOX scope'],
+      ],
+      actions: [
+        { label: 'Escalate now', primary: true },
+        { label: 'Wait for unfreeze' },
+      ],
+    } },
+
+  { state: 8, author: 'ada', ts: 'Mar 22 · 11:42 AM',
+    body: 'Escalating — pinging DBA lead in side thread.',
+    kind: 'side-thread',
+    sideThread: {
+      participants: ['ada', 'optro'],
+      summary: 'Last reply 2hr ago — DBA lead agrees to partial unfreeze',
+      count: 6,
+    } },
+
+  { state: 9, author: 'optro', ts: 'Mar 24 · 9:00 AM', kind: 'context',
+    body: 'DBA freeze partially lifted for SOX scope (6.1.4, 6.2.1, 6.2.2) — Ada\'s ask approved' },
+
+  { state: 10, author: 'optro', ts: 'Mar 26 · 5:00 PM', kind: 'context',
+    body: 'Day 26 · 42/47 cleared · 3 in review · 2 pending' },
+
+  { state: 11, author: 'optro', ts: 'Mar 28 · 5:00 PM',
+    body: 'Close-package preview.',
+    kind: 'card',
+    card: {
+      header: 'Q3 FY26 close package · preview',
+      subtitle: 'Optro ECM',
+      facts: [
+        '44/47 controls cleared',
+        '3 in final review · projected to clear by Day 30',
+        '2 disputes resolved · 1 reviewer Q resolved',
+        'Click any control to drill into its thread',
+      ],
+    } },
+
+  { state: 12, author: 'optro', ts: 'Mar 31 · 4:45 PM',
+    body: 'Final 5 cleared.',
+    kind: 'card',
+    card: {
+      header: 'Q3 FY26 close · summary',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Controls cleared', '47/47'],
+        ['Total disputes',   '2 (both resolved)'],
+        ['Reviewer Qs',      '4 (all resolved)'],
+        ['Avg turnaround',   '1.4 days'],
+        ['Chain anchor',     '<span class="cite">block #4,180,872</span>'],
+      ],
+    } },
+
+  { state: 13, author: 'optro', ts: 'Mar 31 · 4:46 PM', kind: 'receipt',
+    receipt: 'sealed: <strong>q3-fy26-close</strong> · 47/47 · audit-evidence bundle: <strong>q3-fy26-close-package.zip</strong> · 1.4 GB · the thread <strong>is</strong> the close' },
+];
+</script>
+<script src="flow.js"></script>
+</body>
+</html>
