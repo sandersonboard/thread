@@ -1,0 +1,161 @@
+/* Outer page chrome for each take — state pill row above the workspace, caption strip, jump link. */
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+  background: #F4F5F7;
+}
+
+.page-caption {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #4A4A4A;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.page-caption .crumbs a {
+  color: #4A4A4A;
+  text-decoration: none;
+}
+.page-caption .crumbs a:hover { text-decoration: underline; }
+.page-caption .crumbs .sep { margin: 0 4px; color: #B0B0B0; }
+.page-caption .take-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1D1C1D;
+}
+.page-caption .axis-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  background: #E0E2E5;
+  color: #4A4A4A;
+  border-radius: 3px;
+}
+
+.state-pills {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 12px 0;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+.state-pills .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #E5E7EA;
+  color: #4A4A4A;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background 0.12s, color 0.12s;
+}
+.state-pills .pill:hover { background: #D6D9DD; }
+.state-pills .pill.is-done {
+  background: #D5E0E8;
+  color: #2E5F77;
+}
+.state-pills .pill.is-done::before {
+  content: '✓';
+  font-size: 11px;
+  font-weight: 800;
+}
+.state-pills .pill.is-active {
+  background: #1D1C1D;
+  color: #FFFFFF;
+}
+.state-pills .pill.is-future {
+  opacity: 0.4;
+}
+.state-pills .connector {
+  width: 14px;
+  height: 1px;
+  background: #C7CACE;
+}
+
+.state-pills-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+  font-size: 12px;
+  color: #4A4A4A;
+}
+.state-pills-controls button {
+  border: 1px solid #C7CACE;
+  background: #FFFFFF;
+  color: #1D1C1D;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+}
+.state-pills-controls button:hover { background: #F4F4F4; }
+
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 20px;
+}
+
+.page-side {
+  font-size: 13px;
+  color: #4A4A4A;
+  padding-top: 8px;
+}
+.page-side .state-caption {
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.page-side .state-caption .label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #888;
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.page-side .jump-link {
+  display: block;
+  font-size: 12px;
+  color: #1264A3;
+  text-decoration: none;
+  margin-top: 12px;
+  font-weight: 700;
+}
+.page-side .jump-link:hover { text-decoration: underline; }
+
+.page-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid #DDDDDD;
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-footer a {
+  color: #1264A3;
+  text-decoration: none;
+}
+.page-footer a:hover { text-decoration: underline; }
