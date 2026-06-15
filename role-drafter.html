@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="gate.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thread · Optro ECM as Drafter</title>
+<link rel="stylesheet" href="slack-chrome.css?v=20260615" />
+<link rel="stylesheet" href="optro-card.css?v=20260615" />
+<link rel="stylesheet" href="flow.css?v=20260615" />
+</head>
+<body>
+<div id="flow-root" class="page">
+  <div class="page-caption">
+    <span class="crumbs"><a href="index.html">Thread</a><span class="sep">·</span> Bot's role</span>
+    <span class="take-title">Optro ECM as Drafter</span>
+    <span class="axis-tag">Role · Drafter</span>
+  </div>
+
+  <div class="state-pills" id="state-pills"></div>
+  <span class="state-pills-controls" id="state-controls"></span>
+
+  <div class="page-layout">
+    <div class="slack-window">
+      <aside class="slack-sidebar">
+        <div class="slack-workspace"><span class="workspace-mark" style="background:#266c92;">H</span>Helios Robotics</div>
+        <div class="slack-section">Channels</div>
+        <div class="slack-channel"><span class="hash">#</span> sox-q3-close</div>
+        <div class="slack-channel is-active"><span class="hash">#</span> ctrl-4-2-1</div>
+        <div class="slack-channel"><span class="hash">#</span> dba-team</div>
+        <div class="slack-section">Direct messages</div>
+        <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
+        <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
+        <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+      </aside>
+      <main class="slack-main">
+        <header class="slack-header">
+          <span style="color:#868686;font-family:ui-monospace,monospace;">#</span>
+          ctrl-4-2-1
+          <span class="topic">Quarterly user-access review · prod-db-01.helios</span>
+        </header>
+        <div class="slack-messages" id="slack-messages"></div>
+        <div class="slack-composer">
+          <div class="input-shell">
+            <div class="toolbar"><span class="tool"><b>B</b></span><span class="tool"><i>I</i></span><span class="tool"><s>S</s></span><span class="divider">|</span><span class="tool">🔗</span><span class="tool">≡</span><span class="tool">"</span><span class="tool">{ }</span></div>
+            <div class="input-line is-ghost">Message #ctrl-4-2-1</div>
+            <div class="send-row"><div class="icons"><span class="icon">+</span><span class="icon">📎</span><span class="icon">@</span><span class="icon">😊</span></div><button class="send-btn" disabled>Send</button></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="page-side">
+      <div class="state-caption" id="state-caption"></div>
+      <a href="#" class="jump-link" id="jump-to-receipt">→ Jump to receipt</a>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Thread · Optro ECM as Drafter</span>
+    <span><a href="index.html">← All takes</a></span>
+  </div>
+</div>
+
+<script src="scenario.js"></script>
+<script>
+const STATE_CAPTIONS = {
+  1:  "Bot opens the thread with a full Block Kit draft.",
+  2:  "Weston joins, reads the draft.",
+  3:  "Weston one-clicks Approve & file. Upload acknowledged.",
+  4:  "Marie joins. Bot pings her with the pre-drafted reviewer note.",
+  5:  "Marie reads the drafted note.",
+  6:  "Marie clicks Edit. Inflates inline.",
+  7:  "Marie changes 'checked' → 'verified'. Bot logs the edit.",
+  8:  "Marie signs off.",
+  9:  "Bot posts the filing receipt.",
+  10: "Footer expander reveals why the bot earned the right to draft.",
+};
+
+const THREAD = [
+  { state: 1, author: 'optro', ts: 'Friday · 9:00 AM',
+    body: 'Q3 AR for <span class="cite">control 4.2.1</span> — drafted for you both.',
+    kind: 'card',
+    card: {
+      header: 'Evidence draft · AR-Q3FY26-prod-db',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Control',             '4.2.1'],
+        ['Cadence',             'Quarterly'],
+        ['Reviewer',            'Marie Curie'],
+        ['Suggested artifact',  '<span class="cite">snow-query-AR-prod-db.csv</span>'],
+        ['Proposed reviewer note', '"Checked — consistent with Q2."'],
+      ],
+      facts: ['5 prior identical-shape attestations · drift score 0.02 · pattern confidence 0.94'],
+      actions: [
+        { label: '✓ Approve & file', primary: true },
+        { label: 'Edit query' },
+        { label: 'Upload your own' },
+      ],
+    } },
+
+  { state: 2, author: 'weston', ts: '9:14 AM',
+    body: 'Reviewing the draft now.' },
+
+  { state: 3, author: 'optro', ts: '9:14 AM', kind: 'context',
+    body: 'uploaded by Weston · 1 click · awaiting reviewer sign-off' },
+
+  { state: 4, author: 'optro', ts: '10:32 AM',
+    body: 'Marie — I drafted what you usually sign for this control. Edit or approve below.',
+    kind: 'card',
+    card: {
+      header: 'Drafted reviewer note · Q3 FY26',
+      subtitle: 'Optro ECM',
+      fields: [
+        ['Drafted text',   '"Checked — consistent with Q2. No outliers flagged. Routine approval."'],
+        ['Style match',    'Marie\'s prior Q2 / Q1 / Q4 sign-offs'],
+        ['Style score',    '0.91'],
+      ],
+      actions: [
+        { label: '✓ Approve', primary: true },
+        { label: 'Edit' },
+        { label: 'Rewrite from scratch' },
+      ],
+    } },
+
+  { state: 5, author: 'marie', ts: '10:34 AM',
+    body: 'Reading it now…' },
+
+  { state: 6, author: 'marie', ts: '10:35 AM',
+    body: 'Editing — one word change.' },
+
+  { state: 7, author: 'optro', ts: '10:35 AM', kind: 'context',
+    body: 'edit recorded · "checked" → "verified" · drafted-note pattern updated for future Q4 sign-offs' },
+
+  { state: 8, author: 'marie', ts: '10:36 AM',
+    body: 'Done — verified and signed.',
+    reactions: ['✅ 1'] },
+
+  { state: 9, author: 'optro', ts: '10:36 AM', kind: 'receipt',
+    receipt: 'filed: <strong>snow-query-AR-prod-db.csv</strong> → control 4.2.1 · classifier 94% · routed=Marie · 1m32s end-to-end · 2 clicks · chain=block #4,180,221' },
+
+  { state: 10, author: 'optro', ts: '10:36 AM', kind: 'expander',
+    expander: {
+      summary: 'Why I played drafter here',
+      reveal: '5 prior identical-shape attestations · same reviewer · same artifact source · drift score 0.02 · pattern confidence 0.94. <br><br>The bot earns the right to draft only when prior pattern depth crosses 4 quarters AND drift &lt; 0.05 AND reviewer-style match &gt; 0.85. This control hit all three. Any one of them missing → the bot would have stayed in mediator mode instead.',
+    } },
+];
+</script>
+<script src="flow.js"></script>
+</body>
+</html>
