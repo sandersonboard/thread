@@ -1,0 +1,371 @@
+/* Luna design tokens — verbatim values from @soxhub/luna-tokens
+   (pulled via Luna MCP, build SHA recorded in design spec)
+   Real AuditBoard design system, not anonymized. */
+
+:root {
+  /* Gray scale */
+  --luna-gray-50: #f8fafc;
+  --luna-gray-100: #f1f5f9;
+  --luna-gray-200: #e2e8f0;
+  --luna-gray-300: #cbd5e1;
+  --luna-gray-400: #828ca3;
+  --luna-gray-500: #64748b;
+  --luna-gray-600: #475569;
+  --luna-gray-700: #334155;
+  --luna-gray-800: #1e293b;
+  --luna-gray-900: #0f172a;
+  --luna-gray-a-100: hsl(210deg 98% 25% / 6%);
+  --luna-gray-a-200: hsl(214deg 98% 25% / 11%);
+  --luna-gray-a-300: hsl(213deg 78% 25% / 21%);
+
+  /* Brand teal — Luna primary */
+  --luna-teal-50: #f3fafb;
+  --luna-teal-100: #e3f0f2;
+  --luna-teal-200: #c9ecee;
+  --luna-teal-300: #84b8d1;
+  --luna-teal-400: #3f85b4;
+  --luna-teal-500: #266c92;
+  --luna-teal-600: #0e5371;
+  --luna-teal-700: #0c3f5c;
+  --luna-teal-800: #0b2b48;
+  --luna-teal-900: #0a1834;
+
+  /* Status colors */
+  --luna-blue-50: #f2f8ff;
+  --luna-blue-100: #dbeaff;
+  --luna-blue-500: #3172e3;
+  --luna-blue-700: #0e48a1;
+
+  --luna-green-50: #e3fcec;
+  --luna-green-100: #c6fdd9;
+  --luna-green-500: #36844a;
+  --luna-green-600: #26603b;
+  --luna-green-700: #1b4a2c;
+
+  --luna-orange-50: #fff5e8;
+  --luna-orange-100: #ffeacf;
+  --luna-orange-400: #ea6706;
+  --luna-orange-500: #cc4e00;
+  --luna-orange-700: #7e2b0a;
+
+  --luna-yellow-50: #fffce9;
+  --luna-yellow-100: #fef9c3;
+  --luna-yellow-500: #e4b913;
+  --luna-yellow-700: #8d5112;
+
+  --luna-red-50: #fff0f0;
+  --luna-red-100: #ffe0e0;
+  --luna-red-500: #db3535;
+  --luna-red-700: #8c1c1c;
+
+  --luna-purple-50: #faf8ff;
+  --luna-purple-100: #e5ddfa;
+  --luna-purple-500: #6931e3;
+  --luna-purple-700: #341180;
+
+  --luna-white: #ffffff;
+
+  /* Semantic */
+  --luna-text: var(--luna-gray-900);
+  --luna-text-subdued: var(--luna-gray-700);
+  --luna-border: 1px solid var(--luna-gray-200);
+  --luna-input-border: 1px solid var(--luna-gray-300);
+
+  /* Typography */
+  --luna-fontFamily: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
+  --luna-font-size-100: 0.75rem;
+  --luna-font-size-150: 0.8125rem;
+  --luna-font-size-200: 0.875rem;
+  --luna-font-size-300: 1rem;
+  --luna-font-size-400: 1.125rem;
+  --luna-font-size-450: 1.25rem;
+  --luna-font-size-500: 1.5rem;
+  --luna-font-size-600: 2rem;
+  --luna-font-size-700: 2.5rem;
+  --luna-letter-spacing-heading: 0.03rem;
+  --luna-letter-spacing-label: 0.02rem;
+
+  /* Space (rem) */
+  --luna-space-1: 0.25rem;
+  --luna-space-2: 0.5rem;
+  --luna-space-3: 0.75rem;
+  --luna-space-4: 1rem;
+  --luna-space-5: 1.25rem;
+  --luna-space-6: 1.5rem;
+  --luna-space-8: 2rem;
+  --luna-space-10: 2.5rem;
+  --luna-space-12: 3rem;
+  --luna-space-16: 4rem;
+
+  /* Radius */
+  --luna-radius-sm: 0.25rem;
+  --luna-radius-md: 0.5rem;
+  --luna-radius-lg: 0.75rem;
+  --luna-radius-xl: 1rem;
+  --luna-radius-full: 9999px;
+
+  /* Shadow */
+  --luna-shadow-100: 0 0.125rem 0.25rem var(--luna-gray-a-200), 0 0 0.25rem var(--luna-gray-a-100);
+  --luna-shadow-200: 0 0.25rem 0.5rem var(--luna-gray-a-200), 0 0 0.75rem var(--luna-gray-a-100);
+  --luna-shadow-300: 0 0.5rem 1rem var(--luna-gray-a-200), 0 0 1.5rem var(--luna-gray-a-100);
+  --luna-shadow-400: 0 0.75rem 1.5rem var(--luna-gray-a-200), 0 0 2.5rem var(--luna-gray-a-100);
+  --luna-shadow-focus-ring: 0 0 0 0.125rem var(--luna-white), 0 0 0 4px var(--luna-teal-500);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--luna-fontFamily);
+  font-size: var(--luna-font-size-200);
+  line-height: 1.5;
+  color: var(--luna-text);
+  background: var(--luna-gray-50);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--luna-teal-500); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font-family: inherit; cursor: pointer; }
+
+/* Luna primitives — minimal hand-rolled approximations */
+.luna-card {
+  background: var(--luna-white);
+  border: var(--luna-border);
+  border-radius: var(--luna-radius-md);
+  box-shadow: var(--luna-shadow-100);
+}
+.luna-badge {
+  display: inline-flex; align-items: center; gap: var(--luna-space-1);
+  padding: 2px 8px;
+  border-radius: var(--luna-radius-full);
+  font-size: var(--luna-font-size-100);
+  font-weight: 600;
+  letter-spacing: var(--luna-letter-spacing-label);
+  text-transform: uppercase;
+  background: var(--luna-gray-100);
+  color: var(--luna-gray-700);
+}
+.luna-badge.is-teal { background: var(--luna-teal-50); color: var(--luna-teal-700); }
+.luna-badge.is-green { background: var(--luna-green-50); color: var(--luna-green-700); }
+.luna-badge.is-orange { background: var(--luna-orange-50); color: var(--luna-orange-700); }
+.luna-badge.is-yellow { background: var(--luna-yellow-50); color: var(--luna-yellow-700); }
+.luna-badge.is-red { background: var(--luna-red-50); color: var(--luna-red-700); }
+.luna-badge.is-purple { background: var(--luna-purple-50); color: var(--luna-purple-700); }
+.luna-btn {
+  display: inline-flex; align-items: center; gap: var(--luna-space-2);
+  padding: 8px 14px;
+  background: var(--luna-teal-500); color: var(--luna-white);
+  border: 1px solid var(--luna-teal-500);
+  border-radius: var(--luna-radius-sm);
+  font-size: var(--luna-font-size-200);
+  font-weight: 600;
+}
+.luna-btn:hover { background: var(--luna-teal-600); border-color: var(--luna-teal-600); }
+.luna-btn.is-secondary { background: var(--luna-white); color: var(--luna-teal-500); }
+.luna-btn.is-secondary:hover { background: var(--luna-teal-50); }
+.luna-btn.is-ghost { background: transparent; color: var(--luna-gray-700); border-color: transparent; }
+.luna-btn.is-ghost:hover { background: var(--luna-gray-100); }
+
+.luna-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--luna-white);
+  border: var(--luna-input-border);
+  border-radius: var(--luna-radius-sm);
+  font-family: inherit;
+  font-size: var(--luna-font-size-200);
+  color: var(--luna-text);
+}
+.luna-input:focus { outline: none; box-shadow: var(--luna-shadow-focus-ring); border-color: var(--luna-teal-500); }
+
+.luna-heading-700 { font-size: var(--luna-font-size-700); line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; margin: 0; }
+.luna-heading-600 { font-size: var(--luna-font-size-600); line-height: 1.2; font-weight: 600; margin: 0; }
+.luna-heading-500 { font-size: var(--luna-font-size-500); line-height: 1.2; font-weight: 600; margin: 0; }
+.luna-heading-400 { font-size: var(--luna-font-size-400); line-height: 1.3; font-weight: 600; margin: 0; }
+.luna-heading-300 { font-size: var(--luna-font-size-300); line-height: 1.3; font-weight: 600; margin: 0; }
+.luna-text-subdued { color: var(--luna-text-subdued); }
+.luna-text-100 { font-size: var(--luna-font-size-100); }
+.luna-text-150 { font-size: var(--luna-font-size-150); }
+.luna-text-200 { font-size: var(--luna-font-size-200); }
+
+/* AI-specific tokens (not in Luna proper; bridge for AI moments in the prototype) */
+.ai-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 8px 3px 6px;
+  background: linear-gradient(135deg, var(--luna-purple-50), var(--luna-blue-50));
+  border: 1px solid var(--luna-purple-100);
+  border-radius: var(--luna-radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--luna-purple-700);
+}
+.ai-chip::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--luna-purple-500);
+  box-shadow: 0 0 0 2px var(--luna-purple-100);
+}
+.ai-citation {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 1px 6px;
+  background: var(--luna-teal-50);
+  border-radius: var(--luna-radius-sm);
+  font-size: 11px;
+  color: var(--luna-teal-700);
+  font-family: ui-monospace, "SF Mono", monospace;
+}
+.ai-confidence-bar {
+  height: 4px;
+  background: var(--luna-gray-200);
+  border-radius: var(--luna-radius-full);
+  overflow: hidden;
+  position: relative;
+}
+.ai-confidence-bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--luna-purple-400), var(--luna-teal-500));
+  border-radius: inherit;
+}
+
+/* Multi-state flow infrastructure (flows.js companion).
+   Hides all .flow-state by default; only the active one is shown.
+   Stepper shows progress through named steps. */
+.flow-state { display: none; }
+.flow-state.is-active { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .flow-state.is-active { animation: flow-fade 0.18s ease-out; }
+}
+@keyframes flow-fade {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flow-stepper {
+  display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
+  max-width: 1200px; margin: 0 auto 18px;
+  padding: 10px 14px;
+  background: var(--luna-white);
+  border: 1px solid var(--luna-gray-200);
+  border-radius: var(--luna-radius-md);
+  box-shadow: var(--luna-shadow-100);
+}
+.flow-stepper .lbl {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--luna-gray-500);
+  margin-right: 4px;
+}
+.flow-step {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px 5px 5px;
+  border-radius: var(--luna-radius-full);
+  background: var(--luna-gray-50);
+  border: 1px solid var(--luna-gray-200);
+  color: var(--luna-gray-700);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.flow-step:hover {
+  border-color: var(--luna-teal-300);
+  color: var(--luna-teal-700);
+}
+.flow-step .num {
+  display: inline-grid; place-items: center;
+  width: 20px; height: 20px;
+  background: var(--luna-gray-200);
+  color: var(--luna-gray-600);
+  border-radius: 50%;
+  font-size: 11px; font-weight: 700;
+  font-family: ui-monospace, monospace;
+  flex-shrink: 0;
+}
+.flow-step.is-current {
+  background: var(--luna-teal-50);
+  border-color: var(--luna-teal-500);
+  color: var(--luna-teal-700);
+  font-weight: 600;
+  box-shadow: 0 0 0 2px rgba(38, 108, 146, 0.08);
+}
+.flow-step.is-current .num { background: var(--luna-teal-500); color: var(--luna-white); }
+.flow-step.is-done {
+  background: var(--luna-green-50);
+  border-color: var(--luna-green-100);
+  color: var(--luna-green-700);
+}
+.flow-step.is-done .num { background: var(--luna-green-500); color: var(--luna-white); }
+.flow-stepper .sep, .flow-arrow {
+  color: var(--luna-gray-300); font-size: 12px;
+  font-family: ui-monospace, monospace;
+}
+.flow-stepper .ctrl {
+  margin-left: auto;
+  display: inline-flex; gap: 4px; align-items: center;
+}
+.flow-stepper .ctrl button {
+  padding: 4px 10px;
+  border: 1px solid var(--luna-gray-200);
+  background: var(--luna-white);
+  color: var(--luna-gray-700);
+  border-radius: var(--luna-radius-sm);
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+}
+.flow-stepper .ctrl button:hover { border-color: var(--luna-teal-300); color: var(--luna-teal-500); }
+
+/* Subtle "click target" cue for tappable demo elements */
+.is-tappable { cursor: pointer; transition: transform 0.12s, box-shadow 0.12s; }
+.is-tappable:hover { transform: translateY(-1px); box-shadow: var(--luna-shadow-200); }
+.is-tappable:active { transform: translateY(0); }
+
+/* Take navigation strip — shown below the page header on every take detail page */
+.take-nav {
+  max-width: 1200px; margin: 0 auto 24px;
+  display: flex; gap: 6px; align-items: center;
+  font-size: 12px; color: var(--luna-gray-600);
+  flex-wrap: wrap;
+}
+.take-nav .lbl { margin-right: 4px; }
+.take-nav a {
+  padding: 4px 10px;
+  border-radius: var(--luna-radius-full);
+  border: 1px solid var(--luna-gray-200);
+  background: var(--luna-white);
+  color: var(--luna-gray-700);
+  font-size: 12px; font-weight: 500;
+  text-decoration: none;
+}
+.take-nav a:hover { border-color: var(--luna-teal-300); text-decoration: none; }
+.take-nav a.is-current { background: var(--luna-teal-500); color: var(--luna-white); border-color: var(--luna-teal-500); }
+.take-nav .sep { color: var(--luna-gray-400); }
+
+/* Family footer (cross-links) */
+.family-footer {
+  margin-top: 64px;
+  padding: 32px 24px;
+  background: var(--luna-gray-100);
+  border-top: var(--luna-border);
+  text-align: center;
+}
+.family-footer .label {
+  font-size: var(--luna-font-size-100);
+  font-weight: 700;
+  letter-spacing: var(--luna-letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--luna-gray-500);
+  margin-bottom: 12px;
+}
+.family-footer .siblings {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+}
+.family-footer .sibling {
+  padding: 6px 12px;
+  background: var(--luna-white);
+  border: var(--luna-border);
+  border-radius: var(--luna-radius-full);
+  font-size: var(--luna-font-size-150);
+  color: var(--luna-gray-700);
+}
+.family-footer .sibling:hover { background: var(--luna-teal-50); color: var(--luna-teal-700); text-decoration: none; }
