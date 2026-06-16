@@ -5,8 +5,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Optro Thread — multi-party AI for SOX evidence, in Slack</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
-<link rel="stylesheet" href="optro-card.css?v=20260615g" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615h" />
+<link rel="stylesheet" href="optro-card.css?v=20260615h" />
 <style>
 html, body { height: auto; margin: 0; overflow: auto; background: #FFFFFF; }
 body { display: block; min-height: 100vh; }
@@ -228,7 +228,32 @@ body { display: block; min-height: 100vh; }
   color: var(--sidebar-text-dim);
   padding: 14px 18px 4px;
   font-weight: 700;
+  display: flex; align-items: center; gap: 6px;
 }
+.hero-preview .pv-sec::before {
+  content: '▾';
+  font-size: 9px;
+  opacity: 0.7;
+}
+.hero-preview .pv-sec.is-apps::before {
+  content: '';
+  width: 13px;
+  height: 13px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="%23aaa"><circle cx="2" cy="2" r="1.1"/><circle cx="7" cy="2" r="1.1"/><circle cx="12" cy="2" r="1.1"/><circle cx="2" cy="7" r="1.1"/><circle cx="7" cy="7" r="1.1"/><circle cx="12" cy="7" r="1.1"/><circle cx="2" cy="12" r="1.1"/><circle cx="7" cy="12" r="1.1"/><circle cx="12" cy="12" r="1.1"/></g></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.85;
+}
+.hero-preview .pv-ch .pv-app-ico {
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  display: grid; place-items: center;
+  font-size: 8px; font-weight: 800;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+.hero-preview .pv-ch .pv-app-ico img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .hero-preview .pv-ch {
   padding: 4px 18px 4px 26px;
   font-size: 13.5px;
@@ -936,11 +961,13 @@ body { display: block; min-height: 100vh; }
       <div class="pv-ch"><span class="h">#</span> sox-q3-close</div>
       <div class="pv-ch active"><span class="h">#</span> ctrl-4-2-1</div>
       <div class="pv-ch"><span class="h">#</span> dba-team</div>
-      <div class="pv-ch"><span class="h">#</span> it-security</div>
       <div class="pv-sec">Direct messages</div>
-      <div class="pv-ch"><span class="dot online"></span> Optro ECM</div>
       <div class="pv-ch"><span class="dot"></span> Marie Curie</div>
       <div class="pv-ch"><span class="dot"></span> Ada Lovelace</div>
+      <div class="pv-sec is-apps">Apps</div>
+      <div class="pv-ch"><span class="pv-app-ico" style="background:linear-gradient(135deg,#e5ddfa,#dbeaff);padding:2px;"><img src="optro-mark.svg" alt="Optro" /></span> Optro ECM</div>
+      <div class="pv-ch"><span class="pv-app-ico" style="background:#0052CC;">J</span> Jira</div>
+      <div class="pv-ch"><span class="pv-app-ico" style="background:#10B981;">SN</span> ServiceNow</div>
     </aside>
     <main class="pv-main">
       <div class="pv-head">
@@ -1119,9 +1146,9 @@ body { display: block; min-height: 100vh; }
       <a class="tile" href="role-mediator.html">
         <span class="tile-num">MODE · DEFAULT</span>
         <div class="tile-title">Mediator</div>
-        <div class="tile-hook">A new column shows up in the Q3 export. Marie pushes back. The bot surfaces the diff, finds the change ticket, doesn't take sides. <strong>This is the canonical posture.</strong></div>
+        <div class="tile-hook">Full ECM lifecycle, end-to-end. Sarah drafts → routed to Weston → AI auto-review → Marie rejects with reasons → bot mediates → accepted → linked to control → handoff to testing. <strong>The canonical demo.</strong></div>
         <div class="tile-foot">
-          <span class="tile-stat"><span class="num">11</span> · steps</span>
+          <span class="tile-stat"><span class="num">12</span> · steps</span>
           <span class="tile-arrow">Open mode →</span>
         </div>
       </a>

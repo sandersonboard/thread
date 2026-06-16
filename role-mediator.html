@@ -5,10 +5,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Thread · Optro ECM as Mediator</title>
-<link rel="stylesheet" href="slack-chrome.css?v=20260615g" />
-<link rel="stylesheet" href="optro-card.css?v=20260615g" />
-<link rel="stylesheet" href="flow.css?v=20260615g" />
-<link rel="stylesheet" href="tour.css?v=20260615g" />
+<link rel="stylesheet" href="slack-chrome.css?v=20260615h" />
+<link rel="stylesheet" href="optro-card.css?v=20260615h" />
+<link rel="stylesheet" href="flow.css?v=20260615h" />
+<link rel="stylesheet" href="tour.css?v=20260615h" />
 </head>
 <body>
 
@@ -28,11 +28,11 @@
   <div class="take-header">
     <div class="lead">
       <div class="breadcrumb">Mode · Mediator <span class="axis-tag">Default posture</span></div>
-      <h1>The bot surfaces facts. The reviewer keeps the verdict.</h1>
-      <p class="subtitle">Friday afternoon Q3 access review. A new column shows up in the export. Marie pushes back. The bot lays out the schema diff, finds the change-request ticket, and summarizes the exchange for the audit trail — never taking a side.</p>
+      <h1>The full ECM evidence loop, walked end-to-end.</h1>
+      <p class="subtitle">Sarah (External Audit) drafts the Q3 PBC. Optro routes it to Weston. He uploads. The AI auto-reviews. Marie rejects with reasons — a real reviewer question. The bot helps trace the change. Marie accepts. ML links the artifact to the test sample. Then evidence is handed off downstream to midship testing — a separate step.</p>
     </div>
     <div class="meta">
-      <span class="chip"><span class="dot"></span>11 steps</span>
+      <span class="chip"><span class="dot"></span>12 steps</span>
       <span class="chip">Q3 FY26 · ctrl-4-2-1</span>
     </div>
   </div>
@@ -49,9 +49,16 @@
     <div class="slack-channel"><span class="hash">#</span> dba-team</div>
     <div class="slack-channel"><span class="hash">#</span> it-security</div>
     <div class="slack-section">Direct messages</div>
-    <div class="slack-channel"><span class="dot is-online"></span> Optro ECM</div>
     <div class="slack-channel"><span class="dot"></span> Marie Curie</div>
     <div class="slack-channel"><span class="dot"></span> Ada Lovelace</div>
+    <div class="slack-channel"><span class="dot"></span> Sarah Kim · guest</div>
+    <div class="slack-section is-apps">Apps</div>
+    <div class="slack-channel">
+      <span class="app-icon" style="background:linear-gradient(135deg,#e5ddfa,#dbeaff);padding:2px;"><img src="optro-mark.svg" alt="Optro" /></span> Optro ECM
+    </div>
+    <div class="slack-channel"><span class="app-icon" style="background:#0052CC;">J</span> Jira</div>
+    <div class="slack-channel"><span class="app-icon" style="background:#10B981;">SN</span> ServiceNow</div>
+    <div class="slack-channel"><span class="app-icon" style="background:#34A853;">GD</span> Google Drive</div>
   </aside>
   <main class="slack-main">
     <header class="slack-header">
@@ -70,149 +77,253 @@
 <script src="scenario.js"></script>
 <script>
 window.THREAD = [
-  { state: 1, author: 'weston', ts: 'Friday · 2:48 PM',
-    body: 'Q3 UAR attached. Same query as last quarter.',
-    attachment: { name: 'UAR-Q3FY26-prod-db.csv', meta: '12 cols · 261 rows · 154 KB' },
-    reactions: ['👀 1'] },
+  // Step 1: Sarah drafts the PBC request
+  { state: 1, author: 'sarah', ts: 'Friday · 2:42 PM',
+    body: 'Drafting a Q3 PBC for <span class="ai-citation">control 4.2.1</span> — user-access review on prod-db-01. Need the export plus reviewer attestation.' },
 
-  { state: 2, author: 'marie', ts: '2:51 PM',
-    body: "Quick question — there's a new column. Where'd it come from?" },
-
-  { state: 3, author: 'optro', ts: '2:51 PM', kind: 'context',
-    body: 'Noticed the schema diff: <strong>+1 field</strong> vs Q2 — <span class="ai-citation">termination_date_normalized</span>.' },
-
-  { state: 4, author: 'optro', ts: '2:52 PM',
-    body: 'I can help in a few ways — your call:',
+  { state: 1, author: 'optro', ts: '2:42 PM',
+    body: 'Pre-filled the request from the prior period. Sarah — confirm and send to assignee.',
     kind: 'card',
     card: {
-      header: 'Three options · no recommendation',
+      header: 'PBC request · draft <span class="state-pill is-draft">Draft</span>',
+      fields: [
+        ['Control', '<span class="ai-citation">4.2.1</span> · Quarterly user-access review'],
+        ['Period', 'Q3 FY26 (Jul 1 – Sep 30)'],
+        ['Proof needed', 'User-access listing + reviewer attestation'],
+        ['Assignee', 'Weston Prohaska · IT Lead'],
+        ['Reviewer', 'Marie Curie · Internal Audit'],
+        ['SLA', '2 business days from open'],
+      ],
       actions: [
-        { label: 'Show schema comparison' },
-        { label: 'Trace change request' },
-        { label: 'Stay out of it' },
+        { label: '✓ Send to Weston', primary: true },
+        { label: 'Edit fields' },
       ],
     } },
 
-  { state: 5, author: 'optro', ts: '2:53 PM',
-    body: 'Marie picked <em>Show schema comparison</em>:',
+  // Step 2: Sent to assignee → open
+  { state: 2, author: 'optro', ts: 'Friday · 2:48 PM',
+    body: 'Sarah sent it. Routing to Weston now.',
+    kind: 'card',
+    card: {
+      header: 'Evidence request · sent to assignee <span class="state-pill is-open">Open</span>',
+      meta: 'Routed from <span class="ai-citation">Sarah Kim · External Audit</span>',
+      fields: [
+        ['Assignee', '@ Weston Prohaska · IT Lead'],
+        ['Reviewer', 'Marie Curie · Internal Audit'],
+        ['Suggested artifact', '<span class="ai-citation">snow-query-UAR-prod-db.csv</span> (same source as Q2)'],
+      ],
+      confidence: { label: 'Match to prior periods', pct: 94 },
+      actions: [
+        { label: '✓ Approve & file', primary: true },
+        { label: 'Edit query' },
+        { label: 'Upload your own' },
+      ],
+    } },
+
+  // Step 3: Weston uploads → submitted (with content hash dedup)
+  { state: 3, author: 'weston', ts: '3:11 PM',
+    body: 'In a meeting — but I have the export already. Filing the phone screenshot now.',
+    attachment: { name: 'UAR-Q3FY26-prod-db.png', meta: '1.2 MB · phone screenshot' } },
+
+  { state: 3, author: 'optro', ts: '3:11 PM', kind: 'context',
+    body: 'Computing content fingerprint · sha256: <strong>a7c4f9…e2b1</strong> · no prior match in the evidence library · <span class="state-pill is-submitted">Submitted</span>' },
+
+  // Step 4: AI auto-review
+  { state: 4, author: 'optro', ts: '3:11 PM',
+    body: 'AI auto-review complete. Sending the assessment to Marie for the human call.',
+    kind: 'card',
+    card: {
+      header: 'AI auto-review · assistive only',
+      meta: 'Assesses evidence to help the reviewer — never accepts on its own',
+      fields: [
+        ['Completeness', '✓ 12 of 12 expected columns present'],
+        ['Freshness', '✓ Exported today · within 7-day SLA'],
+        ['Population', '261 rows · +3% vs Q2 (in band)'],
+        ['Schema match', '⚠ +1 column vs Q2 — variance flag'],
+        ['Auto-classified', '<span class="ai-citation">control 4.2.1</span> · Q3 FY26 · UAR · prod-db-01'],
+      ],
+      confidence: { label: 'AI confidence', pct: 93 },
+    } },
+
+  // Step 5: Marie rejects with reasons (regresses to open)
+  { state: 5, author: 'optro', ts: 'Friday · 3:24 PM',
+    body: 'Marie sent it back with reasons. The submission moves to <span class="state-pill is-open">Open</span> until the variance is resolved.',
+    kind: 'card',
+    card: {
+      header: 'Reviewer rejected · with reasons',
+      meta: 'The reject loop is a documented part of the audit trail',
+      fields: [
+        ['Reviewer', 'Marie Curie · Internal Audit'],
+        ['Reason', '"There\'s a new column in the Q3 export. Where did it come from? Want to make sure it\'s documented before I accept."'],
+        ['Affected column', '<span class="ai-citation">termination_date_normalized</span>'],
+      ],
+      actions: [
+        { label: 'Help me answer', primary: true },
+        { label: 'I\'ll DM Marie myself' },
+      ],
+    } },
+
+  // Step 6: Bot offers paths
+  { state: 6, author: 'optro', ts: '3:25 PM',
+    body: 'Three ways I can help resolve the variance — your call:',
+    kind: 'card',
+    card: {
+      header: 'Three options · no recommendation',
+      meta: 'The bot stays neutral. Each path uses the integration graph differently.',
+      actions: [
+        { label: 'Show schema comparison', primary: true },
+        { label: 'Trace change request' },
+        { label: 'I\'ll DM Marie myself' },
+      ],
+    } },
+
+  // Step 7: Schema comparison (renamed from "diff")
+  { state: 7, author: 'optro', ts: '3:26 PM',
+    body: 'Q2 columns vs Q3 columns — the new column is highlighted.',
     kind: 'diff',
     diff: {
-      left:  { title: 'Q2 schema (11 cols)', items: [
+      left:  { title: 'Q2 schema · 11 columns', items: [
         { text: 'user_id' }, { text: 'role' }, { text: 'role_assigned_at' },
         { text: 'last_login' }, { text: 'last_review_date' }, { text: 'reviewer' },
         { text: 'review_outcome' }, { text: 'is_active' }, { text: 'created_at' },
         { text: 'updated_at' }, { text: 'export_ts' },
       ]},
-      right: { title: 'Q3 schema (12 cols)', items: [
+      right: { title: 'Q3 schema · 12 columns', items: [
         { text: 'user_id' }, { text: 'role' }, { text: 'role_assigned_at' },
         { text: 'last_login' }, { text: 'last_review_date' }, { text: 'reviewer' },
         { text: 'review_outcome' }, { text: 'is_active' }, { text: 'created_at' },
         { text: 'updated_at' }, { text: 'export_ts' },
         { text: 'termination_date_normalized', isNew: true },
       ]},
-    }},
+    } },
 
-  { state: 6, author: 'optro', ts: '2:54 PM',
-    body: 'And <em>Trace change request</em>:',
+  // Step 8: Change request traced
+  { state: 8, author: 'optro', ts: '3:27 PM',
+    body: 'Traced the change. Cross-referenced from <span class="ai-citation">Oracle patch log</span> + <span class="ai-citation">DBA Jira</span> + <span class="ai-citation">Legal Review</span>.',
     kind: 'card',
     card: {
       header: 'Change source · located',
-      meta: 'Cross-linked from Oracle patch log + DBA Jira + Legal Review',
+      meta: 'The integration graph in action — three connected systems, one query',
       fields: [
         ['Field added', '<span class="ai-citation">termination_date_normalized</span>'],
         ['Source patch', '<span class="ai-citation">Oracle patch log · Apr 14, 2026</span>'],
         ['Linked CR', '<span class="ai-citation">DBA-CR-2401</span> — "Add GDPR-normalized termination date"'],
         ['Approved by', 'Legal Review · <span class="ai-citation">apr12-counsel-memo.pdf</span>'],
       ],
-    }},
-
-  { state: 7, author: 'weston', ts: '2:56 PM',
-    body: "Oh, that's the GDPR field — DBA team added it after legal review. Sorry, should have flagged that." },
-
-  { state: 8, author: 'optro', ts: '2:56 PM',
-    body: 'Summarized the exchange for the audit trail:',
-    kind: 'card',
-    card: {
-      header: 'Audit trail · Q3 FY26',
-      meta: 'Optional — Marie can record this into the control history',
-      fields: [
-        ["Marie's concern", 'Provenance of new column <span class="ai-citation">termination_date_normalized</span>'],
-        ["Weston's answer",  'GDPR compliance field — added via <span class="ai-citation">DBA-CR-2401</span>'],
-        ['Linked artifacts', '<span class="ai-citation">DBA-CR-2401</span> · <span class="ai-citation">apr12-counsel-memo.pdf</span>'],
-      ],
       actions: [
-        { label: 'Record exchange in 4.2.1 history', primary: true },
-        { label: 'Edit summary' },
+        { label: 'Send to Marie', primary: true },
+        { label: 'Loop in Sarah (auditor)' },
       ],
-    }},
+    } },
 
-  { state: 9, author: 'marie', ts: '2:58 PM',
-    body: 'Yes — record it. Good catch on the patch log.',
-    reactions: ['👍 1'] },
+  // Step 9: Weston explains, re-submitted
+  { state: 9, author: 'weston', ts: '3:28 PM',
+    body: 'Oh — that\'s the GDPR field. DBA team added it after legal review. Sorry, should have flagged it in the cover note.' },
 
-  { state: 10, author: 'marie', ts: '3:01 PM',
-    body: 'Approving with notes:',
+  { state: 9, author: 'optro', ts: '3:28 PM', kind: 'context',
+    body: 'Re-submitted to Marie with the change-request link + counsel memo attached · <span class="state-pill is-submitted">Submitted</span>' },
+
+  // Step 10: Marie accepts
+  { state: 10, author: 'optro', ts: 'Friday · 3:32 PM',
+    body: 'Marie accepted. <strong>Approved with notes</strong> — her reviewer note references the audit trail.',
     kind: 'card',
     card: {
-      header: 'Reviewer sign-off · Q3 FY26',
-      subtitle: 'Marie Curie',
+      header: 'Reviewer sign-off · Q3 FY26 <span class="state-pill is-accepted">Accepted</span>',
+      subtitle: 'Marie Curie · Internal Audit',
       fields: [
-        ['Outcome', '<strong>Approved with notes</strong>'],
-        ['Reviewer note', '"Verified — new column documented via <span class="ai-citation">DBA-CR-2401</span>, see thread for full context."'],
-        ['Workpaper reference', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+        ['Outcome', '<strong>Accepted with notes</strong>'],
+        ['Reviewer note', '"Verified — new column documented via <span class="ai-citation">DBA-CR-2401</span>, see thread for context."'],
+        ['Workpaper ref', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+        ['Reject loop', '1 round · resolved in 21 minutes'],
       ],
-    }},
+    } },
 
-  { state: 11, author: 'optro', ts: '3:01 PM', kind: 'receipt',
-    receipt: 'filed: <strong>UAR-Q3FY26-prod-db.csv</strong> → control 4.2.1 · AI confidence 93% · routed=Marie · resolved 1 reviewer Q · 11 messages · chain=block #4,180,318' },
+  // Step 11: Linked to control (ML matches to sample)
+  { state: 11, author: 'optro', ts: '3:33 PM',
+    body: 'ML matched the artifact to the control\'s test sample. Linked.',
+    kind: 'card',
+    card: {
+      header: 'Linked to control · ML-matched <span class="state-pill is-linked">Linked</span>',
+      meta: 'Auto-mapped to the control\'s sampled population',
+      fields: [
+        ['Control', '<span class="ai-citation">4.2.1</span> · Quarterly user-access review'],
+        ['Period', 'Q3 FY26'],
+        ['Sample size', '47 of 261 users (statistical sample)'],
+        ['Match method', 'ML auto-classified · 96% confidence'],
+        ['Coverage', '100% — every sampled user appears in the artifact'],
+      ],
+    } },
+
+  { state: 11, author: 'optro', ts: '3:33 PM', kind: 'receipt',
+    receipt: 'linked: <strong>UAR-Q3FY26-prod-db.png</strong> → ctrl 4.2.1 · sample 47/261 · chain=block #4,180,221 · workpaper bundle attached' },
+
+  // Step 12: Midship-testing handoff (dashed border — ECM ends, testing is downstream)
+  { state: 12, author: 'optro', ts: 'Friday · 3:34 PM',
+    body: 'Evidence is now <strong>sufficient</strong>. The collection loop is closed. Handing off to Sarah\'s testing — a separate downstream step.',
+    kind: 'card',
+    card: {
+      header: '↪ Handoff · ECM ends here',
+      meta: 'Sarah (External Audit) can now proceed with midship testing. Testing is downstream from evidence collection.',
+      fields: [
+        ['Available to test', 'Artifact + workpaper bundle + audit trail'],
+        ['Sample ready', '47 of 261 users · linked + ML-matched'],
+        ['Audit trail', '<span class="ai-citation">thread://ctrl-4-2-1/q3-2026/exchange-1</span>'],
+        ['Chain anchor', 'block #4,180,221'],
+        ['ECM cycle', '45 minutes · 1 reject loop · 1 reviewer question logged'],
+      ],
+    } },
 ];
 
 window.TOUR = {
-  title: 'Optro ECM as Mediator',
+  title: 'The full ECM lifecycle',
   steps: [
-    { title: 'Weston drops the Q3 export',
-      body: 'Friday afternoon. He attaches the CSV — "same query as last quarter." Marie has not arrived yet. The bot is silent so far.',
+    { title: 'Step 1 · Auditor creates request',
+      body: 'Sarah (External Audit) drafts a PBC request: control, period, proof needed. The bot pre-fills from the prior period. ECM state: Draft.',
       before: function () { window.Flow && window.Flow.go(1); } },
 
-    { title: 'Marie spots a new column',
-      body: "She does not accuse. She just asks. There is no default escalation — and the bot has not pre-judged who is right.",
+    { title: 'Step 2 · Sent to assignee',
+      body: 'Sarah confirms; Optro routes the request to Weston (the control owner). The card carries the full provenance — who requested it, who reviews it, the SLA. ECM state: Open.',
       before: function () { window.Flow && window.Flow.go(2); } },
 
-    { title: 'Bot surfaces the fact, not a verdict',
-      body: 'One context line: "schema diff: +1 field." No interpretation. This is the mediator move — make the disagreement legible without taking a side.',
+    { title: 'Step 3 · Uploads and submits',
+      body: 'Weston files a phone screenshot — he\'s in a meeting. Optro computes a content fingerprint (sha256) and dedupes against the evidence library. Fresh fingerprint → new submission. ECM state: Submitted.',
       before: function () { window.Flow && window.Flow.go(3); } },
 
-    { title: 'Three options, no recommendation',
-      body: 'The bot offers what it could do; Marie picks. The bot is the operator, not the decider.',
+    { title: 'Step 4 · AI auto-review',
+      body: 'The bot runs an assistive review: completeness, freshness, population, schema match, classification. It surfaces a variance flag (+1 column vs Q2). The AI assesses — it never accepts. Sent to Marie.',
       before: function () { window.Flow && window.Flow.go(4); } },
 
-    { title: 'Side-by-side schema diff',
-      body: 'Q2 had 11 columns. Q3 has 12. The new column is highlighted. The bot still holds its opinion.',
+    { title: 'Step 5 · Reviewer rejects, back with reasons',
+      body: 'Marie does the human call. She does not accept yet — she sends the submission back with a specific reason: where did the new column come from? ECM state regresses to Open. The reject loop is part of the audit trail.',
       before: function () { window.Flow && window.Flow.go(5); } },
 
-    { title: 'The integration graph kicks in',
-      body: 'Cross-links the Oracle patch log, finds DBA-CR-2401, surfaces the legal approval. This only works because Optro ECM knows the connected systems — patch logs, Jira, change management, legal counsel memos. The graph is the moat.',
+    { title: 'Step 6 · Bot offers paths',
+      body: 'No recommendation. Weston picks. Restraint as a feature — the bot operates, the human decides.',
       before: function () { window.Flow && window.Flow.go(6); } },
 
-    { title: 'Weston explains',
-      body: 'GDPR field, added after legal review. Resolved in one message — the bot had already done the legwork.',
+    { title: 'Step 7 · Schema comparison',
+      body: 'Side-by-side: Q2 had 11 columns; Q3 has 12. The new column is highlighted. Still no judgment from the bot — just the fact.',
       before: function () { window.Flow && window.Flow.go(7); } },
 
-    { title: 'Bot summarizes the exchange',
-      body: "Not a conclusion — a record. Marie can stamp it into the control's permanent history with one click.",
+    { title: 'Step 8 · Change request traced',
+      body: 'The integration graph in action — Optro follows the Oracle patch log → DBA change request → legal counsel memo, without leaving Slack. The cross-system reach is the moat.',
       before: function () { window.Flow && window.Flow.go(8); } },
 
-    { title: 'Marie agrees to record',
-      body: "The exchange becomes part of the control's history — not just the artifact, but the reasoning behind the approval.",
+    { title: 'Step 9 · Weston explains',
+      body: 'One sentence — because the bot already did the legwork. Optro re-submits to Marie with the source documents attached. ECM state moves back to Submitted.',
       before: function () { window.Flow && window.Flow.go(9); } },
 
-    { title: 'Sign-off references the thread',
-      body: "Marie's reviewer note links to the exchange itself. The next auditor sees not just \"approved\" but \"approved after this 3-message clarification.\"",
+    { title: 'Step 10 · Reviewer accepts',
+      body: 'Marie\'s human call — AI-assisted, never AI-decided. The reviewer note links to the audit trail so the next auditor sees the full provenance. ECM state: Accepted.',
       before: function () { window.Flow && window.Flow.go(10); } },
 
-    { title: 'Receipt, anchored',
-      body: 'File + diff + CR ticket + clarifying exchange + sign-off — all anchored together. The judgment is part of the audit record, not just the artifact.',
+    { title: 'Step 11 · Linked to control',
+      body: 'ML matches the file to the control\'s test sample — 47 of 261 users covered. This is what makes the artifact usable for downstream testing: not just filed, but mapped to the specific selection. ECM state: Linked.',
       before: function () { window.Flow && window.Flow.go(11); } },
+
+    { title: 'Step 12 · Handoff to midship testing',
+      body: 'ECM\'s job ends at Accepted + Linked. Sarah\'s downstream testing (sampling, reperformance) is a separate step — but now it has sufficient, attested evidence and an audit trail to reperform against.',
+      before: function () { window.Flow && window.Flow.go(12); } },
   ],
 };
 </script>

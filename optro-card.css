@@ -11,6 +11,31 @@
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
+.optro-card.is-accepted { border-left-color: var(--accent-green-500); }
+.optro-card.is-handoff {
+  border: 1px dashed var(--border-strong);
+  border-left: 1px dashed var(--border-strong);
+  background: linear-gradient(180deg, #FAFBFC, #F4F5F7);
+}
+
+.state-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #F3F4F6;
+  color: #4B5563;
+  vertical-align: middle;
+}
+.state-pill.is-draft { background: #F3F4F6; color: #4B5563; }
+.state-pill.is-open { background: #FEF3C7; color: #92400E; }
+.state-pill.is-submitted { background: #FDE68A; color: #78350F; }
+.state-pill.is-accepted { background: #DAFBE1; color: #1A7F37; }
+.state-pill.is-linked { background: #DBEAFE; color: #1E40AF; }
 
 .optro-card .card-section { padding: 14px 16px; }
 .optro-card .card-divider { height: 1px; background: var(--divider); margin: 0; }
