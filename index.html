@@ -565,6 +565,55 @@ body { display: block; min-height: 100vh; }
 }
 .mode-copy strong, .view-copy strong { color: var(--text); font-weight: 700; }
 
+/* ====== Classic-baseline callout (under the canonical) ====== */
+.classic-callout {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 16px 20px;
+  align-items: center;
+  padding: 16px 24px;
+  margin-top: 16px;
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+}
+.classic-eyebrow {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-meta);
+  white-space: nowrap;
+}
+.classic-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.classic-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+.classic-cta {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid var(--text);
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.classic-cta:hover { background: var(--text); color: #FFFFFF; }
+
+@media (max-width: 960px) {
+  .classic-callout { grid-template-columns: 1fr; gap: 10px; }
+}
+
 /* ====== Canonical callout ====== */
 .canonical-callout {
   display: grid;
@@ -1119,11 +1168,17 @@ body { display: block; min-height: 100vh; }
       <div class="canonical-eyebrow">Canonical entry point</div>
       <div class="canonical-title">Mediator × Per Control</div>
       <div class="canonical-body">
-        Start here. The default bot posture on the deepest-history view. Walks through 11 steps of a real Q3 disagreement
-        — and shows why competitors take 4 quarters to catch up.
+        Start here. The full ECM lifecycle walked end-to-end — Sarah drafts → routed to Weston → AI auto-review → Marie rejects with reasons → mediator → accepted → linked to control → handoff to midship testing. 12 steps in a real Q3 close.
       </div>
     </div>
     <a href="role-mediator.html" class="canonical-cta">Open canonical demo →</a>
+  </div>
+
+  <div class="classic-callout">
+    <span class="classic-eyebrow">Also see · Classic baseline</span>
+    <span class="classic-title">Bot DM · 3 steps</span>
+    <span class="classic-body">The simplest happy-path version — Optro DMs Weston, he files a phone screenshot, evidence is routed. Pure interaction shape, before the lifecycle states are surfaced.</span>
+    <a href="bot-dm.html" class="classic-cta">Open classic →</a>
   </div>
 </section>
 
